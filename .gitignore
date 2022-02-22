@@ -2,3 +2,5 @@
 *.exe
 .vscode
 *.log
+*.o
+/packages

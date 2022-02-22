@@ -1,0 +1,18 @@
+{
+    "name": "ADCS Enum (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-adcs-enum",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Enumerates CAs and templates in the AD using Win32 functions",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "adcs_enum.x64.o"
+        }
+    ]
+}
