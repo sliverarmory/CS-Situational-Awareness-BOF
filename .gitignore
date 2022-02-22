@@ -4,3 +4,4 @@
 *.log
 *.o
 /packages
+/SA/**

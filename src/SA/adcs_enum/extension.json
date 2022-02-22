@@ -13,6 +13,11 @@
             "os": "windows",
             "arch": "amd64",
             "path": "adcs_enum.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "adcs_enum.x86.o"
         }
     ]
 }

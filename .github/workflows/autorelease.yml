@@ -40,17 +40,7 @@ jobs:
 
       - name: ADCS Enum
         run: |
-          cd ./src/SA/adcs_enum
-          make
-          VERSION=$(git describe --tags --abbrev=0)
-          cat extension.json | jq ".version |= \"$VERSION\"" > ../../../SA/adcs_enum/extension.json
-          cd ../../../SA/adcs_enum/
-          cp ../../LICENSE .
-          tar -czvf ../../packages/sa-adcs-enum.tar.gz .
-          MANIFEST=$(cat ./extension.json | base64 -w 0)
-          cd ../../packages
-          bash -c "echo \"\" | ~/minisign -s ~/minisign.key -S -m ./sa-adcs-enum.tar.gz -t \"$MANIFEST\" -x sa-adcs-enum.minisig"
-          cd ..
+          ./make_bof.sh adcs_enum
 
       - name: "Publish Release"
         uses: "marvinpinto/action-automatic-releases@latest"
