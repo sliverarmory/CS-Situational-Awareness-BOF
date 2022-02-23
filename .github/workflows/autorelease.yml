@@ -6,6 +6,7 @@ on:
     branches: [master]
 
 jobs:
+
   bof-build:
     name: Build and publish tagged release
     if: startsWith( github.ref, 'refs/tags/v')
@@ -61,6 +62,34 @@ jobs:
       - name: Cacls
         run: |
           ./make_bof.sh cacls
+
+      - name: Driver Sigs
+        run: |
+          ./make_bof.sh driversigs
+
+      - name: Enum Filter Driver
+        run: |
+          ./make_bof.sh enum_filter_driver
+
+      - name: Enum Local Sessions
+        run: |
+          ./make_bof.sh enumLocalSessions
+
+      - name: Find Loaded Module
+        run: |
+          ./make_bof.sh findLoadedModule
+
+      - name: Get Password Policy
+        run: |
+          ./make_bof.sh get_password_policy
+
+      - name: Get Net Session
+        run: |
+          ./make_bof.sh get-netsession
+
+      - name: IPConfig
+        run: |
+          ./make_bof.sh ipconfig
 
       - name: "Publish Release"
         uses: "marvinpinto/action-automatic-releases@latest"
