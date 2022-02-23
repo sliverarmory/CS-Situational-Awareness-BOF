@@ -42,6 +42,26 @@ jobs:
         run: |
           ./make_bof.sh adcs_enum
 
+      - name: ADCS Enum COM
+        run: |
+          ./make_bof.sh adcs_enum_com
+
+      - name: ADCS Enum COM2
+        run: |
+          ./make_bof.sh adcs_enum_com2
+
+      - name: Adv Audit Policies
+        run: |
+          ./make_bof.sh adv_audit_policies
+
+      - name: ARP
+        run: |
+          ./make_bof.sh arp
+
+      - name: Cacls
+        run: |
+          ./make_bof.sh cacls
+
       - name: "Publish Release"
         uses: "marvinpinto/action-automatic-releases@latest"
         with:

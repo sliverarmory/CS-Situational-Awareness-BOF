@@ -1,0 +1,23 @@
+{
+    "name": "Adv Audit Policies (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-adv-audit-policies",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Retrieves advanced security audit policies",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "adv_audit_policies.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "adv_audit_policies.x86.o"
+        }
+    ]
+}

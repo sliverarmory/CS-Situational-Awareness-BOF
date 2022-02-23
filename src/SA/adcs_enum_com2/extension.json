@@ -1,0 +1,23 @@
+{
+    "name": "ADCS Enum COM2 (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-adcs-enum-com2",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Enumerates CAs and templates in the AD using IX509PolicyServerListManager COM object",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "adcs_enum_com2.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "adcs_enum_com2.x86.o"
+        }
+    ]
+}
