@@ -19,5 +19,13 @@
             "arch": "386",
             "path": "cacls.x86.o"
         }
+    ],
+    "arguments": [
+        {
+            "name": "filepath",
+            "desc": "The file path to list permissions for",
+            "type": "string",
+            "optional": false
+        }
     ]
 }
