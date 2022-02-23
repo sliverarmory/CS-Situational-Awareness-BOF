@@ -12,12 +12,12 @@
         {
             "os": "windows",
             "arch": "amd64",
-            "path": "finLoadedModule.x64.o"
+            "path": "findLoadedModule.x64.o"
         },
         {
             "os": "windows",
             "arch": "386",
-            "path": "finLoadedModule.x86.o"
+            "path": "findLoadedModule.x86.o"
         }
     ],
     "arguments": [
