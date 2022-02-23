@@ -1,0 +1,31 @@
+{
+    "name": "Net Group (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-netgroup",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Lists Groups from the default (or specified) domain",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "netgroup.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "netgroup.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "domain",
+            "desc": "Domain",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

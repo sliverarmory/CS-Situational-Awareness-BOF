@@ -1,0 +1,23 @@
+{
+    "name": "Netstat (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-netstat",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "TCP / UDP IPv4 netstat listing",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "netstat.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "netstat.x86.o"
+        }
+    ]
+}

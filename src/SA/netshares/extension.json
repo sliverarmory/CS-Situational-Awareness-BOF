@@ -1,0 +1,31 @@
+{
+    "name": "Net Shares (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-netshares",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "List shares on local or remote computer",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "netshares.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "netshares.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "computername",
+            "desc": "Computer name",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

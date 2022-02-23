@@ -91,6 +91,34 @@ jobs:
         run: |
           ./make_bof.sh ipconfig
 
+      - name: LDAP Search
+        run: |
+          ./make_bof.sh ldapsearch
+
+      - name: List DNS
+        run: |
+          ./make_bof.sh listdns
+
+      - name: List Modules
+        run: |
+          ./make_bof.sh listmods
+
+      - name: Net Group
+        run: |
+          ./make_bof.sh netgroup  
+
+      - name: Net Local Group
+        run: |
+          ./make_bof.sh netlocalgroup
+
+      - name: Net Shares
+        run: |
+          ./make_bof.sh netshares
+
+      - name: Net Stat
+        run: |
+          ./make_bof.sh netstat
+
       - name: "Publish Release"
         uses: "marvinpinto/action-automatic-releases@latest"
         with:

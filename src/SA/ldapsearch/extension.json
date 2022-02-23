@@ -1,0 +1,55 @@
+{
+    "name": "LDAP Search (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-ldapsearch",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Executes LDAP searches",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "ldapsearch.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "ldapsearch.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "query",
+            "desc": "Query",
+            "type": "string",
+            "optional": false
+        },
+        {
+            "name": "attributes",
+            "desc": "Comma separated attributes",
+            "type": "string",
+            "optional": true
+        },
+        {
+            "name": "results_count",
+            "desc": "Limit number of results",
+            "type": "integer",
+            "optional": true
+        },
+        {
+            "name": "hostname",
+            "desc": "DC hostname or IP",
+            "type": "string",
+            "optional": true
+        },
+        {
+            "name": "dn",
+            "desc": "Distingished Name to use",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

@@ -3,6 +3,8 @@ This Repo intends to serve two purposes.  First it provides a nice set of basic 
 
 Its larger goal is providing a code example and workflow for others to begin making more BOF files.  It is a companion document of the blog post made here: https://www.trustedsec.com/blog/a-developers-introduction-to-beacon-object-files/
 
+[![Release](https://github.com/sliverarmory/CS-Situational-Awareness-BOF/actions/workflows/autorelease.yml/badge.svg)](https://github.com/sliverarmory/CS-Situational-Awareness-BOF/actions/workflows/autorelease.yml)
+
 ## Making a new BOF
 If you want to use the same workflow as this repository, your basic steps are as follows
 1. Make a folder that covers the target topic, for example in this repo we are using SA

@@ -1,0 +1,31 @@
+{
+    "name": "Net Local Group (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-netlocalgroup",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "List local groups from the local (or specified) computer",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "netlocalgroup.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "netlocalgroup.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "server",
+            "desc": "Server",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}
