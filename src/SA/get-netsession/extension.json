@@ -1,7 +1,7 @@
 {
     "name": "Get Net Session (SA)",
     "version": "0.0.0",
-    "command_name": "sa-get-net-session",
+    "command_name": "sa-get-netsession",
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",

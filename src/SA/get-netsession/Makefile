@@ -10,7 +10,7 @@ all:
 	$(CC_x64) -o $(BOFNAME).x64.o $(COMINCLUDE) -Os -c entry.c -DBOF 
 	$(CC_x86) -o $(BOFNAME).x86.o $(COMINCLUDE) -Os -c entry.c -DBOF
 	mkdir -p ../../../SA/$(BOFNAME) 
-	mv $(BOFNAME)*.o ../../../SA/$(BOFNA
+	mv $(BOFNAME)*.o ../../../SA/$(BOFNAME)
 	cp extension.json ../../../SA/$(BOFNAME)
 
 test:
