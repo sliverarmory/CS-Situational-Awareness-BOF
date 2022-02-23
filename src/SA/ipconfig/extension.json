@@ -1,0 +1,23 @@
+{
+    "name": "IPConfig (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-ipconfig",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Simply gets ipv4 addresses, hostname and dns server",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "ipconfig.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "ipconfig.x86.o"
+        }
+    ]
+}

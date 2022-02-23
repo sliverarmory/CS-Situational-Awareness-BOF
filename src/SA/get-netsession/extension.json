@@ -1,0 +1,31 @@
+{
+    "name": "Get Net Session (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-get-net-session",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Enumerates all sessions on the specified computer or the local one",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "get-netsession.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "get-netsession.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "computer",
+            "desc": "Computer",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

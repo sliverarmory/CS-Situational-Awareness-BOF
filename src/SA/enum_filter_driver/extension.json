@@ -1,0 +1,31 @@
+{
+    "name": "Enum Filter Driver (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-enum-filter-driver",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Enumerates all the filter drivers",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "enum_filter_driver.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "enum_filter_driver.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "computer",
+            "desc": "Computer to enumerate filter drivers on",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

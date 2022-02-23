@@ -1,0 +1,37 @@
+{
+    "name": "Find Loaded Module (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-find-loaded-module",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Finds what processes *modulepart* is loaded into, optionally searching just *procnamepart*",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "finLoadedModule.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "finLoadedModule.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "modulepart",
+            "desc": "Find what processes *modulepart* is loaded into",
+            "type": "string",
+            "optional": false
+        },
+        {
+            "name": "procnamepart",
+            "desc": "Search just *procnamepart*",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

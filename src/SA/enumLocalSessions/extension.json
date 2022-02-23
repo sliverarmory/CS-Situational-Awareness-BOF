@@ -1,0 +1,23 @@
+{
+    "name": "Enum Local Sessions (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-enum-local-sessions",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Enumerate the currently attached user sessions both local and over rdp",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "enumLocalSessions.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "enumLocalSessions.x86.o"
+        }
+    ]
+}

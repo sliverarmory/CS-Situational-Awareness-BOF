@@ -1,0 +1,23 @@
+{
+    "name": "Driver Sigs (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-driversigs",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Enumerate installed services Imagepaths to check the signing cert against known edr/av vendors",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "driversigs.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "driversigs.x86.o"
+        }
+    ]
+}
