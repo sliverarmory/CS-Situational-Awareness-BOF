@@ -5,7 +5,7 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Enumerate installed services Imagepaths to check the signing cert against known edr/av vendors",
+    "help": "Enumerate installed services Image paths",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
