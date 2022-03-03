@@ -24,7 +24,7 @@
         {
             "name": "filepath",
             "desc": "The file path to list permissions for",
-            "type": "string",
+            "type": "wstring",
             "optional": false
         }
     ]
