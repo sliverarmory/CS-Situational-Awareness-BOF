@@ -1,0 +1,38 @@
+{
+    "name": "Net User (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-netuser",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Pulls info about specific user.",
+    "long_help": "Pulls info about specific user. Pulls from domain if a domain name is specified",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "netuser.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "netuser.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "username",
+            "desc": "Username to pull info for",
+            "type": "string",
+            "optional": false
+        },
+        {
+            "name": "domain",
+            "desc": "Domain name",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

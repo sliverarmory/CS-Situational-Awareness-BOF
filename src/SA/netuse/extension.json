@@ -1,0 +1,24 @@
+{
+    "name": "Netuse (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-netuse",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "netuse.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "netuse.x86.o"
+        }
+    ]
+}
