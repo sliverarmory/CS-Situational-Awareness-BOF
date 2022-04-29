@@ -1,0 +1,50 @@
+{
+    "name": "Reg Query (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-reg-query",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Query the Windows registry",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "reg-query.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "reg-query.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "hostname",
+            "desc": "Hostname to resolve",
+            "type": "string",
+            "optional": true
+        },
+        {
+            "name": "hive",
+            "desc": "Registry hive",
+            "type": "string",
+            "optional": false
+        },
+        {
+            "name": "path",
+            "desc": "Registry key path",
+            "type": "string",
+            "optional": false
+        },
+        {
+            "name": "value",
+            "desc": "Registry key value",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}
