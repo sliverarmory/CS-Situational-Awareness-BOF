@@ -1,0 +1,38 @@
+{
+    "name": "Scheduled Task Query (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-schtasksquery",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Queries the given task from the local or if provided remote machine",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "schtasksquery.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "schtasksquery.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "server",
+            "desc": "Target server",
+            "type": "string",
+            "optional": true
+        },
+        {
+            "name": "taskpath",
+            "desc": "Task path",
+            "type": "string",
+            "optional": false
+        }
+    ]
+}

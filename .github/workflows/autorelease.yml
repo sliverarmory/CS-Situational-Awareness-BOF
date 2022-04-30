@@ -119,6 +119,94 @@ jobs:
         run: |
           ./make_bof.sh netstat
 
+      # - name: Net Use
+      #   run: |
+      #     ./make_bof.sh netuse
+
+      - name: Net User
+        run: |
+          ./make_bof.sh netuser
+
+      # - name: Net User Enum
+      #   run: |
+      #     ./make_bof.sh netuserenum
+
+      - name: Net View
+        run: |
+          ./make_bof.sh netview
+
+      - name: NSLookup
+        run: |
+          ./make_bof.sh nslookup
+
+      - name: Reg Query
+        run: |
+          ./make_bof.sh reg_query
+
+      - name: Resources
+        run: |
+          ./make_bof.sh resources
+
+      - name: Route Print
+        run: |
+          ./make_bof.sh routeprint
+
+      - name: SC Enum
+        run: |
+          ./make_bof.sh sc_enum
+
+      - name: SC QC
+        run: |
+          ./make_bof.sh sc_qc
+
+      - name: SC QDescription
+        run: |
+          ./make_bof.sh sc_qdescription
+
+      - name: SC QFailure
+        run: |
+          ./make_bof.sh sc_qfailure
+
+      - name: SC QTriggerInfo
+        run: |
+          ./make_bof.sh sc_qtriggerinfo
+
+      - name: SC Query
+        run: |
+          ./make_bof.sh sc_query
+
+      - name: Scheduled Tasks Enum
+        run: |
+          ./make_bof.sh schtasksenum
+
+      - name: Scheduled Tasks Query
+        run: |
+          ./make_bof.sh schtasksquery
+
+      - name: Task List
+        run: |
+          ./make_bof.sh tasklist
+
+      - name: Uptime
+        run: |
+          ./make_bof.sh uptime
+
+      - name: VSS Enum
+        run: |
+          ./make_bof.sh vssenum
+
+      - name: Who Am I
+        run: |
+          ./make_bof.sh whoami
+
+      - name: Window list
+        run: |
+          ./make_bof.sh windowlist
+
+      - name: WMI Query
+        run: |
+          ./make_bof.sh wmi_query
+
       - name: "Publish Release"
         uses: "marvinpinto/action-automatic-releases@latest"
         with:

@@ -1,0 +1,32 @@
+{
+    "name": "Tasklist (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-tasklist",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Get a list of running processes including PID, PPID and CommandLine (uses wmi)",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "tasklist.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "tasklist.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "server",
+            "desc": "Target server",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

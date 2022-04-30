@@ -1,0 +1,38 @@
+{
+    "name": "Service QTriggerInfo (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-sc-qtriggerinfo",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Queries a service for trigger conditions.",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "sc-qtriggerinfo.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "sc-qtriggerinfo.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "service",
+            "desc": "Target service",
+            "type": "string",
+            "optional": false
+        },
+        {
+            "name": "server",
+            "desc": "Target server",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

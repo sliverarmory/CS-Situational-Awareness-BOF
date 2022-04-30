@@ -1,0 +1,32 @@
+{
+    "name": "Scheduled Task Enum (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-schtasksenum",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Enumerates all scheduled tasks on the local or if provided remote machine",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "schtasksenum.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "schtasksenum.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "server",
+            "desc": "Target server",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

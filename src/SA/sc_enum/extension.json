@@ -1,0 +1,32 @@
+{
+    "name": "Service Enum (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-sc-enum",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Enumerate Windows services",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "sc-enum.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "sc-enum.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "server",
+            "desc": "Target server",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}
