@@ -1,11 +1,11 @@
 {
-    "name": "NSLookup (SA)",
+    "name": "VSS Enum (SA)",
     "version": "0.0.0",
-    "command_name": "sa-nslookup",
+    "command_name": "sa-vssenum",
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Makes a dns query. NOTE: Some situations are limited due to observed crashes",
+    "help": "Enumerates shadow copies on some server 2012+ machines",
     "long_help": "",
     "depends_on": "coff-loader",
     "entrypoint": "go",
@@ -13,30 +13,24 @@
         {
             "os": "windows",
             "arch": "amd64",
-            "path": "nslookup.x64.o"
+            "path": "vssenum.x64.o"
         },
         {
             "os": "windows",
             "arch": "386",
-            "path": "nslookup.x86.o"
+            "path": "vssenum.x86.o"
         }
     ],
     "arguments": [
         {
             "name": "hostname",
-            "desc": "Hostname to resolve",
+            "desc": "Hostname",
             "type": "string",
             "optional": false
         },
         {
-            "name": "server",
-            "desc": "DNS server ",
-            "type": "string",
-            "optional": true
-        },
-        {
-            "name": "type",
-            "desc": "DNS record type (A, AAAA, or ANY)",
+            "name": "sharename",
+            "desc": "Share name",
             "type": "string",
             "optional": true
         }
