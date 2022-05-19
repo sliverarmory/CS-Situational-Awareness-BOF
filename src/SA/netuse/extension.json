@@ -20,5 +20,13 @@
             "arch": "386",
             "path": "netuse.x86.o"
         }
+    ],
+    "arguments": [
+        {
+            "name": "cmd",
+            "desc": "Command: 1 = ADD, 2 = LIST, 3 = DELETE",
+            "type": "integer",
+            "optional": false
+        }
     ]
 }

@@ -25,13 +25,19 @@
         {
             "name": "server",
             "desc": "Target server",
-            "type": "string",
+            "type": "wstring",
             "optional": true
         },
         {
             "name": "namespace",
             "desc": "Target namespace",
-            "type": "string",
+            "type": "wstring",
+            "optional": true
+        },
+        {
+            "name": "query",
+            "desc": "Query to run",
+            "type": "wstring",
             "optional": true
         }
     ]

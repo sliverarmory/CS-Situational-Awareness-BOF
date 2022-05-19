@@ -20,5 +20,13 @@
             "arch": "386",
             "path": "netview.x86.o"
         }
+    ],
+    "arguments": [
+        {
+            "name": "domain",
+            "desc": "Domain",
+            "type": "wstring",
+            "optional": true
+        }
     ]
 }

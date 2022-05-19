@@ -25,13 +25,13 @@
         {
             "name": "hostname",
             "desc": "Hostname",
-            "type": "string",
+            "type": "wstring",
             "optional": false
         },
         {
             "name": "sharename",
             "desc": "Share name",
-            "type": "string",
+            "type": "wstring",
             "optional": true
         }
     ]

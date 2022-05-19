@@ -23,14 +23,14 @@
     ],
     "arguments": [
         {
-            "name": "service",
-            "desc": "Target service",
+            "name": "server",
+            "desc": "Target server",
             "type": "string",
             "optional": true
         },
         {
-            "name": "server",
-            "desc": "Target server",
+            "name": "service",
+            "desc": "Target service",
             "type": "string",
             "optional": true
         }

@@ -24,7 +24,13 @@
         {
             "name": "computername",
             "desc": "Computer name",
-            "type": "string",
+            "type": "wstring",
+            "optional": true
+        },
+        {
+            "name": "asAdmin",
+            "desc": "Enumerate as Admin",
+            "type": "integer",
             "optional": true
         }
     ]

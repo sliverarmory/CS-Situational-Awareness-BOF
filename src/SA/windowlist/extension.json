@@ -25,7 +25,7 @@
         {
             "name": "all",
             "desc": "List all windows",
-            "type": "bool",
+            "type": "integer",
             "optional": true
         }
     ]
