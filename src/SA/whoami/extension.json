@@ -20,13 +20,5 @@
             "arch": "386",
             "path": "whoami.x86.o"
         }
-    ],
-    "arguments": [
-        {
-            "name": "server",
-            "desc": "Target server",
-            "type": "string",
-            "optional": true
-        }
     ]
 }

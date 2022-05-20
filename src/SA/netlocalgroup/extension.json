@@ -24,7 +24,13 @@
         {
             "name": "server",
             "desc": "Server",
-            "type": "string",
+            "type": "wstring",
+            "optional": true
+        },
+        {
+            "name": "group",
+            "desc": "Group",
+            "type": "wstring",
             "optional": true
         }
     ]

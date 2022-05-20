@@ -23,16 +23,16 @@
     ],
     "arguments": [
         {
-            "name": "username",
-            "desc": "Username to pull info for",
-            "type": "string",
+            "name": "use domain",
+            "desc": "Request domain users",
+            "type": "integer",
             "optional": false
         },
         {
-            "name": "domain",
-            "desc": "Domain name",
-            "type": "string",
-            "optional": true
+            "name": "use filter",
+            "desc": "Attribute to filter on: 1 = No filter, 2 = Lockout, 3 = Disabled, 4 = Disable and Locked out",
+            "type": "integer",
+            "optional": false
         }
     ]
 }

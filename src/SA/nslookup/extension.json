@@ -29,15 +29,9 @@
             "optional": false
         },
         {
-            "name": "server",
-            "desc": "DNS server ",
-            "type": "string",
-            "optional": true
-        },
-        {
             "name": "type",
-            "desc": "DNS record type (A, AAAA, or ANY)",
-            "type": "string",
+            "desc": "DNS record type (A, AAAA, or ANY), see https://docs.microsoft.com/en-us/windows/win32/dns/dns-constants for the actual values",
+            "type": "short",
             "optional": true
         }
     ]

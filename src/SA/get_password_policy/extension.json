@@ -24,7 +24,7 @@
         {
             "name": "hostname",
             "desc": "Hostname",
-            "type": "string",
+            "type": "wstring",
             "optional": false
         }
     ]

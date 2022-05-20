@@ -24,7 +24,7 @@
         {
             "name": "computer",
             "desc": "Computer",
-            "type": "string",
+            "type": "wstring",
             "optional": true
         }
     ]

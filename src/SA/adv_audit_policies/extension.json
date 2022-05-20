@@ -19,5 +19,13 @@
             "arch": "386",
             "path": "adv_audit_policies.x86.o"
         }
+    ],
+    "arguments": [
+        {
+            "name": "isWow64",
+            "desc": "isWow64",
+            "type": "integer",
+            "optional": true
+        }
     ]
 }

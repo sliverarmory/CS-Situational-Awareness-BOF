@@ -25,13 +25,13 @@
         {
             "name": "username",
             "desc": "Username to pull info for",
-            "type": "string",
+            "type": "wstring",
             "optional": false
         },
         {
             "name": "domain",
             "desc": "Domain name",
-            "type": "string",
+            "type": "wstring",
             "optional": true
         }
     ]

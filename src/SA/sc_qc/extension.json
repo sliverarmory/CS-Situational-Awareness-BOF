@@ -23,16 +23,16 @@
     ],
     "arguments": [
         {
-            "name": "service",
+            "name": "hostname",
+            "desc": "Target host",
+            "type": "string",
+            "optional": true
+        },
+        {
+            "name": "service-name",
             "desc": "Target service",
             "type": "string",
             "optional": false
-        },
-        {
-            "name": "server",
-            "desc": "Target server",
-            "type": "string",
-            "optional": true
         }
     ]
 }

@@ -30,8 +30,8 @@
         },
         {
             "name": "hive",
-            "desc": "Registry hive",
-            "type": "string",
+            "desc": "Hive identifier: 0 = HKCL, 1 = HKCU, 2 = HKLM, 3 = HKU",
+            "type": "integer",
             "optional": false
         },
         {
@@ -41,9 +41,15 @@
             "optional": false
         },
         {
-            "name": "value",
-            "desc": "Registry key value",
+            "name": "key",
+            "desc": "Registry key name",
             "type": "string",
+            "optional": true
+        },
+        {
+            "name": "recursive",
+            "desc": "Recursive search",
+            "type": "integer",
             "optional": true
         }
     ]
