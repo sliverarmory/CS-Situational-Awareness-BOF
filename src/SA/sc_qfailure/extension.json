@@ -13,12 +13,12 @@
         {
             "os": "windows",
             "arch": "amd64",
-            "path": "sc-qfailure.x64.o"
+            "path": "sc_qfailure.x64.o"
         },
         {
             "os": "windows",
             "arch": "386",
-            "path": "sc-qfailure.x86.o"
+            "path": "sc_qfailure.x86.o"
         }
     ],
     "arguments": [

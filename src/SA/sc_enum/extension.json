@@ -13,12 +13,12 @@
         {
             "os": "windows",
             "arch": "amd64",
-            "path": "sc-enum.x64.o"
+            "path": "sc_enum.x64.o"
         },
         {
             "os": "windows",
             "arch": "386",
-            "path": "sc-enum.x86.o"
+            "path": "sc_enum.x86.o"
         }
     ],
     "arguments": [
