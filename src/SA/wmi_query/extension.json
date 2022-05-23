@@ -13,12 +13,12 @@
         {
             "os": "windows",
             "arch": "amd64",
-            "path": "wmi-query.x64.o"
+            "path": "wmi_query.x64.o"
         },
         {
             "os": "windows",
             "arch": "386",
-            "path": "wmi-query.x86.o"
+            "path": "wmi_query.x86.o"
         }
     ],
     "arguments": [
