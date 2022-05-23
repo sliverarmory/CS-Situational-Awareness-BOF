@@ -13,12 +13,12 @@
         {
             "os": "windows",
             "arch": "amd64",
-            "path": "reg-query.x64.o"
+            "path": "reg_query.x64.o"
         },
         {
             "os": "windows",
             "arch": "386",
-            "path": "reg-query.x86.o"
+            "path": "reg_query.x86.o"
         }
     ],
     "arguments": [

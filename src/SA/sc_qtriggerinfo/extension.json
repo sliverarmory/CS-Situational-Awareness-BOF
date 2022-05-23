@@ -13,12 +13,12 @@
         {
             "os": "windows",
             "arch": "amd64",
-            "path": "sc-qtriggerinfo.x64.o"
+            "path": "sc_qtriggerinfo.x64.o"
         },
         {
             "os": "windows",
             "arch": "386",
-            "path": "sc-qtriggerinfo.x86.o"
+            "path": "sc_qtriggerinfo.x86.o"
         }
     ],
     "arguments": [
