@@ -22,6 +22,12 @@
     ],
     "arguments": [
         {
+            "name": "type",
+            "desc": "type (0 for or 1 to list server group members)",
+            "type": "short",
+            "optional": true
+        },
+        {
             "name": "server",
             "desc": "Server",
             "type": "wstring",
