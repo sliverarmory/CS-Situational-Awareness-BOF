@@ -25,13 +25,13 @@
         {
             "name": "server",
             "desc": "Target server",
-            "type": "string",
+            "type": "wstring",
             "optional": false
         },
         {
             "name": "taskpath",
             "desc": "Task path",
-            "type": "string",
+            "type": "wstring",
             "optional": false
         }
     ]
