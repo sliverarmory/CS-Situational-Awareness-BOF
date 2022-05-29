@@ -83,6 +83,11 @@ WINBASEAPI HMODULE WINAPI KERNEL32$LoadLibraryA (LPCSTR lpLibFileName);
 WINBASEAPI FARPROC WINAPI KERNEL32$GetProcAddress (HMODULE hModule, LPCSTR lpProcName);
 WINBASEAPI WINBOOL WINAPI KERNEL32$FreeLibrary (HMODULE hLibModule);
 DECLSPEC_IMPORT WINBASEAPI int WINAPI KERNEL32$lstrlenA(LPCSTR);
+DECLSPEC_IMPORT int WINAPI KERNEL32$GetLocaleInfoEx(LPCWSTR lpLocaleName, LCTYPE LCType, LPWSTR lpLCData, int cchData);
+WINBASEAPI int WINAPI KERNEL32$GetSystemDefaultLocaleName(LPCWSTR lpLocaleName, int cchLocaleName);
+DECLSPEC_IMPORT LCID WINAPI KERNEL32$LocaleNameToLCID(LPCWSTR lpName, DWORD dwFlags);
+DECLSPEC_IMPORT int WINAPI KERNEL32$GetDateFormatEx(LPCWSTR lpLocaleName, DWORD dwFlags, const SYSTEMTIME *lpData, LPCWSTR lpFormat, LPWSTR lpDateStr, int cchDate, LPCWSTR lpCalendar);
+
 
 //WTSAPI32
 DECLSPEC_IMPORT DWORD WINAPI WTSAPI32$WTSEnumerateSessionsA(LPVOID, DWORD, DWORD, PWTS_SESSION_INFO*, DWORD*);
@@ -142,9 +147,6 @@ DECLSPEC_IMPORT VOID WINAPI DNSAPI$DnsFree(PVOID pData,DNS_FREE_TYPE FreeType);
 
 //WSOCK32
 DECLSPEC_IMPORT unsigned long __stdcall WSOCK32$inet_addr(const char *cp);
-DECLSPEC_IMPORT u_long __stdcall WS2_32$htonl(u_long hostlong);
-DECLSPEC_IMPORT u_short __stdcall WS2_32$htons(u_short hostshort);
-DECLSPEC_IMPORT char * __stdcall WS2_32$inet_ntoa(struct in_addr in);
 
 //NETAPI32
 DECLSPEC_IMPORT DWORD WINAPI NETAPI32$DsGetDcNameA(LPVOID, LPVOID, LPVOID, LPVOID, ULONG, LPVOID);
@@ -265,8 +267,32 @@ WINIMPM WINBOOL WINAPI CRYPT32$CertGetCertificateChain (HCERTCHAINENGINE hChainE
 WINIMPM VOID WINAPI CRYPT32$CertFreeCertificateChain (PCCERT_CHAIN_CONTEXT pChainContext);
 WINIMPM PCCRYPT_OID_INFO WINAPI CRYPT32$CryptFindOIDInfo (DWORD dwKeyType, void *pvKey, DWORD dwGroupId);
 
+//WS2_32
+// defining this here to avoid including ws2tcpip.h which results in include order warnings when bofs include windows.h before bofdefs.h
+typedef struct addrinfo {
+    int ai_flags;
+    int ai_family;
+    int ai_socktype;
+    int ai_protocol;
+    size_t ai_addrlen;
+    char *ai_canonname;
+    struct sockaddr *ai_addr;
+    struct addrinfo *ai_next;
+} ADDRINFOA,*PADDRINFOA;
 
 //WS2_32
+DECLSPEC_IMPORT int __stdcall WS2_32$connect(SOCKET sock, const struct sockaddr* name, int namelen);
+DECLSPEC_IMPORT int __stdcall WS2_32$closesocket(SOCKET sock);
+DECLSPEC_IMPORT void __stdcall WS2_32$freeaddrinfo(struct addrinfo* ai);
+DECLSPEC_IMPORT int __stdcall WS2_32$getaddrinfo(char* host, char* port, const struct addrinfo* hints, struct addrinfo** result);
+DECLSPEC_IMPORT u_long __stdcall WS2_32$htonl(u_long hostlong);
+DECLSPEC_IMPORT u_short __stdcall WS2_32$htons(u_short hostshort);
+DECLSPEC_IMPORT char * __stdcall WS2_32$inet_ntoa(struct in_addr in);
+DECLSPEC_IMPORT int __stdcall WS2_32$ioctlsocket(SOCKET sock, long cmd, u_long* arg);
+DECLSPEC_IMPORT int __stdcall WS2_32$select(int nfds, fd_set* readfds, fd_set* writefds, fd_set* exceptfds, const struct timeval* timeout);
+DECLSPEC_IMPORT unsigned int __stdcall WS2_32$socket(int af, int type, int protocol);
+DECLSPEC_IMPORT int __stdcall WS2_32$__WSAFDIsSet(SOCKET sock, struct fd_set* fdset);
+DECLSPEC_IMPORT int __stdcall WS2_32$WSAGetLastError();
 DECLSPEC_IMPORT LPCWSTR WINAPI WS2_32$InetNtopW(INT Family, LPCVOID pAddr, LPWSTR pStringBuf, size_t StringBufSIze);
 DECLSPEC_IMPORT INT WINAPI WS2_32$inet_pton(INT Family, LPCSTR pStringBuf, PVOID pAddr);
 
@@ -472,6 +498,11 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define KERNEL32$GetProcAddress GetProcAddress
 #define KERNEL32$FreeLibrary FreeLibrary
 #define KERNEL32$lstrlenA lstrlenA
+#define KERNEL32$GetLocaleInfoEx GetLocaleInfoEx
+#define KERNEL32$GetSystemDefaultLocaleName GetSystemDefaultLocaleName
+#define KERNEL32$LocaleNameToLCID LocaleNameToLCID
+#define KERNEL32$GetDateFormatEx GetDateFormatEx
+
 #define WTSAPI32$WTSEnumerateSessionsA WTSEnumerateSessionsA
 #define WTSAPI32$WTSQuerySessionInformationA WTSQuerySessionInformationA
 #define WTSAPI32$WTSFreeMemory WTSFreeMemory
@@ -521,9 +552,18 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define DNSAPI$DnsQuery_A DnsQuery_A
 #define DNSAPI$DnsFree DnsFree
 #define WSOCK32$inet_addr inet_addr
+#define WS2_32$closesocket closesocket
+#define WS2_32$connect connect
+#define WS2_32$freeaddrinfo freeaddrinfo
+#define WS2_32$getaddrinfo getaddrinfo
 #define WS2_32$htonl htonl
 #define WS2_32$htons htons
 #define WS2_32$inet_ntoa inet_ntoa
+#define WS2_32$ioctlsocket ioctlsocket
+#define WS2_32$select select
+#define WS2_32$socket socket
+#define WS2_32$__WSAFDIsSet __WSAFDIsSet
+#define WS2_32$WSAGetLastError WSAGetLastError
 #define NETAPI32$DsGetDcNameA DsGetDcNameA
 #define NETAPI32$NetUserGetInfo NetUserGetInfo
 #define NETAPI32$NetUserModalsGet NetUserModalsGet

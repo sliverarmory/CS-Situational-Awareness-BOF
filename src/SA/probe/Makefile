@@ -1,10 +1,9 @@
-BOFNAME := get-netsession
+BOFNAME := probe
 COMINCLUDE := -I ../../common
-LIBINCLUDE := -l netapi32
+LIBINCLUDE := -l ws2_32
 CC_x64 := x86_64-w64-mingw32-gcc
 CC_x86 := i686-w64-mingw32-gcc
 CC=x86_64-w64-mingw32-clang
-
 
 all:
 	$(CC_x64) -o $(BOFNAME).x64.o $(COMINCLUDE) -Os -c entry.c -DBOF 
@@ -13,7 +12,7 @@ all:
 	mv $(BOFNAME)*.o ../../../SA/$(BOFNAME)
 
 test:
-	$(CC_x64) entry.c -g $(COMINCLUDE) $(LIBINCLUDE)  -o $(BOFNAME).x64.exe
+	$(CC_x64) entry.c -g $(COMINCLUDE) $(LIBINCLUDE) -o $(BOFNAME).x64.exe
 	$(CC_x86) entry.c -g $(COMINCLUDE) $(LIBINCLUDE) -o $(BOFNAME).x86.exe
 
 scanbuild:
