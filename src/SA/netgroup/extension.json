@@ -22,6 +22,12 @@
     ],
     "arguments": [
         {
+            "name": "global",
+            "type": "short",
+            "desc": "List global group members (0:no, 1:yes)",
+            "optional": false
+        },
+        {
             "name": "domain",
             "desc": "Domain",
             "type": "wstring",
