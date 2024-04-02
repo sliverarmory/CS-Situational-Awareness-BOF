@@ -1,5 +1,5 @@
 #pragma once
-#pragma intrinsic(memcmp, memcpy,strcpy,strcmp,strlen)
+#pragma intrinsic(memcmp, memcpy,strcpy,strcmp,_stricmp,strlen)
 #include <windows.h>
 #include <process.h>
 #include <winternl.h>
@@ -62,7 +62,9 @@ WINBASEAPI DWORD WINAPI KERNEL32$GetFullPathNameW (LPCWSTR lpFileName, DWORD nBu
 WINBASEAPI DWORD WINAPI KERNEL32$GetFileAttributesW (LPCWSTR lpFileName);
 WINBASEAPI DWORD WINAPI KERNEL32$GetCurrentDirectoryW (DWORD nBufferLength, LPWSTR lpBuffer);
 WINBASEAPI HANDLE WINAPI KERNEL32$FindFirstFileW (LPCWSTR lpFileName, LPWIN32_FIND_DATAW lpFindFileData);
+WINBASEAPI HANDLE WINAPI KERNEL32$FindFirstFileA (char * lpFileName, LPWIN32_FIND_DATA lpFindFileData);
 WINBASEAPI WINBOOL WINAPI KERNEL32$FindNextFileW (HANDLE hFindFile, LPWIN32_FIND_DATAW lpFindFileData);
+WINBASEAPI WINBOOL WINAPI KERNEL32$FindNextFileA (HANDLE hFindFile, LPWIN32_FIND_DATA lpFindFileData);
 WINBASEAPI WINBOOL WINAPI KERNEL32$FindClose (HANDLE hFindFile);
 WINBASEAPI VOID WINAPI KERNEL32$SetLastError (DWORD dwErrCode);
 #define intAlloc(size) KERNEL32$HeapAlloc(KERNEL32$GetProcessHeap(), HEAP_ZERO_MEMORY, size)
@@ -116,16 +118,20 @@ WINBASEAPI int __cdecl MSVCRT$vsnprintf(char * __restrict__ d,size_t n,const cha
 WINBASEAPI int __cdecl MSVCRT$_snwprintf(wchar_t * __restrict__ _Dest,size_t _Count,const wchar_t * __restrict__ _Format,...);
 WINBASEAPI errno_t __cdecl MSVCRT$wcscpy_s(wchar_t *_Dst, rsize_t _DstSize, const wchar_t *_Src);
 WINBASEAPI size_t __cdecl MSVCRT$wcslen(const wchar_t *_Str);
+WINBASEAPI size_t __cdecl MSVCRT$wcstombs(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount);
 WINBASEAPI wchar_t *__cdecl MSVCRT$wcscmp(const wchar_t *_lhs,const wchar_t *_rhs);
 WINBASEAPI wchar_t *__cdecl MSVCRT$wcstok(wchar_t * __restrict__ _Str,const wchar_t * __restrict__ _Delim);
 WINBASEAPI wchar_t *__cdecl MSVCRT$wcstok_s(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context);
 WINBASEAPI wchar_t *__cdecl MSVCRT$wcsstr(const wchar_t *_Str,const wchar_t *_SubStr);
 WINBASEAPI wchar_t *__cdecl MSVCRT$wcscat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source);
 WINBASEAPI wchar_t *__cdecl MSVCRT$wcsncat(wchar_t * __restrict__ _Dest, const wchar_t * __restrict__ _Source, size_t _Count);
+WINBASEAPI wchar_t *__cdecl MSVCRT$strncat(char * __restrict__ _Dest,const char * __restrict__ _Source, size_t _Count);
 WINBASEAPI wchar_t *__cdecl MSVCRT$wcscpy(wchar_t * __restrict__ _Dest, const wchar_t * __restrict__ _Source);
 WINBASEAPI int __cdecl MSVCRT$_wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2);
+WINBASEAPI int __cdecl MSVCRT$_wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2, size_t _Count);
+WINBASEAPI int __cdecl MSVCRT$_strnicmp(const char *_Str1,const char *_Str2, size_t _Count);
 WINBASEAPI _CONST_RETURN wchar_t *__cdecl MSVCRT$wcschr(const wchar_t *_Str, wchar_t _Ch);
-WINBASEAPI wchar_t * __cdecl MSVCRT$wcsncat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count);
+
 WINBASEAPI wchar_t *__cdecl MSVCRT$wcsrchr(const wchar_t *_Str,wchar_t _Ch);
 WINBASEAPI wchar_t *__cdecl MSVCRT$wcsrchr(const wchar_t *_Str,wchar_t _Ch);
 WINBASEAPI unsigned long __cdecl MSVCRT$wcstoul(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
@@ -133,6 +139,7 @@ DECLSPEC_IMPORT char * __cdecl MSVCRT$strcat(char * __restrict__ _Dest,const cha
 WINBASEAPI size_t __cdecl MSVCRT$strnlen(const char *_Str,size_t _MaxCount);
 WINBASEAPI size_t __cdecl MSVCRT$strlen(const char *_Str);
 DECLSPEC_IMPORT int __cdecl MSVCRT$strcmp(const char *_Str1,const char *_Str2);
+DECLSPEC_IMPORT int __cdecl MSVCRT$_stricmp(const char *string1,const char *string2);
 WINBASEAPI int __cdecl MSVCRT$strncmp(const char *_Str1,const char *_Str2,size_t _MaxCount);
 DECLSPEC_IMPORT char * __cdecl MSVCRT$strcpy(char * __restrict__ __dst, const char * __restrict__ __src);
 DECLSPEC_IMPORT PCHAR __cdecl MSVCRT$strstr(const char *haystack, const char *needle);
@@ -140,6 +147,9 @@ DECLSPEC_IMPORT PCHAR __cdecl MSVCRT$strchr(const char *haystack, int needle);
 DECLSPEC_IMPORT char *__cdecl MSVCRT$strtok(char * __restrict__ _Str,const char * __restrict__ _Delim);
 _CRTIMP char *__cdecl MSVCRT$strtok_s(char *_Str,const char *_Delim,char **_Context);
 WINBASEAPI unsigned long __cdecl MSVCRT$strtoul(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
+WINBASEAPI size_t __cdecl MSVCRT$strftime(char *_DstBuf,size_t _SizeInBytes,const char *_Format,const struct tm *_Tm);
+WINBASEAPI struct tm * __cdecl MSVCRT$gmtime(const time_t *_Time);
+WINBASEAPI wchar_t * __cdecl MSVCRT$wcsncat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count);
 
 //DNSAPI
 DECLSPEC_IMPORT DNS_STATUS WINAPI DNSAPI$DnsQuery_A(PCSTR,WORD,DWORD,PIP4_ARRAY,PDNS_RECORD*,PVOID*);
@@ -166,6 +176,10 @@ WINBASEAPI DWORD WINAPI NETAPI32$NetUserSetInfo(LPCWSTR servername,LPCWSTR usern
 WINBASEAPI DWORD WINAPI NETAPI32$NetShareEnum(LMSTR servername,DWORD level,LPBYTE *bufptr,DWORD prefmaxlen,LPDWORD entriesread,LPDWORD totalentries,LPDWORD resume_handle);
 WINBASEAPI DWORD WINAPI NETAPI32$NetApiBufferFree(LPVOID Buffer);
 WINBASEAPI DWORD WINAPI NETAPI32$NetSessionEnum(LPCWSTR servername, LPCWSTR UncClientName, LPCWSTR username, DWORD level, LPBYTE* bufptr, DWORD prefmaxlen, LPDWORD entriesread, LPDWORD totalentries, LPDWORD resumehandle);
+WINBASEAPI DWORD WINAPI NETAPI32$NetWkstaUserEnum(LMSTR servername,DWORD level,LPBYTE *bufptr,DWORD prefmaxlen,LPDWORD entriesread,LPDWORD totalentries,LPDWORD resumehandle);
+WINBASEAPI DWORD WINAPI NETAPI32$NetWkstaGetInfo(LMSTR servername,DWORD level,LPBYTE *bufptr);
+WINBASEAPI DWORD WINAPI NETAPI32$NetStatisticsGet(LMSTR server,LMSTR service,DWORD level,DWORD options,LPBYTE *bufptr);
+WINBASEAPI DWORD WINAPI NETAPI32$NetRemoteTOD(LPCWSTR UncServerName,LPBYTE  *BufferPtr);
 
 //mpr
 WINBASEAPI DWORD WINAPI MPR$WNetOpenEnumW(DWORD dwScope, DWORD dwType, DWORD dwUsage, LPNETRESOURCEW lpNetResource, LPHANDLE lphEnum);
@@ -184,6 +198,11 @@ WINUSERAPI int WINAPI USER32$IsWindowVisible (HWND hWnd);
 WINUSERAPI int WINAPI USER32$GetWindowTextA(HWND hWnd,LPSTR lpString,int nMaxCount);
 WINUSERAPI int WINAPI USER32$GetClassNameA(HWND hWnd,LPSTR lpClassName,int nMaxCount);
 WINUSERAPI LPWSTR WINAPI USER32$CharPrevW(LPCWSTR lpszStart,LPCWSTR lpszCurrent);
+WINUSERAPI HWND WINAPI USER32$FindWindowExA (HWND hWndParent, HWND hWndChildAfter, LPCSTR lpszClass, LPCSTR lpszWindow);
+WINUSERAPI LRESULT WINAPI USER32$SendMessageA (HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam);
+WINUSERAPI int WINAPI USER32$GetWindowTextA(HWND  hWnd, LPSTR lpString, int nMaxCount);
+WINUSERAPI int WINAPI USER32$GetClassNameA(HWND hWnd, LPTSTR lpClassName, int nMaxCount);
+WINUSERAPI BOOL WINAPI USER32$EnumChildWindows(HWND hWndParent, WNDENUMPROC lpEnumFunc, LPARAM lParam);
 
 //secur32
 WINBASEAPI BOOLEAN WINAPI SECUR32$GetUserNameExA (int NameFormat, LPSTR lpNameBuffer, PULONG nSize);
@@ -478,6 +497,8 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define KERNEL32$GetCurrentDirectoryW  GetCurrentDirectoryW 
 #define KERNEL32$FindFirstFileW  FindFirstFileW 
 #define KERNEL32$FindNextFileW  FindNextFileW 
+#define KERNEL32$FindFirstFileA  FindFirstFileA
+#define KERNEL32$FindNextFileA  FindNextFileA 
 #define KERNEL32$FindClose  FindClose 
 #define KERNEL32$SetLastError  SetLastError 
 #define KERNEL32$HeapAlloc HeapAlloc
@@ -524,6 +545,7 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define MSVCRT$_snwprintf _snwprintf
 #define MSVCRT$wcscpy_s wcscpy_s
 #define MSVCRT$wcslen wcslen
+#define MSVCRT$wcstombs wcstombs
 #define MSVCRT$sprintf  sprintf 
 #define MSVCRT$wcscmp wcscmp
 #define MSVCRT$wcstok wcstok
@@ -543,6 +565,7 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define MSVCRT$strlen strlen
 #define MSVCRT$strcmp strcmp
 #define MSVCRT$strncmp strncmp
+#define MSVCRT$_stricmp _stricmp
 #define MSVCRT$strcpy strcpy
 #define MSVCRT$strstr strstr
 #define MSVCRT$strchr strchr
@@ -579,6 +602,9 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define NETAPI32$NetLocalGroupGetMembers NetLocalGroupGetMembers
 #define NETAPI32$NetUserSetInfo NetUserSetInfo
 #define NETAPI32$NetShareEnum NetShareEnum
+#define NETAPI32$NetWkstaUserEnum NetWkstaUserEnum
+#define NETAPI32$NetWkstaGetInfo NetWkstaGetInfo
+#define NETAPI32$NetStatisticsGet NetStatisticsGet
 #define NETAPI32$NetApiBufferFree NetApiBufferFree
 #define NETAPI32$NetSessionEnum NetSessionEnum
 #define MPR$WNetOpenEnumW WNetOpenEnumW
@@ -595,6 +621,11 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define USER32$GetWindowTextA GetWindowTextA
 #define USER32$GetClassNameA GetClassNameA
 #define USER32$CharPrevW CharPrevW
+#define USER32$FindWindowExA FindWindowExA 
+#define USER32$SendMessageA SendMessageA
+#define USER32$GetWindowTextA GetWindowTextA
+#define USER32$GetClassNameA GetClassNameA
+#define USER32$EnumChildWindows EnumChildWindows
 #define SECUR32$GetUserNameExA  GetUserNameExA 
 #define SHLWAPI$StrStrIA StrStrIA
 #define ADVAPI32$OpenProcessToken  OpenProcessToken 
