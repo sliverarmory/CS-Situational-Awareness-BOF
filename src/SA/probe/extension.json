@@ -1,0 +1,38 @@
+{
+    "name": "probe",
+    "version": "0.0.0",
+    "command_name": "sa-probe",
+    "extension_author": "c2biz",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Check if a specific port is open",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "probe.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "probe.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "host",
+            "desc": "Hostname or IP address.",
+            "type": "string",
+            "optional": false
+        },
+        {
+            "name": "port",
+            "desc": "Port number.",
+            "type": "integer",
+            "optional": false
+        }
+    ]
+}

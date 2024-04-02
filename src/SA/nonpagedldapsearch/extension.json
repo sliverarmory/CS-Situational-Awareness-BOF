@@ -1,0 +1,56 @@
+{
+    "name": "ldapsearch",
+    "version": "0.0.0",
+    "command_name": "sa-ldapsearch",
+    "extension_author": "c2biz",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Execute LDAP searches (non paged)",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "nonpagedldapsearch.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "nonpagedldapsearch.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+          "name": "ldap_filter",
+          "desc": "Query to filter LDAP entries.",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "name": "ldap_attributes",
+          "desc": "Specific attributes to retrieve from LDAP entries.",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "name": "results_count",
+          "desc": "Limit on the number of results to return.",
+          "type": "integer",
+          "optional": true
+        },
+        {
+          "name": "hostname",
+          "desc": "Hostname or IP address of the Domain Controller.",
+          "type": "string",
+          "optional": true
+        },
+        {
+          "name": "domain",
+          "desc": "Distinguished Name (DN) to use for the query base.",
+          "type": "string",
+          "optional": true
+        }
+    ]
+}

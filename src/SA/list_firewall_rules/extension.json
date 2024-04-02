@@ -1,0 +1,25 @@
+{
+    "name": "list_firewall_rules",
+    "version": "0.0.0",
+    "command_name": "sa-list_firewall_rules",
+    "extension_author": "c2biz",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "List Windows firewall rules",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "list_firewall_rules.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "list_firewall_rules.x86.o"
+        }
+    ],
+    "arguments": []
+}

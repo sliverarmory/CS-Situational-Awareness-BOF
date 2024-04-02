@@ -207,6 +207,58 @@ jobs:
         run: |
           ./make_bof.sh wmi_query
 
+      - name: env
+        run: |
+          ./make_bof.sh env
+
+      - name: get-netsession2
+        run: |
+          ./make_bof.sh get-netsession2
+
+      - name: list_firewall_rules
+        run: |
+          ./make_bof.sh list_firewall_rules
+
+      - name: locale
+        run: |
+          ./make_bof.sh locale
+
+      - name: netlocalgroup2
+        run: |
+          ./make_bof.sh netlocalgroup2
+
+      - name: netloggedon
+        run: |
+          ./make_bof.sh netloggedon
+
+      - name: netloggedon2
+        run: |
+          ./make_bof.sh netloggedon2
+
+      - name: nettime
+        run: |
+          ./make_bof.sh nettime
+
+      - name: netuptime
+        run: |
+          ./make_bof.sh netuptime
+
+      - name: nonpagedldapsearch
+        run: |
+          ./make_bof.sh nonpagedldapsearch
+
+      - name: notepad
+        run: |
+          ./make_bof.sh notepad
+
+      - name: probe
+        run: |
+          ./make_bof.sh probe
+
+      - name: regsession
+        run: |
+          ./make_bof.sh regsession
+
       - name: "Publish Release"
         uses: "marvinpinto/action-automatic-releases@latest"
         with:

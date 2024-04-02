@@ -1,0 +1,44 @@
+{
+    "name": "get-netsession2",
+    "version": "0.0.0",
+    "command_name": "sa-get-netsession2",
+    "extension_author": "c2biz",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Modified version of netsession that supports BOFHound",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "get-netsession2.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "get-netsession2.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+          "name": "hostname",
+          "desc": "Represents the hostname.",
+          "type": "wstring",
+          "optional": true
+        },
+        {
+          "name": "resolveMethod",
+          "desc": "Method to resolve the hostname.",
+          "type": "integer",
+          "optional": true
+        },
+        {
+          "name": "dnsserver",
+          "desc": "DNS server address.",
+          "type": "string",
+          "optional": true
+        }
+      ]
+}
