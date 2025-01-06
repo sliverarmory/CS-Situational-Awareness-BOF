@@ -75,9 +75,27 @@ void free_regkey(pregkeyval val)
     }
 }
 
-void Reg_InternalPrintKey(char * data, const char * valuename, DWORD type, DWORD datalen){
+void Reg_KeyToTimestamp(HKEY key, char *stringDate) {
+    FILETIME mytime;
+    LSTATUS stat;
+    SYSTEMTIME sAsystemTime, stLocal;
+
+    stat = ADVAPI32$RegQueryInfoKeyA(key, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, (PFILETIME) &mytime);
+    if(stat != ERROR_SUCCESS) {
+        BeaconPrintf(CALLBACK_ERROR, "Error calling RegQueryInfoKeyA with error code %d\n", stat);
+        return;
+    }
+
+    KERNEL32$FileTimeToSystemTime(&mytime, &sAsystemTime);
+    KERNEL32$SystemTimeToTzSpecificLocalTime(NULL, &sAsystemTime, &stLocal);
+
+    MSVCRT$sprintf(stringDate, "%02i/%02i/%04i %02i:%02i:%02i", stLocal.wMonth, stLocal.wDay, stLocal.wYear, stLocal.wHour, stLocal.wMinute, stLocal.wSecond);
+}
+
+void Reg_InternalPrintKey(char * data, const char * valuename, DWORD type, DWORD datalen, HKEY key){
     char default_name[] = {'[', 'N', 'U', 'L', 'L', ']', 0};
     int i = 0;
+
     if(valuename == NULL)
     {
         valuename = default_name;
@@ -114,7 +132,6 @@ void Reg_InternalPrintKey(char * data, const char * valuename, DWORD type, DWORD
     {
         internal_printf("None data type, or unhandled\n");
     }
-
 }
 
 DWORD Reg_GetValue(const char * hostname, HKEY hivekey, DWORD Arch, const char* keystring, const char* value){
@@ -173,8 +190,10 @@ DWORD Reg_GetValue(const char * hostname, HKEY hivekey, DWORD Arch, const char* 
     );
 	if(!dwRet)
 	{
-        internal_printf("%s\\%s\n", gHiveName, keystring);
-        Reg_InternalPrintKey(ValueData, value, type, size);
+        char stringDate[19];
+        Reg_KeyToTimestamp(key, stringDate);
+        internal_printf("%24s %s\\%s\n", stringDate, gHiveName, keystring);
+        Reg_InternalPrintKey(ValueData, value, type, size, key);
 	}
     END:
 	if(ValueData)
@@ -238,8 +257,10 @@ DWORD Reg_EnumKey(const char * hostname, HKEY hivekey, DWORD Arch, const char* k
     keyStack->push(keyStack, init_regkey(keystring, MSVCRT$strlen(keystring), NULL, 0, rootkey));
     while((curitem = keyStack->pop(keyStack)) != NULL)
     {
+        char stringDate[19];
+        Reg_KeyToTimestamp(curitem->hreg, stringDate);
         
-        internal_printf("%s%s\n", gHiveName, curitem->keypath);
+        internal_printf("%-24s %s\\%s\n", stringDate, gHiveName, curitem->keypath);
         // Get the class name and the value count.
         dwresult = ADVAPI32$RegQueryInfoKeyA(
             curitem->hreg,                    // key handle 
@@ -277,8 +298,8 @@ DWORD Reg_EnumKey(const char * hostname, HKEY hivekey, DWORD Arch, const char* k
                     (LPBYTE)currentdata,
                     &cchData);
                 if (retCode == ERROR_SUCCESS ) 
-                { 
-                        Reg_InternalPrintKey(currentdata, currentvaluename, regType, cchData);
+                {
+                    Reg_InternalPrintKey(currentdata, currentvaluename, regType, cchData, (HKEY) curitem->hreg);
                 } 
                 
             }
@@ -311,7 +332,11 @@ DWORD Reg_EnumKey(const char * hostname, HKEY hivekey, DWORD Arch, const char* k
                     }
                     else
                     {
-                        internal_printf("%s%s\\%s\n", gHiveName, curitem->keypath, currentkeyname);
+                        curKey = NULL;
+                        dwresult = ADVAPI32$RegOpenKeyExA(curitem->hreg, currentkeyname, 0, KEY_READ, &curKey);
+                        if(curKey)
+                            Reg_KeyToTimestamp(curKey, stringDate);
+                        internal_printf("%-24s %s\\%s\\%s\n", (curKey) ? stringDate : "Unable to get time", gHiveName, curitem->keypath, currentkeyname);
                     }
                 }
             }
