@@ -119,17 +119,17 @@ jobs:
         run: |
           ./make_bof.sh netstat
 
-      # - name: Net Use
-      #   run: |
-      #     ./make_bof.sh netuse
+       - name: Net Use
+         run: |
+           ./make_bof.sh netuse
 
       - name: Net User
         run: |
           ./make_bof.sh netuser
 
-      # - name: Net User Enum
-      #   run: |
-      #     ./make_bof.sh netuserenum
+       - name: Net User Enum
+         run: |
+           ./make_bof.sh netuserenum
 
       - name: Net View
         run: |
@@ -258,6 +258,10 @@ jobs:
       - name: regsession
         run: |
           ./make_bof.sh regsession
+
+      - name: dir
+        run: |
+          ./make_bof.sh dir
 
       - name: "Publish Release"
         uses: "marvinpinto/action-automatic-releases@latest"

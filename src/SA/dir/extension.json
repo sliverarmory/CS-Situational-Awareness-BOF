@@ -1,0 +1,38 @@
+{
+    "name": "dir",
+    "version": "0.0.0",
+    "command_name": "sa-dir",
+    "extension_author": "c2biz",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Lists a target directory using BOF.",
+    "long_help": "",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "dir.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "dir.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "targetdir",
+            "desc": "Directory to list",
+            "type": "string",
+            "optional": true
+        },
+        {
+            "name": "subdirs",
+            "desc": "Depth",
+            "type": "short",
+            "optional": true
+        }
+    ]
+}
