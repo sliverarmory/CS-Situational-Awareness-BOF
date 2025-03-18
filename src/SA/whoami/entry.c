@@ -13,7 +13,8 @@
 #include "bofdefs.h"
 #include "base.c"
 
-
+#define MAX_USERNAME_LENGTH 256
+#define MAX_DOMAINNAME_LENGTH 256
 typedef struct
 {
     UINT Rows;
@@ -38,54 +39,48 @@ char* WhoamiGetUser(EXTENDED_NAME_FORMAT NameFormat)
     return NULL;
 }
 
-VOID* WhoamiGetTokenInfo(TOKEN_INFORMATION_CLASS TokenType)
+VOID* WhoamiGetTokenInfo(TOKEN_INFORMATION_CLASS TokenType,HANDLE hToken)
 {
-    HANDLE hToken = 0;
     DWORD dwLength = 0;
     VOID* pTokenInfo = 0;
 
-    if (ADVAPI32$OpenProcessToken(KERNEL32$GetCurrentProcess(), TOKEN_READ, &hToken))
+    ADVAPI32$GetTokenInformation(hToken,
+                        TokenType,
+                        NULL,
+                        dwLength,
+                        &dwLength);
+
+    if (KERNEL32$GetLastError() == ERROR_INSUFFICIENT_BUFFER)
     {
-        ADVAPI32$GetTokenInformation(hToken,
-                            TokenType,
-                            NULL,
-                            dwLength,
-                            &dwLength);
-
-        if (KERNEL32$GetLastError() == ERROR_INSUFFICIENT_BUFFER)
+        pTokenInfo = intAlloc(dwLength);
+        if (pTokenInfo == NULL)
         {
-            pTokenInfo = intAlloc(dwLength);
-            if (pTokenInfo == NULL)
-            {
-                //printf("ERROR: not enough memory to allocate the token structure.\r\n");
-                KERNEL32$CloseHandle(hToken);
-                return NULL;
-            }
-        }
-
-        if (!ADVAPI32$GetTokenInformation(hToken, TokenType,
-                                 (LPVOID)pTokenInfo,
-                                 dwLength,
-                                 &dwLength))
-        {
-            //printf("ERROR 0x%x: could not get token information.\r\n", GetLastError());
-            KERNEL32$CloseHandle(hToken);
-            intFree(pTokenInfo);
+            //printf("ERROR: not enough memory to allocate the token structure.\r\n");
             return NULL;
         }
-
-        KERNEL32$CloseHandle(hToken);
     }
+
+    if (!ADVAPI32$GetTokenInformation(hToken, TokenType,
+                                (LPVOID)pTokenInfo,
+                                dwLength,
+                                &dwLength))
+    {
+        //printf("ERROR 0x%x: could not get token information.\r\n", GetLastError());
+        intFree(pTokenInfo);
+        return NULL;
+    }
+
+    
 
     return pTokenInfo;
 }
 
 
 
-int WhoamiUser(void)
+int WhoamiUser(HANDLE hToken)
 {
-    PTOKEN_USER pUserInfo = (PTOKEN_USER) WhoamiGetTokenInfo(TokenUser);
-    char* pUserStr = NULL;
+    PTOKEN_USER pUserInfo = (PTOKEN_USER) WhoamiGetTokenInfo(TokenUser,hToken);
+    // char* pUserStr = NULL;
     char* pSidStr = NULL;
     WhoamiTable *UserTable = NULL;
     int retval = 0;
@@ -96,31 +91,35 @@ int WhoamiUser(void)
         goto end;
     }
 
-    pUserStr = WhoamiGetUser(NameSamCompatible);
-    if (pUserStr == NULL)
-    {
-        retval = 1;
-        goto end;
-    }
+    // pUserStr = WhoamiGetUser(NameSamCompatible);
+    // if (pUserStr == NULL)
+    // {
+    //     retval = 1;
+    //     goto end;
+    // }
+    char username[MAX_USERNAME_LENGTH] = {0}, domain[MAX_DOMAINNAME_LENGTH] = {0};
+    DWORD user_length = MAX_USERNAME_LENGTH, domain_length = MAX_DOMAINNAME_LENGTH;
+    SID_NAME_USE sid;
+    ADVAPI32$LookupAccountSidA(NULL, pUserInfo->User.Sid, username, &user_length, domain, &domain_length, &sid);
 
     internal_printf("\nUserName\t\tSID\n");
     internal_printf("====================== ====================================\n");
 
     ADVAPI32$ConvertSidToStringSidA(pUserInfo->User.Sid, &pSidStr);
 
-    internal_printf("%s\t%s\n\n", pUserStr, pSidStr);
+    internal_printf("%s\\%s\t%s\n\n", domain,username, pSidStr);
 
 
     /* cleanup our allocations */
     end:
     if(pSidStr){KERNEL32$LocalFree(pSidStr);}
     if(pUserInfo){intFree(pUserInfo);}
-    if(pUserStr){intFree(pUserStr);};
+    // if(pUserStr){intFree(pUserStr);};
 
     return retval;
 }
 
-int WhoamiGroups(void)
+int WhoamiGroups(HANDLE hToken)
 {
     DWORD dwIndex = 0;
     char* pSidStr = NULL;
@@ -133,7 +132,7 @@ int WhoamiGroups(void)
 
     SID_NAME_USE Use = 0;
 
-    PTOKEN_GROUPS pGroupInfo = (PTOKEN_GROUPS)WhoamiGetTokenInfo(TokenGroups);
+    PTOKEN_GROUPS pGroupInfo = (PTOKEN_GROUPS)WhoamiGetTokenInfo(TokenGroups,hToken);
     WhoamiTable *GroupTable = NULL;
 
     if (pGroupInfo == NULL)
@@ -230,9 +229,9 @@ int WhoamiGroups(void)
     return 0;
 }
 
-int WhoamiPriv(void)
+int WhoamiPriv(HANDLE hToken)
 {
-    PTOKEN_PRIVILEGES pPrivInfo = (PTOKEN_PRIVILEGES) WhoamiGetTokenInfo(TokenPrivileges);
+    PTOKEN_PRIVILEGES pPrivInfo = (PTOKEN_PRIVILEGES) WhoamiGetTokenInfo(TokenPrivileges,hToken);
     DWORD dwResult = 0, dwIndex = 0;
     WhoamiTable *PrivTable = NULL;
 
@@ -315,9 +314,29 @@ VOID go(
 	{
 		return;
 	}
-	(void)WhoamiUser();
-	(void)WhoamiGroups();
-	(void)WhoamiPriv();
+    HANDLE hToken = 0;
+    if (ADVAPI32$OpenProcessToken(KERNEL32$GetCurrentProcess(), TOKEN_READ, &hToken))
+    {
+        internal_printf("*****PROCESS TOKEN INFORMATION*****\n");
+        (void)WhoamiUser(hToken);
+        (void)WhoamiGroups(hToken);
+        (void)WhoamiPriv(hToken);
+        KERNEL32$CloseHandle(hToken);
+    }
+    else{
+        internal_printf("Failed OpenProcessToken with error: %d\n",KERNEL32$GetLastError());
+    }
+    if (ADVAPI32$OpenThreadToken(KERNEL32$GetCurrentThread(), TOKEN_READ,FALSE, &hToken))
+    {
+        internal_printf("\n\n*****THREAD TOKEN INFORMATION*****\n");
+        (void)WhoamiUser(hToken);
+        (void)WhoamiGroups(hToken);
+        (void)WhoamiPriv(hToken);
+        KERNEL32$CloseHandle(hToken);
+    }
+    else{
+        internal_printf("\n\nFailed OpenThreadToken with error: %d\n",KERNEL32$GetLastError());
+    }
 	printoutput(TRUE);
 };
 #else
