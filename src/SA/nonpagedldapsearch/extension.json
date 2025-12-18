@@ -1,7 +1,7 @@
 {
-    "name": "ldapsearch",
+    "name": "nonpagedldapsearch",
     "version": "0.0.0",
-    "command_name": "sa-ldapsearch",
+    "command_name": "sa-nonpagedldapsearch",
     "extension_author": "c2biz",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
