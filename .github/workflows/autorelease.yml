@@ -263,6 +263,34 @@ jobs:
         run: |
           ./make_bof.sh dir
 
+      - name: aadjoininfo
+        run: |
+          ./make_bof.sh aadjoininfo
+
+      - name: get_dpapi_system
+        run: |
+          ./make_bof.sh get_dpapi_system
+
+      - name: get_session_info
+        run: |
+          ./make_bof.sh get_session_info
+
+      - name: md5
+        run: |
+          ./make_bof.sh md5
+
+      - name: sha1
+        run: |
+          ./make_bof.sh sha1
+
+      - name: sha256
+        run: |
+          ./make_bof.sh sha256
+
+      - name: useridletime
+        run: |
+          ./make_bof.sh useridletime
+
       - name: "Publish Release"
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
