@@ -28,9 +28,11 @@ Realistically, this could be compressed into a helper script, but those steps we
 |enumLocalSessions| enumLocalSessions| Enumerate currently attached user sessions both local and over RDP|
 |env| env| List process environment variables|
 |findLoadedModule| findLoadedModule [modulepart] [opt:procnamepart]| Find what processes \*modulepart\* are loaded into, optionally searching just \*procnamepart\*|
+|get_dpapi_system| get_dpapi_system | Get the DPAPI_SYSTEM key and bootkey |
 |get_password_policy| get_password_policy [hostname]| Get target server or domain's configured password policy and lockouts|
+|get_session_info| get_session_info | prints out information related to the current users logon session |
 |ipconfig| ipconfig| List IPv4 address, hostname, and DNS server|
-|ldapsearch| ldapsearch [query] [opt: attribute] [opt: results_limit] [opt: DC hostname or IP] [opt: Distingished Name]| Execute LDAP searches (NOTE: specify *,ntsecuritydescriptor as attribute parameter if you want all attributes + base64 encoded ACL of the objects, this can then be resolved using BOFHound. Could possibly break pagination, although everything seemed fine during testing.)|
+|ldapsearch| ldapsearch <query> [--attributes] [--count] [--scope] [--hostname] [--dn] [--ldaps] | Execute LDAP searches (NOTE: specify *,ntsecuritydescriptor as attribute parameter if you want all attributes + base64 encoded ACL of the objects, this can then be resolved using BOFHound. Could possibly break pagination, although everything seemed fine during testing.)|
 |listdns| listdns| List DNS cache entries. Attempt to query and resolve each|
 |list_firewall_rules| list_firewall_rules| List Windows firewall rules|
 |listmods| listmods [opt: pid]| List process modules (DLL). Target current process if PID is empty. Complement to driversigs to determine if our process was injected by AV/EDR|
@@ -55,6 +57,7 @@ Realistically, this could be compressed into a helper script, but those steps we
 |netuse_list| netuse_list [opt:target]| List all bound share resources or info about target local resource|
 |netview| netview| List reachable computers in the current domain|
 |nslookup| nslookup [hostname] [opt:dns server] [opt: record type]| Make a DNS query.<br/>  DNS server is the server you want to query (do not specify or 0 for default) <br/>record type is something like A, AAAA, or ANY. Some situations are limited due to observed crashes|
+| md5 | md5 [filename] | Hash filename using md5 |
 |probe| probe [host] [port]| Check if a specific port is open|
 |regsession| regsession [opt: hostname]| Return logged on user SIDs by enumerating HKEY_USERS. BOFHound compatible|
 |reg_query| [opt:hostname] [hive] [path] [opt: value to query]| Query a registry value or enumerate a single key|
@@ -69,8 +72,11 @@ Realistically, this could be compressed into a helper script, but those steps we
 |sc_query| sc_query [opt: service name] [opt: server]| sc query implementation in BOF|
 |schtasksenum| schtasksenum [opt: server]| Enumerate scheduled tasks on the local or remote computer|
 |schtasksquery| schtasksquery [opt: server] [taskpath]| Query the given task on the local or remote computer|
+| sha1 | sha1 [filename] | Hash filename using sha1 |
+|sha256 | sha256 [filename] | Hash filename using sha256 |
 |tasklist| tasklist [opt: server]| List running processes including PID, PPID, and ComandLine (uses wmi)|
 |uptime| uptime| List system boot time and how long it has been running|
+|useridletime| useridletime| Shows how long the user as been idle, displayed in seconds, minutes, hours and days.|
 |vssenum| vssenum [hostname] [opt:sharename]| Enumerate Shadow Copies on some Server 2012+ servers|
 |whoami| whoami| List whoami /all|
 |windowlist| windowlist [opt:all]| List visible windows in the current user session|
@@ -85,7 +91,11 @@ The driversigs codebase comes from https://gist.github.com/jthuraisamy/4c4c751df
 Thanks all of the contributors listed under contributors. Each of you have contributed something meaningful to this repository and dealt with me and my review processes. I appreciate each and every one of you for teaching me and helping make this BOF repository the best it can be!
 
 ##### Compiler used
-Precompiled BOF's are provided in this project and are compiled using a recent version of Mingw-w64 typically installed from Brew.
+BOF's are built against [freefirex2/ts_bof_builder:latest](https://hub.docker.com/r/freefirex2/ts_bof_builder)
 
 ## System Support
 These BOF's are written with support for Windows Vista+ in mind. A new branch called [winxp_2003](https://github.com/trustedsec/CS-Situational-Awareness-BOF/tree/winxp_2003) has been created if you need to use the main set of BOF's on those older systems. This branch will remain in a less supported state. It will be functional, but not updated with every new push / feature that we may add.
+
+## Want to Learn More?
+If you've found these beacon object files helpful and want to write some of your own bofs following a similar style we invite you to check out our [Beacon Object File (BOF) Development](https://learn.trustedsec.com/courses/cd84409a-36af-4507-be2c-ca7ad1e9fd2d) course.  
+The course gives a breif overview of the history of beacon object files and then dives into a variety of challenge problems that aim to teach you how to leverage a variety of windows technologies when developing your own beacon object files.

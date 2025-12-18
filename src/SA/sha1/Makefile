@@ -1,4 +1,4 @@
-BOFNAME := YOUNAMEHERE
+BOFNAME := sha1
 COMINCLUDE := -I ../../common
 LIBINCLUDE := 
 CC_x64 := x86_64-w64-mingw32-gcc

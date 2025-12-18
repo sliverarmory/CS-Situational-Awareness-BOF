@@ -1,6 +1,6 @@
-BOFNAME := arp
+BOFNAME := aadjoininfo
 COMINCLUDE := -I ../../common
-LIBINCLUDE := -l iphlpapi
+LIBINCLUDE := -l netapi32
 CC_x64 := x86_64-w64-mingw32-gcc
 CC_x86 := i686-w64-mingw32-gcc
 CC=x86_64-w64-mingw32-clang
@@ -12,8 +12,9 @@ all:
 	mv $(BOFNAME)*.o ../../../SA/$(BOFNAME)
 
 test:
-	$(CC_x64) entry.c -g $(COMINCLUDE) $(LIBINCLUDE)  -o $(BOFNAME).x64.exe
-	$(CC_x86) entry.c -g $(COMINCLUDE) $(LIBINCLUDE) -o $(BOFNAME).x86.exe
+	# NetApi32 definitions not available with mingw32 as of writing
+	#$(CC_x64) entry.c -I . -g $(COMINCLUDE) $(LIBINCLUDE)  -o $(BOFNAME).x64.exe -D_WIN32_WINNT=0x0A00 -DWINAPI_FAMILY=WINAPI_FAMILY_DESKTOP_APP
+	#$(CC_x86) entry.c -g $(COMINCLUDE) $(LIBINCLUDE) -o $(BOFNAME).x86.exe -D_WIN32_WINNT=0x0A00 -DWINAPI_FAMILY=WINAPI_FAMILY_DESKTOP_APP
 
 scanbuild:
 	$(CC) entry.c -o $(BOFNAME).scanbuild.exe $(COMINCLUDE) $(LIBINCLUDE)
