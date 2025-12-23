@@ -23,19 +23,25 @@
     "arguments": [
         {
             "name": "query",
-            "desc": "Query",
+            "desc": "LDAP filter query",
             "type": "string",
             "optional": false
         },
         {
             "name": "attributes",
-            "desc": "Comma separated attributes",
+            "desc": "Comma separated attributes to return",
             "type": "string",
             "optional": true
         },
         {
             "name": "results_count",
-            "desc": "Limit number of results",
+            "desc": "Limit number of results (0 = unlimited)",
+            "type": "integer",
+            "optional": true
+        },
+        {
+            "name": "scope",
+            "desc": "Search scope: 1=BASE, 2=ONELEVEL, 3=SUBTREE",
             "type": "integer",
             "optional": true
         },
@@ -46,9 +52,15 @@
             "optional": true
         },
         {
-            "name": "dn",
-            "desc": "Distingished Name to use",
+            "name": "domain",
+            "desc": "Distinguished Name for search base",
             "type": "string",
+            "optional": true
+        },
+        {
+            "name": "ldaps",
+            "desc": "Use LDAPS (1) or LDAP (0)",
+            "type": "integer",
             "optional": true
         }
     ]

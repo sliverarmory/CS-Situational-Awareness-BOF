@@ -30,13 +30,13 @@
         },
         {
             "name": "server",
-            "desc": "DNS Server to use",
+            "desc": "DNS Server IP (empty for system default)",
             "type": "string",
-            "optional": false
+            "optional": true
         },
         {
             "name": "type",
-            "desc": "DNS record type (A, AAAA, or ANY), see https://docs.microsoft.com/en-us/windows/win32/dns/dns-constants for the actual values",
+            "desc": "DNS record type: 1=A, 5=CNAME, 6=SOA, 15=MX, 28=AAAA, 33=SRV, 255=ANY",
             "type": "short",
             "optional": false
         }
