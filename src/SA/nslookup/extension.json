@@ -29,16 +29,16 @@
             "optional": false
         },
         {
-            "name": "server",
-            "desc": "DNS Server IP (empty for system default)",
-            "type": "string",
-            "optional": true
-        },
-        {
             "name": "type",
             "desc": "DNS record type: 1=A, 5=CNAME, 6=SOA, 15=MX, 28=AAAA, 33=SRV, 255=ANY",
             "type": "short",
             "optional": false
+        },
+        {
+            "name": "server",
+            "desc": "DNS Server IP (empty for system default)",
+            "type": "string",
+            "optional": true
         }
     ]
 }
