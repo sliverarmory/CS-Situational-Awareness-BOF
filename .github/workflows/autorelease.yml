@@ -11,19 +11,18 @@ jobs:
     name: Build and publish tagged release
     if: startsWith( github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
+    container:
+      image: freefirex2/ts_bof_builder@sha256:e203ba628c97abb51ef65914b216fa1e088401710107027c353d15f09e0cfb62
     timeout-minutes: 10
     steps:
       - name: OS Packages
-        run: |
-          sudo apt-get update --fix-missing && sudo apt-get -y install \
-          git build-essential zlib1g zlib1g-dev wget zip unzip \
-          mingw-w64 binutils-mingw-w64 g++-mingw-w64 gcc-multilib jq
+        run: dnf install -y jq
 
       - name: Minisign
         run: |
           MINISIGN_TMP=`mktemp -d`
           cd $MINISIGN_TMP
-          wget https://github.com/aead/minisign/releases/download/v0.2.0/minisign-linux-amd64.tar.gz
+          curl -sL -o minisign-linux-amd64.tar.gz https://github.com/aead/minisign/releases/download/v0.2.0/minisign-linux-amd64.tar.gz
           tar xvf minisign-linux-amd64.tar.gz
           mv ./minisign ~/minisign
           touch ~/minisign.key && chmod 600 ~/minisign.key
@@ -94,6 +93,10 @@ jobs:
       - name: LDAP Search
         run: |
           ./make_bof.sh ldapsearch
+
+      - name: LDAP Security Check
+        run: |
+          ./make_bof.sh ldapsecuritycheck
 
       - name: List DNS
         run: |
