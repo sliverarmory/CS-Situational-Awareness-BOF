@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "sc query implementation in bof",
-    "long_help": "",
+    "help": "Query the status of Windows services",
+    "long_help": "Retrieves runtime status for one or all services including type, state, exit codes, PID, and flags. If no service name is provided, enumerates all Win32 services. Equivalent to 'sc query'.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -23,14 +23,14 @@
     ],
     "arguments": [
         {
-            "name": "server",
-            "desc": "Target server",
+            "name": "hostname",
+            "desc": "Target hostname or IP address (default: local machine)",
             "type": "string",
             "optional": true
         },
         {
-            "name": "service",
-            "desc": "Target service",
+            "name": "servicename",
+            "desc": "Service name to query, or omit to enumerate all services",
             "type": "string",
             "optional": true
         }

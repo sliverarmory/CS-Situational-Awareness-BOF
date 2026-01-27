@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Queries the given task from the local or if provided remote machine",
-    "long_help": "",
+    "help": "Query details for a specific scheduled task",
+    "long_help": "Retrieves detailed information for a single scheduled task including name, path, enabled state, last/next run times, current state, and full XML definition.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -24,13 +24,13 @@
     "arguments": [
         {
             "name": "server",
-            "desc": "Target server",
+            "desc": "Target hostname or IP address (empty string for local machine)",
             "type": "wstring",
-            "optional": false
+            "optional": true
         },
         {
-            "name": "taskpath",
-            "desc": "Task path",
+            "name": "taskname",
+            "desc": "Full path to the task (e.g., \\Microsoft\\Windows\\Autochk\\Proxy)",
             "type": "wstring",
             "optional": false
         }

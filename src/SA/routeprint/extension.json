@@ -5,8 +5,7 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Prints IPv4 configured routes",
-    "long_help": "",
+    "help": "Prints IPv4 routing table, interface list, and default gateway",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

@@ -5,7 +5,7 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "TCP / UDP IPv4 netstat listing",
+    "help": "Lists TCP/UDP IPv4 connections with owning process name and PID",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -19,5 +19,6 @@
             "arch": "386",
             "path": "netstat.x86.o"
         }
-    ]
+    ],
+    "arguments": []
 }

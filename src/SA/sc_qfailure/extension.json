@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "sc qfailure implementation in bof",
-    "long_help": "",
+    "help": "Query the failure recovery actions for a Windows service",
+    "long_help": "Retrieves failure recovery configuration including reset period, reboot message, command line, and failure actions (restart, reboot, run command). Equivalent to 'sc qfailure'.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -23,16 +23,16 @@
     ],
     "arguments": [
         {
-            "name": "service",
-            "desc": "Target service",
-            "type": "string",
-            "optional": false
-        },
-        {
-            "name": "server",
-            "desc": "Target server",
+            "name": "hostname",
+            "desc": "Target hostname or IP address (default: local machine)",
             "type": "string",
             "optional": true
+        },
+        {
+            "name": "servicename",
+            "desc": "Service name to query (not display name)",
+            "type": "string",
+            "optional": false
         }
     ]
 }

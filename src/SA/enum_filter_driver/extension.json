@@ -5,7 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Enumerates all the filter drivers",
+    "help": "Enumerates security-related filter drivers (AV, activity monitors, content screeners)",
+    "long_help": "Scans the registry for minifilter drivers and identifies security-related filter drivers based on their altitude values. Reports activity monitors (360000-389999), antivirus products (320000-329999), and content screeners (260000-269999). Useful for identifying endpoint protection software.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -22,8 +23,8 @@
     ],
     "arguments": [
         {
-            "name": "computer",
-            "desc": "Computer to enumerate filter drivers on",
+            "name": "system",
+            "desc": "Remote computer to query (default: local machine)",
             "type": "string",
             "optional": true
         }

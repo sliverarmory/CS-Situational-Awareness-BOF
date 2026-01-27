@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Simulates whoami /all",
-    "long_help": "",
+    "help": "Displays current user, group memberships, and token privileges",
+    "long_help": "Returns information similar to 'whoami /all': the current username and SID, all group memberships with their SIDs and attributes, and all token privileges with their enabled/disabled state.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -20,5 +20,6 @@
             "arch": "386",
             "path": "whoami.x86.o"
         }
-    ]
+    ],
+    "arguments": []
 }

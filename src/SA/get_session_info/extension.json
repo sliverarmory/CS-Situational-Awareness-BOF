@@ -5,8 +5,8 @@
     "extension_author": "c2biz",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Retrieves current session information",
-    "long_help": "",
+    "help": "Retrieve detailed logon session information for the current process token",
+    "long_help": "Uses LsaGetLogonSessionData to display comprehensive information about the current logon session including: username, domain, authentication package (NTLM/Kerberos), logon type (Interactive/Network/Service/etc.), session ID, logon server, DNS domain, UPN, profile path, home directory, and password timestamps (last changed, can change, must change).",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

@@ -5,8 +5,8 @@
     "extension_author": "c2biz",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Calculates MD5 hash of a file",
-    "long_help": "",
+    "help": "Calculates the MD5 hash of a file.",
+    "long_help": "Computes and displays the MD5 (128-bit) hash of a file using the Windows CryptoAPI. Useful for file integrity verification or comparing files. Note: MD5 is cryptographically broken and should not be used for security purposes.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

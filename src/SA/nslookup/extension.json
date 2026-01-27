@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Makes a dns query. NOTE: Some situations are limited due to observed crashes",
-    "long_help": "",
+    "help": "Perform DNS lookups using the Windows DNS API",
+    "long_help": "Queries DNS records for a hostname using DnsQuery_A. Supports common record types including A, CNAME, SOA, MX, AAAA, SRV, and ANY. Can optionally specify a custom DNS server IP address. NOTE: Some query types may cause instability in certain environments.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -29,15 +29,15 @@
             "optional": false
         },
         {
-            "name": "type",
-            "desc": "DNS record type: 1=A, 5=CNAME, 6=SOA, 15=MX, 28=AAAA, 33=SRV, 255=ANY",
-            "type": "short",
-            "optional": false
-        },
-        {
             "name": "server",
             "desc": "DNS Server IP (empty for system default)",
             "type": "string",
+            "optional": true
+        },
+        {
+            "name": "type",
+            "desc": "DNS record type: 1=A, 5=CNAME, 6=SOA, 15=MX, 28=AAAA, 33=SRV, 255=ANY",
+            "type": "short",
             "optional": true
         }
     ]

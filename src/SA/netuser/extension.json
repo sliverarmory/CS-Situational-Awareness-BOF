@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Pulls info about specific user.",
-    "long_help": "Pulls info about specific user. Pulls from domain if a domain name is specified",
+    "help": "Get detailed information about a specific user account.",
+    "long_help": "Retrieves detailed information about a user account including: account status (enabled/disabled), delegation settings, password policy, group memberships (local and global), logon information, profile paths, and account expiration. Queries the local system by default, or a domain controller if a domain is specified.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -30,7 +30,7 @@
         },
         {
             "name": "domain",
-            "desc": "Domain name",
+            "desc": "Domain or server to query (defaults to local system if not specified)",
             "type": "wstring",
             "optional": true
         }

@@ -5,7 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Retrieves advanced security audit policies",
+    "help": "Retrieves advanced security audit policies from local Group Policy",
+    "long_help": "Reads and combines audit.csv files from the local Group Policy directory to display configured advanced audit policies. Shows audit subcategory settings including inclusion/exclusion criteria and success/failure auditing configuration.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -23,7 +24,7 @@
     "arguments": [
         {
             "name": "isWow64",
-            "desc": "isWow64",
+            "desc": "Set to 1 if running from a WoW64 process (auto-detected by loader)",
             "type": "integer",
             "optional": true
         }

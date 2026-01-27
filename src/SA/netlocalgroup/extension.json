@@ -5,7 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "List local groups from the local (or specified) computer",
+    "help": "List local groups or enumerate members of a specific local group.",
+    "long_help": "Lists all local groups on a computer or retrieves members of a specific local group. When 'type' is 0, lists all local groups with their comments. When 'type' is 1, lists members of the specified group. Queries the local system by default if no server is specified.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -23,19 +24,19 @@
     "arguments": [
         {
             "name": "type",
-            "desc": "type (0 for or 1 to list server group members)",
+            "desc": "Operation mode: 0 = list all local groups, 1 = list members of specified group",
             "type": "short",
             "optional": true
         },
         {
             "name": "server",
-            "desc": "Server",
+            "desc": "Server to query (defaults to local system if not specified)",
             "type": "wstring",
             "optional": true
         },
         {
             "name": "group",
-            "desc": "Group",
+            "desc": "Group name to enumerate members from (required when type=1)",
             "type": "wstring",
             "optional": true
         }

@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Query the Windows registry",
-    "long_help": "",
+    "help": "Query the Windows registry for keys and values",
+    "long_help": "Reads registry keys and values from local or remote systems. Can enumerate subkeys and values at a path, or retrieve a specific value. Supports recursive enumeration. Displays value names, types, and data along with last modified timestamps.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -24,9 +24,9 @@
     "arguments": [
         {
             "name": "hostname",
-            "desc": "Hostname to resolve",
+            "desc": "Target hostname for remote registry (empty for local)",
             "type": "string",
-            "optional": false
+            "optional": true
         },
         {
             "name": "hive",
@@ -42,13 +42,13 @@
         },
         {
             "name": "key",
-            "desc": "Registry key name",
+            "desc": "Value name to retrieve (empty to enumerate all values/subkeys)",
             "type": "string",
             "optional": true
         },
         {
             "name": "recursive",
-            "desc": "Recursive search",
+            "desc": "Enumerate subkeys recursively (0=no, 1=yes). Only applies when key is empty. Default: 0",
             "type": "integer",
             "optional": true
         }

@@ -5,7 +5,7 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Lists ARP table",
+    "help": "Lists ARP table entries (IP to MAC address mappings)",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -19,5 +19,6 @@
             "arch": "386",
             "path": "arp.x86.o"
         }
-    ]
+    ],
+    "arguments": []
 }

@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "List a process' modules (DLL)",
-    "long_help": "List a process' modules (DLL). Target current process if pid is empty. Complement to driversigs to determine if our process was injected by edr/av.",
+    "help": "List loaded modules (DLLs) for a process with version info",
+    "long_help": "Enumerates all loaded modules (DLLs) for a specified process, displaying file path, company name, and file description from version info. Useful for identifying injected DLLs from EDR/AV products.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -24,7 +24,7 @@
     "arguments": [
         {
             "name": "pid",
-            "desc": "PID",
+            "desc": "Process ID to inspect. Default: current process (0 or empty)",
             "type": "integer",
             "optional": true
         }

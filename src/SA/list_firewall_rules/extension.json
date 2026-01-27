@@ -6,7 +6,7 @@
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
     "help": "List Windows firewall rules",
-    "long_help": "",
+    "long_help": "Enumerates all Windows Firewall rules using the INetFwPolicy2 COM interface. For each rule, displays: name, description, application, service, protocol, ports, addresses, profiles (Domain/Private/Public), direction, action, interfaces, enabled status, grouping, and edge traversal settings.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

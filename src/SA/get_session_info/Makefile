@@ -6,7 +6,7 @@ CC_x86 := i686-w64-mingw32-gcc
 CC=x86_64-w64-mingw32-clang
 
 all:
-	$(CC_x64) -o $(BOFNAME).x64.o $(COMINCLUDE) -fno-jump-tables -Os -c entry.c -DBOF 
+	$(CC_x64) -o $(BOFNAME).x64.o $(COMINCLUDE) -fno-jump-tables -Os -c entry.c -DBOF
 	$(CC_x86) -o $(BOFNAME).x86.o $(COMINCLUDE) -fno-jump-tables -Os -c entry.c -DBOF
 	mkdir -p ../../../SA/$(BOFNAME) 
 	mv $(BOFNAME)*.o ../../../SA/$(BOFNAME)

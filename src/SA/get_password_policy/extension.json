@@ -5,7 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Gets target server or domain's configured password policy and lockouts",
+    "help": "Retrieve password policy and account lockout settings from a server or domain",
+    "long_help": "Uses NetUserModalsGet to retrieve password and lockout policies. Displays: minimum password length, maximum/minimum password age, forced logoff time, password history length, lockout duration, lockout observation window, and lockout threshold.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -22,10 +23,10 @@
     ],
     "arguments": [
         {
-            "name": "hostname",
-            "desc": "Hostname",
+            "name": "server",
+            "desc": "Target server or domain controller to query (default: local system or domain)",
             "type": "wstring",
-            "optional": false
+            "optional": true
         }
     ]
 }

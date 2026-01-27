@@ -5,8 +5,8 @@
     "extension_author": "c2biz",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Modified version of netsession that supports BOFHound",
-    "long_help": "",
+    "help": "Enumerate network sessions with client hostname resolution (BOFHound compatible)",
+    "long_help": "Extended version of get-netsession that resolves client IP addresses to hostnames. Uses NetSessionEnum to list sessions with additional hostname resolution via DNS PTR lookup or NetWkstaGetInfo. Outputs computer name and domain for BloodHound/BOFHound ingestion.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -24,19 +24,19 @@
     "arguments": [
         {
           "name": "hostname",
-          "desc": "Represents the hostname.",
+          "desc": "Target computer to query for sessions (default: local system)",
           "type": "wstring",
           "optional": true
         },
         {
-          "name": "resolveMethod",
-          "desc": "Method to resolve the hostname.",
-          "type": "integer",
+          "name": "method",
+          "desc": "Method to resolve client IPs: 0 = DNS PTR lookup (default), 1 = NetWkstaGetInfo",
+          "type": "short",
           "optional": true
         },
         {
           "name": "dnsserver",
-          "desc": "DNS server address.",
+          "desc": "DNS server IP address to use for PTR lookups (only used when resolveMethod=0)",
           "type": "string",
           "optional": true
         }

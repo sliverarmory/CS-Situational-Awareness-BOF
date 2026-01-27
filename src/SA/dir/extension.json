@@ -5,8 +5,8 @@
     "extension_author": "c2biz",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Lists a target directory using BOF.",
-    "long_help": "",
+    "help": "Lists files and directories in a target path, with optional recursive listing.",
+    "long_help": "Lists directory contents including file sizes and modification times. Supports local paths, drive letters (C:), and UNC paths (\\\\server\\share). Output shows date/time, size (or <dir>/<junction>), and filename. Displays total file size and counts at the end.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -30,7 +30,7 @@
         },
         {
             "name": "subdirs",
-            "desc": "Depth",
+            "desc": "Recurse into subdirectories (0=no, 1=yes). Defaults to 0.",
             "type": "short",
             "optional": true
         }

@@ -5,7 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Enumerates CAs and templates in the AD using IX509PolicyServerListManager COM object",
+    "help": "Enumerate AD Certificate Services via IX509PolicyServerListManager and enrollment policy servers",
+    "long_help": "Enumerates Active Directory Certificate Services (ADCS) infrastructure using the IX509PolicyServerListManager and IX509EnrollmentPolicyServer COM interfaces. Discovers policy servers from Group Policy and registry, then enumerates CAs and certificate templates via enrollment policy. Provides CA certificate details, web servers, security permissions, and template configurations. Uses Kerberos authentication. Alternative enumeration method when other approaches fail.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

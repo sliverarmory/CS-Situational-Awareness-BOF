@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Get a list of running processes including PID, PPID and CommandLine (uses wmi)\nNote: -server expects full WMI path, e.g. \\\\.\\root\\cimv2 (local) or \\\\HOST\\root\\cimv2 (remote)",
-    "long_help": "",
+    "help": "List running processes with PID, PPID, session ID and command line via WMI",
+    "long_help": "Queries Win32_Process via WMI to list all running processes. Returns Name, ProcessId, ParentProcessId, SessionId, and CommandLine. Can query local or remote systems.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -23,8 +23,8 @@
     ],
     "arguments": [
         {
-            "name": "server",
-            "desc": "Target server",
+            "name": "resource",
+            "desc": "WMI resource path, e.g. \\\\.\\root\\cimv2 (local) or \\\\HOST\\root\\cimv2 (remote). Empty for local default",
             "type": "wstring",
             "optional": true
         }

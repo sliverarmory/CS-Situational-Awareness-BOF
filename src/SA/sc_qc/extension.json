@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Queries the configuration information for a specified service.",
-    "long_help": "",
+    "help": "Query configuration for a specific Windows service",
+    "long_help": "Retrieves detailed configuration for a service including type, start type, error control, binary path, load order group, dependencies, display name, and service account. Equivalent to 'sc qc'.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -24,13 +24,13 @@
     "arguments": [
         {
             "name": "hostname",
-            "desc": "Target host",
+            "desc": "Target hostname or IP address (empty string for local machine)",
             "type": "string",
-            "optional": false
+            "optional": true
         },
         {
-            "name": "service-name",
-            "desc": "Target service",
+            "name": "servicename",
+            "desc": "Service name to query (not display name)",
             "type": "string",
             "optional": false
         }

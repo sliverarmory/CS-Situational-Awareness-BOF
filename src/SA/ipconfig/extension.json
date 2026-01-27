@@ -5,7 +5,7 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Simply gets ipv4 addresses, hostname and dns server",
+    "help": "Lists network adapters with IPv4 addresses, MAC addresses, hostname, DNS suffix and DNS servers",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -19,5 +19,6 @@
             "arch": "386",
             "path": "ipconfig.x86.o"
         }
-    ]
+    ],
+    "arguments": []
 }

@@ -5,8 +5,7 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Prints system boot time and how long it's been since then",
-    "long_help": "",
+    "help": "Displays system uptime, local time, and boot time (x64 only shows boot time)",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

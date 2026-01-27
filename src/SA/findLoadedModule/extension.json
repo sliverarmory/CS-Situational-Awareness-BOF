@@ -5,7 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Finds what processes *modulepart* is loaded into, optionally searching just *procnamepart*",
+    "help": "Find processes that have a specific module loaded",
+    "long_help": "Searches all running processes to find which ones have a specific module (DLL) loaded. Supports partial matching on both module name and process name. Useful for identifying processes with specific DLLs like amsi.dll or security product DLLs.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -22,14 +23,14 @@
     ],
     "arguments": [
         {
-            "name": "modulepart",
-            "desc": "Find what processes *modulepart* is loaded into",
+            "name": "modname",
+            "desc": "Module name or partial match to search for (e.g., amsi.dll, ntdll)",
             "type": "string",
             "optional": false
         },
         {
-            "name": "procnamepart",
-            "desc": "Search just *procnamepart*",
+            "name": "procname",
+            "desc": "Process name filter - only search processes matching this string (empty for all processes)",
             "type": "string",
             "optional": true
         }

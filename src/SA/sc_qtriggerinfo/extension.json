@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Queries a service for trigger conditions.",
-    "long_help": "",
+    "help": "Query the start/stop trigger conditions for a Windows service",
+    "long_help": "Retrieves trigger conditions that automatically start or stop a service, such as device arrival, IP address changes, domain join/leave, firewall events, or group policy updates. Equivalent to 'sc qtriggerinfo'.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -23,14 +23,14 @@
     ],
     "arguments": [
         {
-            "name": "server",
-            "desc": "Target server",
+            "name": "hostname",
+            "desc": "Target hostname or IP address (empty string for local machine)",
             "type": "string",
-            "optional": false
+            "optional": true
         },
         {
-            "name": "service",
-            "desc": "Target service",
+            "name": "servicename",
+            "desc": "Service name to query (not display name)",
             "type": "string",
             "optional": false
         }

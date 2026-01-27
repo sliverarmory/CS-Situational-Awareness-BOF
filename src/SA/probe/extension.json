@@ -5,8 +5,8 @@
     "extension_author": "c2biz",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Check if a specific port is open",
-    "long_help": "",
+    "help": "Check if a TCP port is open on a remote host",
+    "long_help": "Performs a non-blocking TCP connection attempt to check if a specific port is open on a target host. Uses a 5-second timeout. Returns OPEN if the connection succeeds, FAILED otherwise.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -24,13 +24,13 @@
     "arguments": [
         {
             "name": "host",
-            "desc": "Hostname or IP address.",
+            "desc": "Target hostname or IP address to probe",
             "type": "string",
             "optional": false
         },
         {
             "name": "port",
-            "desc": "Port number.",
+            "desc": "TCP port number to check (1-65535)",
             "type": "integer",
             "optional": false
         }
