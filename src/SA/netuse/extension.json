@@ -1,5 +1,6 @@
 {
     "name": "Netuse (SA)",
+    "package_name": "sa-netuse",
     "version": "0.0.0",
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
