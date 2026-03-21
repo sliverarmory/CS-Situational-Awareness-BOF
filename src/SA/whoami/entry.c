@@ -43,6 +43,7 @@ VOID* WhoamiGetTokenInfo(TOKEN_INFORMATION_CLASS TokenType)
     HANDLE hToken = 0;
     DWORD dwLength = 0;
     VOID* pTokenInfo = 0;
+    VOID* pResult = 0;
 
     if (ADVAPI32$OpenProcessToken(KERNEL32$GetCurrentProcess(), TOKEN_READ, &hToken))
     {
@@ -57,10 +58,12 @@ VOID* WhoamiGetTokenInfo(TOKEN_INFORMATION_CLASS TokenType)
             pTokenInfo = intAlloc(dwLength);
             if (pTokenInfo == NULL)
             {
-                //printf("ERROR: not enough memory to allocate the token structure.\r\n");
-                KERNEL32$CloseHandle(hToken);
-                return NULL;
+                internal_printf("ERROR: not enough memory to allocate the token structure.\r\n");
+                goto cleanup;
             }
+        }
+        else {
+            goto cleanup;
         }
 
         if (!ADVAPI32$GetTokenInformation(hToken, TokenType,
@@ -68,16 +71,22 @@ VOID* WhoamiGetTokenInfo(TOKEN_INFORMATION_CLASS TokenType)
                                  dwLength,
                                  &dwLength))
         {
-            //printf("ERROR 0x%x: could not get token information.\r\n", GetLastError());
-            KERNEL32$CloseHandle(hToken);
-            intFree(pTokenInfo);
-            return NULL;
+            internal_printf("ERROR 0x%x: could not get token information.\r\n", KERNEL32$GetLastError());
+            goto cleanup;
         }
-
-        KERNEL32$CloseHandle(hToken);
+        pResult = pTokenInfo;
+        pTokenInfo = NULL;
     }
 
-    return pTokenInfo;
+    cleanup:
+        if (hToken) {
+            KERNEL32$CloseHandle(hToken);
+        }
+        if (pTokenInfo) {
+            intFree(pTokenInfo);
+        }
+
+        return pResult;
 }
 
 
@@ -106,9 +115,12 @@ int WhoamiUser(void)
     internal_printf("\nUserName\t\tSID\n");
     internal_printf("====================== ====================================\n");
 
-    ADVAPI32$ConvertSidToStringSidA(pUserInfo->User.Sid, &pSidStr);
+    if(ADVAPI32$ConvertSidToStringSidA(pUserInfo->User.Sid, &pSidStr)) {
+        internal_printf("%s\t%s\n\n", pUserStr, pSidStr);
+        KERNEL32$LocalFree(pSidStr);
+        pSidStr = NULL;
+    };
 
-    internal_printf("%s\t%s\n\n", pUserStr, pSidStr);
 
 
     /* cleanup our allocations */

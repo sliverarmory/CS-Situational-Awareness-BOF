@@ -196,7 +196,10 @@ HRESULT adcs_enum_com()
 
 	// Initialize COM
 	hr = OLE32$CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
-	CHECK_RETURN_FAIL("CoInitializeEx", hr);
+	if (FAILED(hr) && hr != RPC_E_CHANGED_MODE)
+	{
+		CHECK_RETURN_FAIL("CoInitializeEx", hr);
+	}
 	
 	hr = _adcs_get_CertConfig();
 	CHECK_RETURN_FAIL("_adcs_get_CertConfig()", hr);

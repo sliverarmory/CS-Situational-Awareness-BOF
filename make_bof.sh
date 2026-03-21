@@ -2,7 +2,7 @@
 
 cd ./src/SA/$1
 make
-VERSION=$(git describe --tags --abbrev=0)
+VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0-dev")
 
 # Check extension.json for required fields (supports both V1 and V2 manifests)
 # V1: fields at top level
@@ -42,4 +42,6 @@ MANIFEST=$(cat ./extension.json | base64 -w 0)
 PACKAGE_NAME=$(cat extension.json | jq -r '.package_name // .command_name // .commands[0].command_name')
 tar -czvf ../../packages/$PACKAGE_NAME.tar.gz .
 cd ../../packages
-bash -c "echo \"\" | ~/minisign -s ~/minisign.key -S -m ./$PACKAGE_NAME.tar.gz -t \"$MANIFEST\" -x $PACKAGE_NAME.minisig"
+if [ -f ~/minisign.key ]; then
+    bash -c "echo \"\" | ~/minisign -s ~/minisign.key -S -m ./$PACKAGE_NAME.tar.gz -t \"$MANIFEST\" -x $PACKAGE_NAME.minisig"
+fi

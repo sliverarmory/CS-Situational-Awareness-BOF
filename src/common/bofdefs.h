@@ -97,7 +97,7 @@ WINBASEAPI int WINAPI KERNEL32$GetSystemDefaultLocaleName(LPCWSTR lpLocaleName, 
 DECLSPEC_IMPORT LCID WINAPI KERNEL32$LocaleNameToLCID(LPCWSTR lpName, DWORD dwFlags);
 DECLSPEC_IMPORT int WINAPI KERNEL32$GetDateFormatEx(LPCWSTR lpLocaleName, DWORD dwFlags, const SYSTEMTIME* lpData, LPCWSTR lpFormat, LPWSTR lpDateStr, int cchDate, LPCWSTR lpCalendar);
 WINBASEAPI BOOL WINAPI KERNEL32$OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHANDLE TokenHandle);
-
+DECLSPEC_IMPORT BOOL WINAPI KERNEL32$QueryFullProcessImageNameA(HANDLE hProcess, DWORD dwFlags, LPSTR lpExeName, PDWORD lpdwSize);
 //WTSAPI32
 DECLSPEC_IMPORT DWORD WINAPI WTSAPI32$WTSEnumerateSessionsA(LPVOID, DWORD, DWORD, PWTS_SESSION_INFO*, DWORD*);
 DECLSPEC_IMPORT DWORD WINAPI WTSAPI32$WTSQuerySessionInformationA(LPVOID, DWORD, WTS_INFO_CLASS, LPSTR*, DWORD*);
@@ -111,6 +111,9 @@ DECLSPEC_IMPORT DWORD WINAPI IPHLPAPI$GetNetworkParams(PFIXED_INFO, PULONG);
 DECLSPEC_IMPORT ULONG WINAPI IPHLPAPI$GetUdpTable(PMIB_UDPTABLE UdpTable, PULONG SizePointer, WINBOOL Order);
 DECLSPEC_IMPORT ULONG WINAPI IPHLPAPI$GetTcpTable(PMIB_TCPTABLE TcpTable, PULONG SizePointer, WINBOOL Order);
 DECLSPEC_IMPORT ULONG WINAPI IPHLPAPI$GetIpNetTable(PMIB_IPNETTABLE IpNetTable, PULONG SizePointer, BOOL Order);
+DECLSPEC_IMPORT DWORD WINAPI IPHLPAPI$GetExtendedTcpTable(PVOID pTcpTable, PDWORD pdwSize, BOOL bOrder, ULONG ulAf, TCP_TABLE_CLASS TableClass, ULONG Reserved);
+DECLSPEC_IMPORT DWORD WINAPI IPHLPAPI$GetExtendedUdpTable(PVOID pUdpTable, PDWORD pdwSize, BOOL bOrder, ULONG ulAf, UDP_TABLE_CLASS TableClass, ULONG Reserved);
+DECLSPEC_IMPORT ULONG WINAPI IPHLPAPI$GetAdaptersAddresses(ULONG Family, ULONG Flags, PVOID Reserved, PVOID AdapterAddresses, PULONG SizePointer);
 
 //MSVCRT
 WINBASEAPI char* __cdecl MSVCRT$_ultoa(unsigned long _Value, char* _Dest, int _Radix);
@@ -574,6 +577,8 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define KERNEL32$GetSystemDefaultLocaleName GetSystemDefaultLocaleName
 #define KERNEL32$LocaleNameToLCID LocaleNameToLCID
 #define KERNEL32$GetDateFormatEx GetDateFormatEx
+#define KERNEL32$QueryFullProcessImageNameA QueryFullProcessImageNameA
+
 
 #define WTSAPI32$WTSEnumerateSessionsA WTSEnumerateSessionsA
 #define WTSAPI32$WTSQuerySessionInformationA WTSQuerySessionInformationA
@@ -585,6 +590,9 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define IPHLPAPI$GetUdpTable  GetUdpTable 
 #define IPHLPAPI$GetTcpTable  GetTcpTable 
 #define IPHLPAPI$GetIpNetTable GetIpNetTable
+#define IPHLPAPI$GetExtendedTcpTable GetExtendedTcpTable
+#define IPHLPAPI$GetExtendedUdpTable GetExtendedUdpTable
+#define IPHLPAPI$GetAdaptersAddresses GetAdaptersAddresses
 #define MSVCRT$calloc calloc
 #define MSVCRT$memcpy memcpy
 #define MSVCRT$memcmp memcmp

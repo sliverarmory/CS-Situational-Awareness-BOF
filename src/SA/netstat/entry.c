@@ -12,13 +12,12 @@
 #include "bofdefs.h"
 #include "base.c"
 
-WINBASEAPI DWORD WINAPI IPHLPAPI$GetExtendedTcpTable(PVOID pTcpTable, PDWORD pdwSize, BOOL bOrder, ULONG ulAf, TCP_TABLE_CLASS TableClass, ULONG Reserved);
-WINBASEAPI DWORD WINAPI IPHLPAPI$GetExtendedUdpTable(PVOID pUdpTable, PDWORD pdwSize, BOOL bOrder, ULONG ulAf, UDP_TABLE_CLASS TableClass, ULONG Reserved);
-DECLSPEC_IMPORT BOOL WINAPI KERNEL32$QueryFullProcessImageNameA(HANDLE hProcess, DWORD dwFlags, LPSTR lpExeName, PDWORD lpdwSize);
-
 #define HOSTNAMELEN 256
 #define PORTNAMELEN 256
-#define ADDRESSLEN 512
+#define ADDRESSLEN  512
+#ifndef AF_INET6
+#define AF_INET6 23
+#endif
 
 CHAR TcpState[][32] = {
     "???",
@@ -38,17 +37,27 @@ CHAR TcpState[][32] = {
 
 char* GetIpHostName(BOOL Local, UINT IpAddr, CHAR Name[], int NameLen)
 {
-//  struct hostent *phostent;
-    UINT nIpAddr;
+    UINT nIpAddr = WS2_32$htonl(IpAddr);
+        MSVCRT$sprintf(Name, "%u.%u.%u.%u",
+        (nIpAddr >> 24) & 0xFF,
+        (nIpAddr >> 16) & 0xFF,
+        (nIpAddr >> 8)  & 0xFF,
+        (nIpAddr)       & 0xFF);
+    return Name;
+}
 
-    /* display dotted decimal */
-    nIpAddr = WS2_32$htonl(IpAddr);
-    MSVCRT$sprintf(Name, "%u.%u.%u.%u",
-            (nIpAddr >> 24) & 0xFF,
-            (nIpAddr >> 16) & 0xFF,
-            (nIpAddr >> 8) & 0xFF,
-            (nIpAddr) & 0xFF);
-   return Name;
+char* GetIp6HostName(UCHAR addr[16], CHAR Name[], int NameLen)
+{
+    MSVCRT$sprintf(Name, "%x:%x:%x:%x:%x:%x:%x:%x",
+        WS2_32$htons(*(USHORT*)&addr[0]),
+        WS2_32$htons(*(USHORT*)&addr[2]),
+        WS2_32$htons(*(USHORT*)&addr[4]),
+        WS2_32$htons(*(USHORT*)&addr[6]),
+        WS2_32$htons(*(USHORT*)&addr[8]),
+        WS2_32$htons(*(USHORT*)&addr[10]),
+        WS2_32$htons(*(USHORT*)&addr[12]),
+        WS2_32$htons(*(USHORT*)&addr[14]));
+    return Name;
 }
 
 char* GetPortName(UINT Port, PCSTR Proto, CHAR Name[], INT NameLen)
@@ -57,168 +66,288 @@ char* GetPortName(UINT Port, PCSTR Proto, CHAR Name[], INT NameLen)
     return Name;
 }
 
-void GetNameByPID(DWORD processId, char* procName, DWORD *procNameLength) {
+void GetNameByPID(DWORD processId, char* procName, DWORD *procNameLength)
+{
+    BOOL state;
+    HANDLE hProcess = KERNEL32$OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
 
-HANDLE hProcess = KERNEL32$OpenProcess(PROCESS_QUERY_INFORMATION|PROCESS_VM_READ, FALSE, processId);
-BOOL state;
+    if (NULL != hProcess)
+    {
+        state = KERNEL32$QueryFullProcessImageNameA(hProcess, 0, (LPSTR)procName, procNameLength);
+        KERNEL32$CloseHandle(hProcess);
 
-	if (NULL != hProcess )
-    	{
-		state = KERNEL32$QueryFullProcessImageNameA(hProcess, 0, (LPSTR)procName, procNameLength);
-		KERNEL32$CloseHandle( hProcess );
-		if(state == TRUE) {
-		    return;
-		} else {
-		    procName = "PERM\x00";
-		    procNameLength = 0;
-		    BeaconPrintf(CALLBACK_ERROR, "Failed to determine processName by PID %lu QueryFullProcessImageNameA failed", processId);
-		}
-    	} else {
-		procName = "PERM\x00";
-		procNameLength = 0;
-	}
-	return;
+        if (state)
+        {
+            procName[*procNameLength] = ' ';
+            (*procNameLength)++;
+            procName[*procNameLength] = '\0';
+            return;
+        }
+
+        procName[0] = '\0';
+        *procNameLength = 0;
+    }
+    else
+    {
+        procName[0] = '\0';
+        *procNameLength = 0;
+    }
 }
 
-VOID ShowUdpTable()
+
+void ResolvePID(DWORD pid, char* name, DWORD* size)
 {
-//    PMIB_UDPTABLE udpTable;
+    int i;
+    for (i = 0; i < MAX_PATH; i++)
+        name[i] = '\x00';
+    *size = MAX_PATH;
+    GetNameByPID(pid, name, size);
+}
+
+
+void ShowTcpTable()
+{
+    PMIB_TCPTABLE_OWNER_PID ptTable;
+    DWORD error, dwSize;
+    DWORD i;
+    CHAR HostIp[HOSTNAMELEN], HostPort[PORTNAMELEN];
+    CHAR RemoteIp[HOSTNAMELEN], RemotePort[PORTNAMELEN];
+    CHAR Host[ADDRESSLEN], Remote[ADDRESSLEN];
+
+    dwSize = 0;
+    error = IPHLPAPI$GetExtendedTcpTable(
+        NULL, &dwSize, TRUE, AF_INET, TCP_TABLE_OWNER_PID_ALL, 0);
+    if (error != ERROR_INSUFFICIENT_BUFFER)
+    {
+        BeaconPrintf(CALLBACK_ERROR, "Failed to snapshot TCP4 endpoints.\n");
+        return;
+    }
+
+    ptTable = (PMIB_TCPTABLE_OWNER_PID)intAlloc(dwSize);
+    error = IPHLPAPI$GetExtendedTcpTable(
+        ptTable, &dwSize, TRUE, AF_INET, TCP_TABLE_OWNER_PID_ALL, 0);
+    if (error)
+    {
+        BeaconPrintf(CALLBACK_ERROR, "Failed to get TCP4 endpoints table.\n");
+        intFree(ptTable);
+        return;
+    }
+
+    for (i = 0; i < ptTable->dwNumEntries; i++)
+    {
+        MIB_TCPROW_OWNER_PID row = ptTable->table[i];
+        char name[MAX_PATH];
+        DWORD size;
+
+        GetIpHostName(TRUE, row.dwLocalAddr, HostIp, HOSTNAMELEN);
+        GetPortName(row.dwLocalPort, "tcp", HostPort, PORTNAMELEN);
+        MSVCRT$sprintf(Host, "%s:%s", HostIp, HostPort);
+
+        if (row.dwState == MIB_TCP_STATE_LISTEN)
+        {
+            MSVCRT$sprintf(Remote, "*:*");
+        }
+        else
+        {
+            GetIpHostName(FALSE, row.dwRemoteAddr, RemoteIp, HOSTNAMELEN);
+            GetPortName(row.dwRemotePort, "tcp", RemotePort, PORTNAMELEN);
+            MSVCRT$sprintf(Remote, "%s:%s", RemoteIp, RemotePort);
+        }
+
+        ResolvePID(row.dwOwningPid, name, &size);
+        internal_printf("  %-6s %-48s %-48s %-13s %s(%lu)\n",
+            "TCP", Host, Remote, TcpState[row.dwState], name, row.dwOwningPid);
+    }
+
+    intFree(ptTable);
+}
+
+void ShowTcp6Table()
+{
+    PMIB_TCP6TABLE_OWNER_PID ptTable;
+    DWORD error, dwSize;
+    DWORD i;
+    CHAR HostIp[HOSTNAMELEN], HostPort[PORTNAMELEN];
+    CHAR RemoteIp[HOSTNAMELEN], RemotePort[PORTNAMELEN];
+    CHAR Host[ADDRESSLEN], Remote[ADDRESSLEN];
+
+    dwSize = 0;
+    error = IPHLPAPI$GetExtendedTcpTable(
+        NULL, &dwSize, TRUE, AF_INET6, TCP_TABLE_OWNER_PID_ALL, 0);
+    if (error != ERROR_INSUFFICIENT_BUFFER)
+    {
+        return;
+    }
+
+    ptTable = (PMIB_TCP6TABLE_OWNER_PID)intAlloc(dwSize);
+    error = IPHLPAPI$GetExtendedTcpTable(
+        ptTable, &dwSize, TRUE, AF_INET6, TCP_TABLE_OWNER_PID_ALL, 0);
+    if (error)
+    {
+        BeaconPrintf(CALLBACK_ERROR, "Failed to get TCP6 endpoints table.\n");
+        intFree(ptTable);
+        return;
+    }
+
+    for (i = 0; i < ptTable->dwNumEntries; i++)
+    {
+        MIB_TCP6ROW_OWNER_PID row = ptTable->table[i];
+        char name[MAX_PATH];
+        DWORD size;
+
+        GetIp6HostName(row.ucLocalAddr, HostIp, HOSTNAMELEN);
+        GetPortName(row.dwLocalPort, "tcp", HostPort, PORTNAMELEN);
+        MSVCRT$sprintf(Host, "[%s]:%s", HostIp, HostPort);
+
+        if (row.dwState == MIB_TCP_STATE_LISTEN)
+        {
+            MSVCRT$sprintf(Remote, "*:*");
+        }
+        else
+        {
+            GetIp6HostName(row.ucRemoteAddr, RemoteIp, HOSTNAMELEN);
+            GetPortName(row.dwRemotePort, "tcp", RemotePort, PORTNAMELEN);
+            MSVCRT$sprintf(Remote, "[%s]:%s", RemoteIp, RemotePort);
+        }
+
+        ResolvePID(row.dwOwningPid, name, &size);
+        internal_printf("  %-6s %-48s %-48s %-13s %s(%lu)\n",
+            "TCP6", Host, Remote, TcpState[row.dwState], name, row.dwOwningPid);
+    }
+
+    intFree(ptTable);
+}
+
+void ShowUdpTable()
+{
     PMIB_UDPTABLE_OWNER_PID uTable;
     DWORD error, dwSize;
     DWORD i;
     CHAR HostIp[HOSTNAMELEN], HostPort[PORTNAMELEN];
     CHAR Host[ADDRESSLEN];
 
-    /* Get the table of UDP endpoints */
     dwSize = 0;
     error = IPHLPAPI$GetExtendedUdpTable(NULL, &dwSize, TRUE, AF_INET, UDP_TABLE_OWNER_PID, 0);
     if (error != ERROR_INSUFFICIENT_BUFFER)
     {
-        BeaconPrintf(CALLBACK_ERROR, "Failed to snapshot UDP endpoints.\n");
+        BeaconPrintf(CALLBACK_ERROR, "Failed to snapshot UDP4 endpoints.\n");
         return;
     }
-    uTable = (PMIB_UDPTABLE_OWNER_PID) intAlloc(dwSize);
+
+    uTable = (PMIB_UDPTABLE_OWNER_PID)intAlloc(dwSize);
     error = IPHLPAPI$GetExtendedUdpTable(uTable, &dwSize, TRUE, AF_INET, UDP_TABLE_OWNER_PID, 0);
     if (error)
     {
-        BeaconPrintf(CALLBACK_ERROR, "Failed to snapshot UDP endpoints table.\n");
+        BeaconPrintf(CALLBACK_ERROR, "Failed to get UDP4 endpoints table.\n");
         intFree(uTable);
         return;
     }
 
-    /* Dump the UDP table */
+    for (i = 0; i < uTable->dwNumEntries; i++)
+    {
+        MIB_UDPROW_OWNER_PID row = uTable->table[i];
+        char name[MAX_PATH];
+        DWORD size;
+
+        GetIpHostName(TRUE, row.dwLocalAddr, HostIp, HOSTNAMELEN);
+        GetPortName(row.dwLocalPort, "udp", HostPort, PORTNAMELEN);
+        MSVCRT$sprintf(Host, "%s:%s", HostIp, HostPort);
+
+        ResolvePID(row.dwOwningPid, name, &size);
+        internal_printf("  %-6s %-48s %-48s %-13s %s(%lu)\n",
+            "UDP", Host, "*:*", "", name, row.dwOwningPid);
+    }
+
+    intFree(uTable);
+}
+
+void ShowUdp6Table()
+{
+    PMIB_UDP6TABLE_OWNER_PID uTable;
+    DWORD error, dwSize;
+    DWORD i;
+    CHAR HostIp[HOSTNAMELEN], HostPort[PORTNAMELEN];
+    CHAR Host[ADDRESSLEN];
+
+    dwSize = 0;
+    error = IPHLPAPI$GetExtendedUdpTable(NULL, &dwSize, TRUE, AF_INET6, UDP_TABLE_OWNER_PID, 0);
+    if (error != ERROR_INSUFFICIENT_BUFFER)
+    {
+        /* No IPv6 UDP entries or API failure - silently skip */
+        return;
+    }
+
+    uTable = (PMIB_UDP6TABLE_OWNER_PID)intAlloc(dwSize);
+    error = IPHLPAPI$GetExtendedUdpTable(uTable, &dwSize, TRUE, AF_INET6, UDP_TABLE_OWNER_PID, 0);
+    if (error)
+    {
+        BeaconPrintf(CALLBACK_ERROR, "Failed to get UDP6 endpoints table.\n");
+        intFree(uTable);
+        return;
+    }
 
     for (i = 0; i < uTable->dwNumEntries; i++)
     {
-	MIB_UDPROW_OWNER_PID row = uTable->table[i];
-        /* I've split this up so it's easier to follow */
-        GetIpHostName(TRUE, row.dwLocalAddr, HostIp, HOSTNAMELEN);
-        GetPortName(row.dwLocalPort, "tcp", HostPort, PORTNAMELEN);
-        MSVCRT$sprintf(Host, "%s:%s", HostIp, HostPort);
-	DWORD pid = row.dwOwningPid;
-	char name[MAX_PATH];
-	for (int i=0; i<MAX_PATH; i++) { name[i] = '\x00'; }
-	DWORD size = MAX_PATH;
-	DWORD* sizep = &size;
-	GetNameByPID(pid, name, sizep);
-	size = (*sizep);
-        internal_printf("  %-6s %-22s %-22s %75s (%5i)\n", "UDP", Host,  "*:*", name, pid);
+        MIB_UDP6ROW_OWNER_PID row = uTable->table[i];
+        char name[MAX_PATH];
+        DWORD size;
+
+        GetIp6HostName(row.ucLocalAddr, HostIp, HOSTNAMELEN);
+        GetPortName(row.dwLocalPort, "udp", HostPort, PORTNAMELEN);
+        MSVCRT$sprintf(Host, "[%s]:%s", HostIp, HostPort);
+
+        ResolvePID(row.dwOwningPid, name, &size);
+        internal_printf("  %-6s %-48s %-48s %-13s %s(%lu)\n",
+            "UDP6", Host, "*:*", "", name, row.dwOwningPid);
     }
 
     intFree(uTable);
 }
 
 
-void Netstat(){
-//    PMIB_TCPTABLE tcpTable;
-    PMIB_TCPTABLE_OWNER_PID ptTable;
-    DWORD error, dwSize;
-    DWORD i;
-    CHAR HostIp[HOSTNAMELEN], HostPort[PORTNAMELEN];
-    CHAR RemoteIp[HOSTNAMELEN], RemotePort[PORTNAMELEN];
-    CHAR Host[ADDRESSLEN];
-    CHAR Remote[ADDRESSLEN];
-
-    dwSize = 0;
-    error = IPHLPAPI$GetExtendedTcpTable(NULL, &dwSize, TRUE, AF_INET, TCP_TABLE_OWNER_PID_ALL, 0);
-    if (error != ERROR_INSUFFICIENT_BUFFER)
-    {
-        BeaconPrintf(CALLBACK_ERROR, "Failed to snapshot TCP endpoints.\n");
-        return;
+void Netstat(int choices)
+{
+    internal_printf("Active Connections\n\n");
+    internal_printf("  %-6s %-48s %-48s %-13s %s\n",
+        "Proto", "Local Address", "Foreign Address", "State", "Process (PID)");
+    internal_printf("  %-6s %-48s %-48s %-13s %s\n",
+        "-----", "-------------", "---------------", "-----", "-------------");
+    if(choices & 0x0001){
+        ShowTcpTable();
+    } 
+    if(choices & 0x0010){
+        ShowTcp6Table();
     }
-	// now that we know the buffer size, alloc it and call again with our struct
-    ptTable = (PMIB_TCPTABLE_OWNER_PID) intAlloc(dwSize);
-    error = IPHLPAPI$GetExtendedTcpTable(ptTable, &dwSize, TRUE, AF_INET, TCP_TABLE_OWNER_PID_ALL, 0);
-    if (error)
-    {
-        BeaconPrintf(CALLBACK_ERROR, "Failed to snapshot TCP endpoints table.\n");
-        intFree(ptTable);
-        return;
+    if(choices & 0x0100){
+        ShowUdpTable();
+    } 
+    if(choices & 0x1000){
+        ShowUdp6Table();
     }
-    internal_printf("Processing: %ld Entries\n", ptTable->dwNumEntries);
-    internal_printf("  %-4s %-22s %-22s %11s %75s %5s\n", "PROTO", "SRC", "DST", "STATE", "PROCESS", "PID");
-
-    for (i = 0; i < ptTable->dwNumEntries; i++)
-    {
-		MIB_TCPROW_OWNER_PID row = ptTable->table[i];
-        /* If we aren't showing all connections, only display established, close wait
- *          * and time wait. This is the default output for netstat */
-        if (1 ||(row.dwState ==  MIB_TCP_STATE_ESTAB)
-            || (row.dwState ==  MIB_TCP_STATE_CLOSE_WAIT)
-            || (row.dwState ==  MIB_TCP_STATE_TIME_WAIT))
-        {
-            /* I've split this up so it's easier to follow */
-           GetIpHostName(TRUE, row.dwLocalAddr, HostIp, HOSTNAMELEN);
-           GetPortName(row.dwLocalPort, "tcp", HostPort, PORTNAMELEN);
-           MSVCRT$sprintf(Host, "%s:%s", HostIp, HostPort);
-
-           if (row.dwState ==  MIB_TCP_STATE_LISTEN)
-           {
-               MSVCRT$sprintf(Remote, "LISTEN");
-           }
-           else
-           {
-               GetIpHostName(FALSE, row.dwRemoteAddr, RemoteIp, HOSTNAMELEN);
-               GetPortName(row.dwRemotePort, "tcp", RemotePort, PORTNAMELEN);
-               MSVCRT$sprintf(Remote, "%s:%s", RemoteIp, RemotePort);
-           }
-	   DWORD pid = row.dwOwningPid;
-	   char name[MAX_PATH];
-	   for(int i=0; i<MAX_PATH; i++) { name[i] = '\x00'; }
-	   DWORD size = MAX_PATH;
-	   DWORD* sizep = &size;
-	   GetNameByPID(pid, name, sizep);
-	   size = (*sizep);
-           internal_printf("  %-4s %-22s %-22s %11s %75s (%5i)\n", "TCP", Host, Remote, TcpState[row.dwState], name, pid);
-//           internal_printf("  %-6s %-22s %-22s %s\n", "TCP", Host, Remote, TcpState[row.dwState]);
-        }
-    }
-    intFree(ptTable);
-    ShowUdpTable();
-    return;
 }
+
 
 #ifdef BOF
 
-VOID go(
-        IN PCHAR Buffer,
-        IN ULONG Length
-)
+VOID go(IN PCHAR Buffer, IN ULONG Length)
 {
-        if(!bofstart())
-        {
-                return;
-        }
-        Netstat();
-        printoutput(TRUE);
-};
+    if (!bofstart())
+        return;
+    datap parser = {0};
+	int user_choices = 0;
+	BeaconDataParse(&parser, Buffer, Length);
+
+	user_choices = BeaconDataInt(&parser);
+    Netstat(user_choices);
+    printoutput(TRUE);
+}
 
 #else
 
 int main()
 {
     Netstat();
+    return 0;
 }
 
 #endif
-

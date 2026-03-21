@@ -29,7 +29,7 @@
             "optional": true
         },
         {
-            "name": "asAdmin",
+            "name": "as-admin",
             "desc": "Show admin-level details including local paths (0 = basic info, 1 = admin info; default: 0)",
             "type": "integer",
             "optional": true

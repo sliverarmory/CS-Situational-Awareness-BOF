@@ -30,7 +30,7 @@
         },
         {
             "name": "hive",
-            "desc": "Hive identifier: 0 = HKCL, 1 = HKCU, 2 = HKLM, 3 = HKU",
+            "desc": "Hive identifier: 0 = HKCR, 1 = HKCU, 2 = HKLM, 3 = HKU",
             "type": "integer",
             "optional": false
         },

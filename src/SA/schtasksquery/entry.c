@@ -15,7 +15,7 @@ void getTask(const wchar_t * server, const wchar_t * taskname)
 {
 	//Set up com
 	HRESULT hr = OLE32$CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
-	if(FAILED(hr))
+	if(FAILED(hr) && hr != RPC_E_CHANGED_MODE)
 	{
 		BeaconPrintf(CALLBACK_ERROR, "Could not initialize com");
 		return;

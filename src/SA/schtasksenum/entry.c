@@ -15,7 +15,7 @@ void enumTasks(const wchar_t * server)
 {
 	//Set up com
 	HRESULT hr = OLE32$CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
-	if(FAILED(hr))
+	if(FAILED(hr) && hr != RPC_E_CHANGED_MODE)
 	{
 		BeaconPrintf(CALLBACK_ERROR, "Could not initialize com");
 		return;

@@ -49,8 +49,8 @@ BOOL SHAFile(LPCSTR lpszFile) {
         }
         BeaconPrintf(CALLBACK_OUTPUT, "SHA-256 Hash for %s: %s", lpszFile, hash);
     }
-    ADVAPI32$CryptReleaseContext(hProv, 0);
     ADVAPI32$CryptDestroyHash(hHash);
+    ADVAPI32$CryptReleaseContext(hProv, 0);
     KERNEL32$CloseHandle(hFile);
     return(TRUE);
 }

@@ -36,7 +36,7 @@
         },
         {
           "name": "result_limit",
-          "desc": "Maximum number of results to display (client-side limit). Note: server may still truncate at its own limit (e.g., 1000).",
+          "desc": "Maximum number of results to display. 0 or omit for no limit. Note: server may still truncate at its own limit (e.g., 1000).",
           "type": "integer",
           "optional": true
         },
