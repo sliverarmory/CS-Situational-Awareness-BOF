@@ -6,7 +6,7 @@
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
     "help": "Lists windows in the current user's desktop session",
-    "long_help": "Enumerates windows on the current desktop. By default (all=1), lists all windows with their visibility status. When all=0, only shows visible windows without status labels.",
+    "long_help": "Enumerates windows on the current desktop. By default (all=0), only shows visible windows. Set all=1 to include all windows with their visibility status labels.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -24,7 +24,7 @@
     "arguments": [
         {
             "name": "all",
-            "desc": "1 = show all windows with visibility status (default), 0 = visible windows only",
+            "desc": "0 = visible windows only (default), 1 = all windows with visibility status",
             "type": "integer",
             "optional": true
         }

@@ -24,9 +24,9 @@
     "arguments": [
         {
           "name": "server",
-          "desc": "Server to query (use empty string for local system)",
+          "desc": "Server to query (default: local system)",
           "type": "wstring",
-          "optional": false
+          "optional": true
         },
         {
           "name": "group",

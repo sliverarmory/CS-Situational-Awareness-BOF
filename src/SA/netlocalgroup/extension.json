@@ -24,9 +24,10 @@
     "arguments": [
         {
             "name": "type",
-            "desc": "Operation mode: 0 = list all local groups, 1 = list members of specified group",
+            "desc": "Operation mode: 0 = list all local groups (default), 1 = list members of specified group",
             "type": "short",
-            "optional": true
+            "optional": true,
+            "default": 0
         },
         {
             "name": "server",
