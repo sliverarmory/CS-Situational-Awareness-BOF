@@ -2,7 +2,7 @@
 #include "beacon.h"
 #include "base.c"
 
-BOOL is_port_open(char* host, int port)
+BOOL is_port_open(char* host, int port, int timeout)
 {
     BOOL ret = FALSE;
     struct addrinfo* result = NULL;
@@ -23,7 +23,7 @@ BOOL is_port_open(char* host, int port)
             WS2_32$ioctlsocket(sock, FIONBIO, &nonblock);
 
             struct timeval tv;
-            tv.tv_sec = 5;
+            tv.tv_sec = timeout;
             tv.tv_usec = 0;
 
             struct fd_set sockets;
@@ -52,12 +52,12 @@ VOID go(IN PCHAR Buffer, IN ULONG Length)
     datap parser;
     char* host = NULL;
     int port = 0;
-
+    int time_out = 5;
     BeaconDataParse(&parser, Buffer, Length);
     host = BeaconDataExtract(&parser, NULL);
     port = BeaconDataInt(&parser);
-
-    char* port_status = is_port_open(host, port) ? "OPEN" : "FAILED";
+    time_out = BeaconDataInt(&parser);
+    char* port_status = is_port_open(host, port, time_out) ? "OPEN" : "FAILED";
     internal_printf("%s:%d %s", host, port, port_status);
 
     printoutput(TRUE);
@@ -66,8 +66,8 @@ VOID go(IN PCHAR Buffer, IN ULONG Length)
 #else
 int main(int argc, char** argv)
 {
-    is_port_open("127.0.0.1", 1);
-    is_port_open("127.0.0.1", 445);
+    is_port_open("127.0.0.1", 1, 5);
+    is_port_open("127.0.0.1", 445, 5);
     return 0;
 }
 #endif
