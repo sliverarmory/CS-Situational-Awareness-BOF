@@ -1,0 +1,10 @@
+{
+  "minisign": {
+    "version": "0.2.0",
+    "public_key": "RWSN1vDbbpNFEi3pKpeoMPIAHIvlOM502TK4zA8zTP5Jn0//+SXJboyQ",
+    "linux_amd64": {
+      "url": "https://github.com/aead/minisign/releases/download/v0.2.0/minisign-linux-amd64.tar.gz",
+      "sha256": "c21b083e5a0b340a3580179abecdf7bd3359607ced37552aa6c1f41ed74f516d"
+    }
+  }
+}

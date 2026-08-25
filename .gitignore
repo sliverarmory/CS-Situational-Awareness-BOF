@@ -3,5 +3,8 @@
 .vscode
 *.log
 *.o
+__pycache__/
 /packages
+/packages-repro
+/dist
 /SA/**

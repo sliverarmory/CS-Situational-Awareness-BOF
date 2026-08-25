@@ -5,7 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Displays system uptime, local time, and boot time (x64 only shows boot time)",
+    "help": "Displays system uptime; local and boot-time detail varies by platform.",
+    "long_help": "On Windows, displays system uptime, local time, and boot time, with boot-time-only behavior on x64. On Linux and macOS, reports only monotonic uptime in seconds and whole days; local time and an absolute boot timestamp are not included.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

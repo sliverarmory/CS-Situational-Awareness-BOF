@@ -5,8 +5,8 @@
     "extension_author": "c2biz",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Display system memory and disk usage",
-    "long_help": "Reports current memory usage (used/total in MB) and primary disk space (free/total in MB).",
+    "help": "Displays local system memory and root-disk resource information.",
+    "long_help": "On Windows, reports current memory usage and primary disk free/total space in MB. Linux emits raw /proc/meminfo and /proc/loadavg data plus /bin/df -k / output. macOS emits /usr/bin/vm_stat plus /bin/df -k / output. Linux and macOS therefore do not reproduce the compact Windows used/total summary.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

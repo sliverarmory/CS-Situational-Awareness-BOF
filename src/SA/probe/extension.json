@@ -9,7 +9,7 @@
         {
             "command_name": "sa-probe",
             "help": "Check if a TCP port is open on a remote host",
-            "long_help": "Performs a non-blocking TCP connection attempt to check if a specific port is open on a target host. Returns OPEN if the connection succeeds, FAILED otherwise. Timeout is configurable (default 5 seconds).",
+            "long_help": "Attempts a TCP connection to the target host and port and returns OPEN on success or FAILED otherwise. The timeout defaults to 5 seconds. On Linux and macOS, one bounded connection deadline begins after hostname resolution, so resolver latency is outside the configured timeout.",
             "depends_on": "coff-loader",
             "entrypoint": "go",
             "files": [

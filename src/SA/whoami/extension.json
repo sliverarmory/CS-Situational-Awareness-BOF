@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Displays current user, group memberships, and token privileges",
-    "long_help": "Returns information similar to 'whoami /all': the current username and SID, all group memberships with their SIDs and attributes, and all token privileges with their enabled/disabled state.",
+    "help": "Displays current identity information; Linux and macOS return reduced POSIX details.",
+    "long_help": "On Windows, returns whoami /all-style username, SID, group membership, and token-privilege information. On Linux and macOS, reports the login name when available plus real/effective UID and GID values only; it does not enumerate supplementary groups, SIDs, or Windows token privileges.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

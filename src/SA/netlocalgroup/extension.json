@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "List local groups or enumerate members of a specific local group.",
-    "long_help": "Lists all local groups on a computer or retrieves members of a specific local group. When 'type' is 0, lists all local groups with their comments. When 'type' is 1, lists members of the specified group. Queries the local system by default if no server is specified.",
+    "help": "Lists groups or members; Linux and macOS support local POSIX groups only.",
+    "long_help": "On Windows, type 0 lists local groups and type 1 lists members of a named local group on the selected computer. On Linux and macOS, the same modes query only the local POSIX group database; a non-empty server or domain selector is rejected.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

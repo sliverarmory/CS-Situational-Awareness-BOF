@@ -5,7 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Lists ARP table entries (IP to MAC address mappings)",
+    "help": "Lists local ARP table entries (IP to MAC address mappings)",
+    "long_help": "Lists the local ARP table. Windows uses the native IP Helper API. Linux reads /proc/net/arp, while macOS runs /usr/sbin/arp -an.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

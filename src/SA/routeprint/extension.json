@@ -5,7 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Prints IPv4 routing table, interface list, and default gateway",
+    "help": "Prints the local routing table; platform-specific detail varies.",
+    "long_help": "On Windows, prints the IPv4 routing table, interface list, and default gateway. Linux emits the raw IPv4 and IPv6 route tables from /proc/net/route and /proc/net/ipv6_route. macOS emits /usr/sbin/netstat -rn output.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

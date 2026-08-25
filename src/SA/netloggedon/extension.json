@@ -5,8 +5,8 @@
     "extension_author": "c2biz",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "List users currently logged on to local or remote computer.",
-    "long_help": "Enumerates users logged on to a workstation including their username, logon domain, other domains, and logon server. Uses NetWkstaUserEnum API to retrieve the information.",
+    "help": "Lists logged-on users; Linux and macOS support the local host only.",
+    "long_help": "On Windows, uses NetWkstaUserEnum to enumerate users on the local or selected remote workstation, including domain and logon-server details. On Linux and macOS, lists local login records from /usr/bin/who and rejects a non-empty remote computer argument; Windows domain and logon-server fields are not available.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

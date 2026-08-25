@@ -40,7 +40,7 @@ typedef ULONG LDAPAPI (*ldap_value_free_len_t)(struct berval **vals);
 typedef ULONG LDAPAPI (*ldap_value_free_t)(PCHAR *);
 typedef PCHAR LDAPAPI (*ldap_next_attribute_t)(LDAP *ld,LDAPMessage *entry,BerElement *ptr);
 typedef PLDAPSearch LDAPAPI (*ldap_search_init_pageA_t)(PLDAP ExternalHandle,const PCHAR DistinguishedName,ULONG ScopeOfSearch,const PCHAR SearchFilter,PCHAR AttributeList[],ULONG AttributesOnly,PLDAPControlA *ServerControls,PLDAPControlA *ClientControls,ULONG PageTimeLimit,ULONG TotalSizeLimit,PLDAPSortKeyA *SortKeys);
-WINBASEAPI void* WINAPI MSVCRT$malloc(SIZE_T);
+WINBASEAPI void* __cdecl MSVCRT$malloc(SIZE_T);
 WINBERAPI BerElement *BERAPI WLDAP32$ber_alloc_t(INT options);
 WINBERAPI INT BERAPI WLDAP32$ber_printf(BerElement *pBerElement, PSTR fmt, ...);
 WINBERAPI INT BERAPI WLDAP32$ber_flatten(BerElement *pBerElement, PBERVAL *pBerVal);

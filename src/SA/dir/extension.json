@@ -8,8 +8,8 @@
     "commands": [
         {
             "command_name": "sa-dir",
-            "help": "Lists files and directories in a target path, with optional recursive listing.",
-            "long_help": "Lists directory contents including file sizes and modification times. Supports local paths, drive letters (C:), UNC paths (\\\\server\\share), and wildcards. Output shows date/time, size (or <dir>/<junction>), and filename. Displays total file size and counts at the end. When omitted, lists the current directory.",
+            "help": "Lists directory contents; recursive listing is available on Windows only.",
+            "long_help": "On Windows, lists directory contents with sizes and modification times and supports local paths, drive letters, UNC paths, wildcards, and optional recursion. On Linux and macOS, lists names in one local directory only; wildcards, metadata, and recursion are not supported, and a nonzero subdirs argument is rejected. When the path is omitted, the current directory is used.",
             "depends_on": "coff-loader",
             "entrypoint": "go",
             "files": [
@@ -30,7 +30,7 @@
                     "desc": "Directory or file path to list. Supports UNC paths (\\\\server\\share) and wildcards. Default: current directory.",
                     "type": "string",
                     "optional": true,
-                    "default": ".\\"
+                    "default": "."
                 },
                 {
                     "name": "subdirs",

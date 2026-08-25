@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Get detailed information about a specific user account.",
-    "long_help": "Retrieves detailed information about a user account including: account status (enabled/disabled), delegation settings, password policy, group memberships (local and global), logon information, profile paths, and account expiration. Queries the local system by default, or a domain controller if a domain is specified.",
+    "help": "Gets user information; Linux and macOS support local POSIX accounts only.",
+    "long_help": "On Windows, retrieves detailed local or domain account status, policy, group, logon, profile, and expiration information. On Linux and macOS, looks up one local POSIX account and reports its UID, primary GID, full-name/comment field, home, shell, and local groups; an empty packed username selects the effective user, and a non-empty domain or server is rejected. Windows account-state and policy fields are not available.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
@@ -24,9 +24,10 @@
     "arguments": [
         {
             "name": "username",
-            "desc": "Username to pull info for",
+            "desc": "Username to query. Required on Windows; omit on Linux or macOS to select the effective user.",
             "type": "wstring",
-            "optional": false
+            "optional": true,
+            "default": ""
         },
         {
             "name": "domain",

@@ -1,334 +1,278 @@
-name: Release
+name: Armory Release
 
 on:
   push:
-    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
-    branches: [master]
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: armory-release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  SOURCE_DATE_EPOCH: "0"
 
 jobs:
+  reflektor-runtime:
+    name: Execute the complete BOF corpus through Reflektor
+    uses: sliverarmory/reflektor/.github/workflows/bof-corpus.yml@becda82f5763b48e23c8e55c244653ad47a3db5c
+    with:
+      corpus_repository: ${{ github.repository }}
+      corpus_ref: ${{ github.sha }}
+      reflektor_ref: becda82f5763b48e23c8e55c244653ad47a3db5c
 
-  bof-build:
-    name: Build and publish tagged release
-    if: startsWith( github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-    container:
-      image: freefirex2/ts_bof_builder@sha256:e203ba628c97abb51ef65914b216fa1e088401710107027c353d15f09e0cfb62
-    timeout-minutes: 10
+  build-signed-candidate:
+    name: Build and verify signed candidate
+    needs: reflektor-runtime
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    environment: armory-release
+    permissions:
+      contents: read
     steps:
-      - name: OS Packages
-        run: dnf install -y jq
-
-      - name: Minisign
-        run: |
-          MINISIGN_TMP=`mktemp -d`
-          cd $MINISIGN_TMP
-          curl -sL -o minisign-linux-amd64.tar.gz https://github.com/aead/minisign/releases/download/v0.2.0/minisign-linux-amd64.tar.gz
-          tar xvf minisign-linux-amd64.tar.gz
-          mv ./minisign ~/minisign
-          touch ~/minisign.key && chmod 600 ~/minisign.key
-          echo -e "${{ secrets.MINISIGN_PRIVATE_KEY }}" > ~/minisign.key
-
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      - name: Git Fetch Tags
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git fetch --prune --unshallow --tags -f
-
-      - name: Packages Setup
-        run: |
-          mkdir packages
-
-      - name: AD Recycle Bin List
-        run: |
-          ./make_bof.sh adrblist
-
-      - name: AD Recycle Bin Permissions
-        run: |
-          ./make_bof.sh adrbperms
-
-      - name: AD Recycle Bin Status
-        run: |
-          ./make_bof.sh adrbstatus
-
-      - name: ADCS Enum
-        run: |
-          ./make_bof.sh adcs_enum
-
-      - name: ADCS Enum COM
-        run: |
-          ./make_bof.sh adcs_enum_com
-
-      - name: ADCS Enum COM2
-        run: |
-          ./make_bof.sh adcs_enum_com2
-
-      - name: Adv Audit Policies
-        run: |
-          ./make_bof.sh adv_audit_policies
-
-      - name: ARP
-        run: |
-          ./make_bof.sh arp
-
-      - name: Cacls
-        run: |
-          ./make_bof.sh cacls
-
-      - name: Cat
-        run: |
-          ./make_bof.sh cat
-
-      - name: Driver Sigs
-        run: |
-          ./make_bof.sh driversigs
-
-      - name: Enum Filter Driver
-        run: |
-          ./make_bof.sh enum_filter_driver
-
-      - name: Enum Local Sessions
-        run: |
-          ./make_bof.sh enumLocalSessions
-
-      - name: Find Loaded Module
-        run: |
-          ./make_bof.sh findLoadedModule
-
-      - name: Get Password Policy
-        run: |
-          ./make_bof.sh get_password_policy
-
-      - name: Get Net Session
-        run: |
-          ./make_bof.sh get-netsession
-
-      - name: IPConfig
-        run: |
-          ./make_bof.sh ipconfig
-
-      - name: LDAP Search
-        run: |
-          ./make_bof.sh ldapsearch
-
-      - name: LDAP Security Check
-        run: |
-          ./make_bof.sh ldapsecuritycheck
-
-      - name: List DNS
-        run: |
-          ./make_bof.sh listdns
-
-      - name: List Modules
-        run: |
-          ./make_bof.sh listmods
-
-      - name: Net Group
-        run: |
-          ./make_bof.sh netgroup  
-
-      - name: Net Local Group
-        run: |
-          ./make_bof.sh netlocalgroup
-
-      - name: Net Shares
-        run: |
-          ./make_bof.sh netshares
-
-      - name: Net Stat
-        run: |
-          ./make_bof.sh netstat
-
-      - name: Net Use
-        run: |
-          ./make_bof.sh netuse
-
-      - name: Net User
-        run: |
-          ./make_bof.sh netuser
-
-      - name: Net User Enum
-        run: |
-          ./make_bof.sh netuserenum
-
-      - name: Net View
-        run: |
-          ./make_bof.sh netview
-
-      - name: NSLookup
-        run: |
-          ./make_bof.sh nslookup
-
-      - name: Reg Query
-        run: |
-          ./make_bof.sh reg_query
-
-      - name: Resources
-        run: |
-          ./make_bof.sh resources
-
-      - name: Route Print
-        run: |
-          ./make_bof.sh routeprint
-
-      - name: SC Enum
-        run: |
-          ./make_bof.sh sc_enum
-
-      - name: SC QC
-        run: |
-          ./make_bof.sh sc_qc
-
-      - name: SC QDescription
-        run: |
-          ./make_bof.sh sc_qdescription
-
-      - name: SC QFailure
-        run: |
-          ./make_bof.sh sc_qfailure
-
-      - name: SC QTriggerInfo
-        run: |
-          ./make_bof.sh sc_qtriggerinfo
-
-      - name: SC Query
-        run: |
-          ./make_bof.sh sc_query
-
-      - name: Scheduled Tasks Enum
-        run: |
-          ./make_bof.sh schtasksenum
-
-      - name: Scheduled Tasks Query
-        run: |
-          ./make_bof.sh schtasksquery
-
-      - name: Task List
-        run: |
-          ./make_bof.sh tasklist
-
-      - name: Uptime
-        run: |
-          ./make_bof.sh uptime
-
-      - name: VSS Enum
-        run: |
-          ./make_bof.sh vssenum
-
-      - name: Who Am I
-        run: |
-          ./make_bof.sh whoami
-
-      - name: Window list
-        run: |
-          ./make_bof.sh windowlist
-
-      - name: WMI Query
-        run: |
-          ./make_bof.sh wmi_query
-
-      - name: env
-        run: |
-          ./make_bof.sh env
-
-      - name: get-netsession2
-        run: |
-          ./make_bof.sh get-netsession2
-
-      - name: list_firewall_rules
-        run: |
-          ./make_bof.sh list_firewall_rules
-
-      - name: locale
-        run: |
-          ./make_bof.sh locale
-
-      - name: netlocalgroup2
-        run: |
-          ./make_bof.sh netlocalgroup2
-
-      - name: netloggedon
-        run: |
-          ./make_bof.sh netloggedon
-
-      - name: netloggedon2
-        run: |
-          ./make_bof.sh netloggedon2
-
-      - name: nettime
-        run: |
-          ./make_bof.sh nettime
-
-      - name: netuptime
-        run: |
-          ./make_bof.sh netuptime
-
-      - name: nonpagedldapsearch
-        run: |
-          ./make_bof.sh nonpagedldapsearch
-
-      - name: notepad
-        run: |
-          ./make_bof.sh notepad
-
-      - name: probe
-        run: |
-          ./make_bof.sh probe
-
-      - name: regsession
-        run: |
-          ./make_bof.sh regsession
-
-      - name: dir
-        run: |
-          ./make_bof.sh dir
-
-      - name: aadjoininfo
-        run: |
-          ./make_bof.sh aadjoininfo
-
-      - name: get_dpapi_system
-        run: |
-          ./make_bof.sh get_dpapi_system
-
-      - name: get_session_info
-        run: |
-          ./make_bof.sh get_session_info
-
-      - name: hostname
-        run: |
-          ./make_bof.sh hostname
-
-      - name: md5
-        run: |
-          ./make_bof.sh md5
-
-      - name: sha1
-        run: |
-          ./make_bof.sh sha1
-
-      - name: sha256
-        run: |
-          ./make_bof.sh sha256
-
-      - name: sha512
-        run: |
-          ./make_bof.sh sha512
-
-      - name: useridletime
-        run: |
-          ./make_bof.sh useridletime
-
-      - name: vol
-        run: |
-          ./make_bof.sh vol
-
-      - name: "Publish Release"
-        uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Check out the approved tag
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            ./packages/*.tar.gz
-            ./packages/*.minisig
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify approved annotated tag
+        shell: bash
+        env:
+          ARMORY_VERSION: ${{ github.ref_name }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$ARMORY_VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "error: release tags must be exact vMAJOR.MINOR.PATCH versions" >&2
+            exit 1
+          fi
+          test "$(git cat-file -t "refs/tags/$ARMORY_VERSION")" = "tag"
+          tag_ref="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$ARMORY_VERSION")"
+          test "$(jq -r '.object.type' <<<"$tag_ref")" = "tag"
+          tag_object_sha="$(jq -er '.object.sha' <<<"$tag_ref")"
+          tag_object="$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$tag_object_sha")"
+          release_commit="$(git rev-parse HEAD)"
+          test "$(jq -r '.object.type' <<<"$tag_object")" = "commit"
+          test "$(jq -r '.object.sha' <<<"$tag_object")" = "$release_commit"
+          test "$(jq -r '.verification.verified' <<<"$tag_object")" = "true"
+          test "$(git rev-parse "refs/tags/$ARMORY_VERSION^{commit}")" = "$release_commit"
+          test "$(git rev-parse "$GITHUB_SHA^{commit}")" = "$release_commit"
+          git fetch --no-tags origin master
+          test "$(git rev-parse origin/master)" = "$release_commit"
+
+      - name: Install pinned Zig
+        uses: mlugg/setup-zig@d1434d08867e3ee9daa34448df10607b98908d29 # v2
+        with:
+          version: 0.14.0
+
+      - name: Verify runner tools and select LLVM inspectors
+        shell: bash
+        run: |
+          set -euo pipefail
+          for tool in bash file jq node python3; do
+            command -v "$tool" >/dev/null
+          done
+          test "$(zig version)" = "0.14.0"
+          llvm_nm="$(command -v llvm-nm-18 || command -v llvm-nm || true)"
+          llvm_objdump="$(command -v llvm-objdump-18 || command -v llvm-objdump || true)"
+          test -n "$llvm_nm"
+          test -n "$llvm_objdump"
+          {
+            printf 'LLVM_NM=%s\n' "$llvm_nm"
+            printf 'NM=%s\n' "$llvm_nm"
+            printf 'OBJDUMP=%s\n' "$llvm_objdump"
+          } >> "$GITHUB_ENV"
+
+      - name: Install checksum-verified minisign
+        shell: bash
+        run: |
+          set -euo pipefail
+          for tool in curl jq sha256sum tar; do
+            command -v "$tool" >/dev/null
+          done
+          minisign_url="$(jq -er '.minisign.linux_amd64.url' packaging/release-config.json)"
+          minisign_sha="$(jq -er '.minisign.linux_amd64.sha256' packaging/release-config.json)"
+          archive="$RUNNER_TEMP/minisign-linux-amd64.tar.gz"
+          curl --fail --location --proto '=https' --tlsv1.2 \
+            --output "$archive" "$minisign_url"
+          printf '%s  %s\n' "$minisign_sha" "$archive" | sha256sum --check --strict
+          mkdir -p "$RUNNER_TEMP/minisign-bin"
+          tar --extract --gzip --file "$archive" --directory "$RUNNER_TEMP/minisign-bin" minisign
+          chmod 0755 "$RUNNER_TEMP/minisign-bin/minisign"
+
+      - name: Materialize signing key outside the workspace
+        shell: bash
+        env:
+          MINISIGN_PRIVATE_KEY: ${{ secrets.MINISIGN_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          test -n "$MINISIGN_PRIVATE_KEY"
+          printf '%b' "$MINISIGN_PRIVATE_KEY" > "$RUNNER_TEMP/minisign.key"
+          test -s "$RUNNER_TEMP/minisign.key"
+
+      - name: Build signed release candidate
+        shell: bash
+        env:
+          ARMORY_SIGNING_KEY: ${{ runner.temp }}/minisign.key
+          ARMORY_VERSION: ${{ github.ref_name }}
+          MINISIGN: ${{ runner.temp }}/minisign-bin/minisign
+        run: ./make_all.sh
+
+      - name: Verify exact signed inventory
+        shell: bash
+        env:
+          ARMORY_VERSION: ${{ github.ref_name }}
+          MINISIGN: ${{ runner.temp }}/minisign-bin/minisign
+        run: |
+          set -euo pipefail
+          python3 packaging/armory_packages.py verify \
+            --version "$ARMORY_VERSION" \
+            --input packages \
+            --require-signatures \
+            --minisign "$MINISIGN"
+
+      - name: Remove signing key
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/minisign.key"
+
+      - name: Upload signed draft candidate
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: signed-armory-release-${{ github.ref_name }}
+          path: |
+            dist/
+            packages/
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
+
+  publish-release:
+    name: Draft, verify, and publish release
+    needs: build-signed-candidate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the approved tag
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Download signed candidate
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: signed-armory-release-${{ github.ref_name }}
+          path: .
+
+      - name: Install checksum-verified minisign
+        shell: bash
+        run: |
+          set -euo pipefail
+          for tool in curl jq sha256sum tar; do
+            command -v "$tool" >/dev/null
+          done
+          minisign_url="$(jq -er '.minisign.linux_amd64.url' packaging/release-config.json)"
+          minisign_sha="$(jq -er '.minisign.linux_amd64.sha256' packaging/release-config.json)"
+          archive="$RUNNER_TEMP/minisign-linux-amd64.tar.gz"
+          curl --fail --location --proto '=https' --tlsv1.2 \
+            --output "$archive" "$minisign_url"
+          printf '%s  %s\n' "$minisign_sha" "$archive" | sha256sum --check --strict
+          mkdir -p "$RUNNER_TEMP/minisign-bin"
+          tar --extract --gzip --file "$archive" --directory "$RUNNER_TEMP/minisign-bin" minisign
+          chmod 0755 "$RUNNER_TEMP/minisign-bin/minisign"
+
+      - name: Verify tag and signed candidate
+        shell: bash
+        env:
+          ARMORY_VERSION: ${{ github.ref_name }}
+          GH_TOKEN: ${{ github.token }}
+          MINISIGN: ${{ runner.temp }}/minisign-bin/minisign
+        run: |
+          set -euo pipefail
+          if [[ ! "$ARMORY_VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "error: release tags must be exact vMAJOR.MINOR.PATCH versions" >&2
+            exit 1
+          fi
+          test "$(git cat-file -t "refs/tags/$ARMORY_VERSION")" = "tag"
+          tag_ref="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$ARMORY_VERSION")"
+          test "$(jq -r '.object.type' <<<"$tag_ref")" = "tag"
+          tag_object_sha="$(jq -er '.object.sha' <<<"$tag_ref")"
+          tag_object="$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$tag_object_sha")"
+          release_commit="$(git rev-parse HEAD)"
+          test "$(jq -r '.object.type' <<<"$tag_object")" = "commit"
+          test "$(jq -r '.object.sha' <<<"$tag_object")" = "$release_commit"
+          test "$(jq -r '.verification.verified' <<<"$tag_object")" = "true"
+          test "$(git rev-parse "refs/tags/$ARMORY_VERSION^{commit}")" = "$release_commit"
+          test "$(git rev-parse "$GITHUB_SHA^{commit}")" = "$release_commit"
+          git fetch --no-tags origin master
+          test "$(git rev-parse origin/master)" = "$release_commit"
+          python3 packaging/armory_packages.py verify \
+            --version "$ARMORY_VERSION" \
+            --input packages \
+            --require-signatures \
+            --minisign "$MINISIGN"
+
+      - name: Create draft, verify remote assets, and publish
+        shell: bash
+        env:
+          ARMORY_VERSION: ${{ github.ref_name }}
+          GH_TOKEN: ${{ github.token }}
+          MINISIGN: ${{ runner.temp }}/minisign-bin/minisign
+        run: |
+          set -euo pipefail
+          expected_tag_object="$(git rev-parse "refs/tags/$ARMORY_VERSION")"
+          release_commit="$(git rev-parse HEAD)"
+          verify_remote_release_ref() {
+            local tag_ref tag_object_sha tag_object
+            tag_ref="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$ARMORY_VERSION")"
+            test "$(jq -r '.object.type' <<<"$tag_ref")" = "tag"
+            tag_object_sha="$(jq -er '.object.sha' <<<"$tag_ref")"
+            test "$tag_object_sha" = "$expected_tag_object"
+            tag_object="$(gh api "repos/$GITHUB_REPOSITORY/git/tags/$tag_object_sha")"
+            test "$(jq -r '.object.type' <<<"$tag_object")" = "commit"
+            test "$(jq -r '.object.sha' <<<"$tag_object")" = "$release_commit"
+            test "$(jq -r '.verification.verified' <<<"$tag_object")" = "true"
+            git fetch --no-tags origin master
+            test "$(git rev-parse origin/master)" = "$release_commit"
+          }
+
+          verify_remote_release_ref
+          if gh release view "$ARMORY_VERSION" >/dev/null 2>&1; then
+            echo "error: release $ARMORY_VERSION already exists; refusing to overwrite it" >&2
+            exit 1
+          fi
+
+          gh release create "$ARMORY_VERSION" \
+            --verify-tag \
+            --draft \
+            --title "$ARMORY_VERSION" \
+            --generate-notes \
+            packages/*
+
+          test "$(gh release view "$ARMORY_VERSION" --json isDraft --jq '.isDraft')" = "true"
+          expected_assets="$(find packages -mindepth 1 -maxdepth 1 -type f -exec basename {} \; | LC_ALL=C sort)"
+          actual_assets="$(gh release view "$ARMORY_VERSION" --json assets --jq '.assets[].name' | LC_ALL=C sort)"
+          if [[ "$actual_assets" != "$expected_assets" ]]; then
+            echo "error: draft release asset inventory differs from the verified candidate" >&2
+            diff -u <(printf '%s\n' "$expected_assets") <(printf '%s\n' "$actual_assets") || true
+            exit 1
+          fi
+
+          remote_assets="$(mktemp -d)"
+          gh release download "$ARMORY_VERSION" --dir "$remote_assets"
+          python3 packaging/armory_packages.py verify \
+            --version "$ARMORY_VERSION" \
+            --input "$remote_assets" \
+            --require-signatures \
+            --minisign "$MINISIGN"
+
+          verify_remote_release_ref
+          gh release edit "$ARMORY_VERSION" --draft=false --latest
+          test "$(gh release view "$ARMORY_VERSION" --json isDraft --jq '.isDraft')" = "false"

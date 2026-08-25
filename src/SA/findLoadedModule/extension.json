@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Find processes that have a specific module loaded",
-    "long_help": "Searches all running processes to find which ones have a specific module (DLL) loaded. Supports partial matching on both module name and process name. Useful for identifying processes with specific DLLs like amsi.dll or security product DLLs.",
+    "help": "Finds loaded modules; Linux and macOS search only the current process.",
+    "long_help": "On Windows, searches running processes for loaded DLL names and supports partial module and process-name filters. On Linux and macOS, performs a case-insensitive path search only in the current process using /proc/self/maps or dyld; the optional process filter must be empty or match the current process. Cross-process search is not supported on Linux or macOS.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

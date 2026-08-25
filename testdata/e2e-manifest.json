@@ -1,0 +1,9351 @@
+{
+  "version": 1,
+  "entrypoint": "go",
+  "fixtures": {
+    "file": {
+      "variable": "FIXTURE_FILE",
+      "contents_utf8": "reflektor-bof-e2e\n"
+    },
+    "directory": {
+      "variable": "FIXTURE_DIR",
+      "files": {
+        "marker.txt": "reflektor-bof-e2e\n"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "name": "aadjoininfo",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/aadjoininfo.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adcs_enum",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/adcs_enum.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adcs_enum_com",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/adcs_enum_com.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adcs_enum_com2",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/adcs_enum_com2.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adrblist",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/adrblist.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adrbperms",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/adrbperms.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adrbstatus",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/adrbstatus.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adv_audit_policies",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/adv_audit_policies.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cat",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/cat.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "driversigs",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/driversigs.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enum_filter_driver",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/enum_filter_driver.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "kernel32.dll"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get-netsession",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/get-netsession.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get-netsession2",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/get-netsession2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get_dpapi_system",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/get_dpapi_system.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get_password_policy",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/get_password_policy.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get_session_info",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/get_session_info.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "hostname",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/hostname.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ldapsearch",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/ldapsearch.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "(objectClass=*)"
+        },
+        {
+          "type": "string",
+          "value": "cn"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 3
+        },
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ldapsecuritycheck",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/ldapsecuritycheck.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "list_firewall_rules",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/list_firewall_rules.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listdns",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/listdns.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netgroup",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup2",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netlocalgroup2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "netshares",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netshares.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nettime",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/nettime.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuptime",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netuptime.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuse",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netuse.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 2
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "Administrator"
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netview",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/netview.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "nonpagedldapsearch",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/nonpagedldapsearch.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "(objectClass=*)"
+        },
+        {
+          "type": "string",
+          "value": "cn"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "notepad",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/notepad.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "reg_query",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/reg_query.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int32",
+          "value": 2
+        },
+        {
+          "type": "string",
+          "value": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
+        },
+        {
+          "type": "string",
+          "value": "ProductName"
+        },
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "regsession",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/regsession.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_enum",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/sc_enum.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qc",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/sc_qc.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qdescription",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/sc_qdescription.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qfailure",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/sc_qfailure.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qtriggerinfo",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/sc_qtriggerinfo.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_query",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/sc_query.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "schtasksenum",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/schtasksenum.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "schtasksquery",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/schtasksquery.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": "\\Microsoft\\Windows\\Defrag\\ScheduledDefrag"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha512",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/sha512.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "2a429bf6031684e95a16222aeb20f60edf30e67bec73e1a1fe47ba2e0a2b03b0be567830989d89c271ccd00896e820165034ac8b36e1056deb76c5efd8a12e57"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "ROOT\\CIMV2"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Uptime"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "useridletime",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/useridletime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "vol",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/vol.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "vssenum",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/vssenum.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "localhost"
+        },
+        {
+          "type": "wstring",
+          "value": "C$"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "windowlist",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/windowlist.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "wmi_query",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/wmi_query.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": "ROOT\\CIMV2"
+        },
+        {
+          "type": "wstring",
+          "value": "SELECT Caption FROM Win32_OperatingSystem"
+        },
+        {
+          "type": "wstring",
+          "value": "ROOT\\CIMV2"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "aadjoininfo",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/aadjoininfo.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adcs_enum",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/adcs_enum.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adcs_enum_com",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/adcs_enum_com.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adcs_enum_com2",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/adcs_enum_com2.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adrblist",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/adrblist.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adrbperms",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/adrbperms.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adrbstatus",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/adrbstatus.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adv_audit_policies",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/adv_audit_policies.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cat",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/cat.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "driversigs",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/driversigs.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enum_filter_driver",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/enum_filter_driver.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "kernel32.dll"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get-netsession",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/get-netsession.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get-netsession2",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/get-netsession2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get_dpapi_system",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/get_dpapi_system.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get_password_policy",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/get_password_policy.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get_session_info",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/get_session_info.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "hostname",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/hostname.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ldapsearch",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/ldapsearch.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "(objectClass=*)"
+        },
+        {
+          "type": "string",
+          "value": "cn"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 3
+        },
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ldapsecuritycheck",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/ldapsecuritycheck.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "list_firewall_rules",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/list_firewall_rules.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listdns",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/listdns.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netgroup",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup2",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netlocalgroup2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "netshares",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netshares.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nettime",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/nettime.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuptime",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netuptime.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuse",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netuse.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 2
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "Administrator"
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netview",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/netview.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "nonpagedldapsearch",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/nonpagedldapsearch.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "(objectClass=*)"
+        },
+        {
+          "type": "string",
+          "value": "cn"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "notepad",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/notepad.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "reg_query",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/reg_query.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int32",
+          "value": 2
+        },
+        {
+          "type": "string",
+          "value": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
+        },
+        {
+          "type": "string",
+          "value": "ProductName"
+        },
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "regsession",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/regsession.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_enum",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/sc_enum.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qc",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/sc_qc.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qdescription",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/sc_qdescription.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qfailure",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/sc_qfailure.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qtriggerinfo",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/sc_qtriggerinfo.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_query",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/sc_query.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "schtasksenum",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/schtasksenum.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "schtasksquery",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/schtasksquery.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": "\\Microsoft\\Windows\\Defrag\\ScheduledDefrag"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha512",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/sha512.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "2a429bf6031684e95a16222aeb20f60edf30e67bec73e1a1fe47ba2e0a2b03b0be567830989d89c271ccd00896e820165034ac8b36e1056deb76c5efd8a12e57"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "ROOT\\CIMV2"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Uptime"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "useridletime",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/useridletime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "vol",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/vol.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "vssenum",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/vssenum.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "localhost"
+        },
+        {
+          "type": "wstring",
+          "value": "C$"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "windowlist",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/windowlist.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "wmi_query",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/wmi_query.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": "ROOT\\CIMV2"
+        },
+        {
+          "type": "wstring",
+          "value": "SELECT Caption FROM Win32_OperatingSystem"
+        },
+        {
+          "type": "wstring",
+          "value": "ROOT\\CIMV2"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "aadjoininfo",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/aadjoininfo.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adcs_enum",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/adcs_enum.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adcs_enum_com",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/adcs_enum_com.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adcs_enum_com2",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/adcs_enum_com2.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adrblist",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/adrblist.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adrbperms",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/adrbperms.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adrbstatus",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/adrbstatus.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "adv_audit_policies",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/adv_audit_policies.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cat",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/cat.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "driversigs",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/driversigs.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enum_filter_driver",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/enum_filter_driver.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "kernel32.dll"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get-netsession",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/get-netsession.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get-netsession2",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/get-netsession2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get_dpapi_system",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/get_dpapi_system.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get_password_policy",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/get_password_policy.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "get_session_info",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/get_session_info.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "hostname",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/hostname.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ldapsearch",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/ldapsearch.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "(objectClass=*)"
+        },
+        {
+          "type": "string",
+          "value": "cn"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 3
+        },
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ldapsecuritycheck",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/ldapsecuritycheck.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "list_firewall_rules",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/list_firewall_rules.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listdns",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/listdns.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netgroup",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup2",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netlocalgroup2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "netshares",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netshares.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nettime",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/nettime.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuptime",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netuptime.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuse",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netuse.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 2
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "Administrator"
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netview",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/netview.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "nonpagedldapsearch",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/nonpagedldapsearch.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "(objectClass=*)"
+        },
+        {
+          "type": "string",
+          "value": "cn"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "notepad",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/notepad.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "reg_query",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/reg_query.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int32",
+          "value": 2
+        },
+        {
+          "type": "string",
+          "value": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
+        },
+        {
+          "type": "string",
+          "value": "ProductName"
+        },
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "regsession",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/regsession.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_enum",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/sc_enum.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qc",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/sc_qc.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qdescription",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/sc_qdescription.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qfailure",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/sc_qfailure.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_qtriggerinfo",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/sc_qtriggerinfo.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sc_query",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/sc_query.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "string",
+          "value": "EventLog"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "schtasksenum",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/schtasksenum.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "schtasksquery",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/schtasksquery.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": "\\Microsoft\\Windows\\Defrag\\ScheduledDefrag"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha512",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/sha512.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "2a429bf6031684e95a16222aeb20f60edf30e67bec73e1a1fe47ba2e0a2b03b0be567830989d89c271ccd00896e820165034ac8b36e1056deb76c5efd8a12e57"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "ROOT\\CIMV2"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Uptime"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "useridletime",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/useridletime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "vol",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/vol.o",
+      "args": [
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "vssenum",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/vssenum.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "localhost"
+        },
+        {
+          "type": "wstring",
+          "value": "C$"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "windowlist",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/windowlist.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 0
+      }
+    },
+    {
+      "name": "wmi_query",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/wmi_query.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": "ROOT\\CIMV2"
+        },
+        {
+          "type": "wstring",
+          "value": "SELECT Caption FROM Win32_OperatingSystem"
+        },
+        {
+          "type": "wstring",
+          "value": "ROOT\\CIMV2"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "ARP table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Exists: yes",
+          "Total entries: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "lib"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Current-process loaded module matches:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Network interfaces:",
+          "hostname:",
+          "Resolver configuration:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Loaded modules:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Locale:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local groups:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Users logged on (local POSIX host):"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Structured local POSIX sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Network connections:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Local POSIX user information:",
+          "Total users: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local POSIX users:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "DNS results for"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "System resources:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Routing table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Processes:",
+          "Name:\t",
+          "Pid:\t",
+          "PPid:\t"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uptime_seconds="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "linux",
+      "arch": "386",
+      "path": "dist/linux/386/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uid="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "ARP table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Exists: yes",
+          "Total entries: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "lib"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Current-process loaded module matches:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Network interfaces:",
+          "hostname:",
+          "Resolver configuration:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Loaded modules:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Locale:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local groups:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Users logged on (local POSIX host):"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Structured local POSIX sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Network connections:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Local POSIX user information:",
+          "Total users: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local POSIX users:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "DNS results for"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "System resources:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Routing table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Processes:",
+          "Name:\t",
+          "Pid:\t",
+          "PPid:\t"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uptime_seconds="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "linux",
+      "arch": "amd64",
+      "path": "dist/linux/amd64/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uid="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "ARP table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Exists: yes",
+          "Total entries: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "lib"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Current-process loaded module matches:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Network interfaces:",
+          "hostname:",
+          "Resolver configuration:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Loaded modules:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Locale:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local groups:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Users logged on (local POSIX host):"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Structured local POSIX sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Network connections:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Local POSIX user information:",
+          "Total users: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local POSIX users:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "DNS results for"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "System resources:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Routing table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Processes:",
+          "Name:\t",
+          "Pid:\t",
+          "PPid:\t"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uptime_seconds="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "linux",
+      "arch": "arm64",
+      "path": "dist/linux/arm64/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uid="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "ARP table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Exists: yes",
+          "Total entries: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "lib"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Current-process loaded module matches:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Network interfaces:",
+          "hostname:",
+          "Resolver configuration:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Loaded modules:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Locale:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local groups:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Users logged on (local POSIX host):"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Structured local POSIX sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Network connections:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Local POSIX user information:",
+          "Total users: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local POSIX users:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "DNS results for"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "System resources:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Routing table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Processes:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uptime_seconds="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "darwin",
+      "arch": "amd64",
+      "path": "dist/darwin/amd64/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uid="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "ARP table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Exists: yes",
+          "Total entries: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "lib"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Current-process loaded module matches:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Network interfaces:",
+          "hostname:",
+          "Resolver configuration:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Loaded modules:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Locale:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local groups:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Users logged on (local POSIX host):"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Structured local POSIX sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Network connections:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Local POSIX user information:",
+          "Total users: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local POSIX users:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "DNS results for"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "System resources:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Routing table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Processes:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uptime_seconds="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "darwin",
+      "arch": "arm64",
+      "path": "dist/darwin/arm64/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uid="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "ARP table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Exists: yes",
+          "Total entries: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "lib"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Current-process loaded module matches:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Network interfaces:",
+          "hostname:",
+          "Resolver configuration:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Loaded modules:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Locale:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local groups:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Users logged on (local POSIX host):"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Structured local POSIX sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Network connections:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Local POSIX user information:",
+          "Total users: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local POSIX users:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "DNS results for"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "System resources:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Routing table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Processes:",
+          "Name:\t",
+          "Pid:\t",
+          "PPid:\t"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uptime_seconds="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "linux",
+      "arch": "arm",
+      "path": "dist/linux/arm/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uid="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "ARP table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Exists: yes",
+          "Total entries: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "lib"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Current-process loaded module matches:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Network interfaces:",
+          "hostname:",
+          "Resolver configuration:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Loaded modules:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Locale:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local groups:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Users logged on (local POSIX host):"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Structured local POSIX sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Network connections:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Local POSIX user information:",
+          "Total users: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local POSIX users:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "DNS results for"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "System resources:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Routing table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Processes:",
+          "Name:\t",
+          "Pid:\t",
+          "PPid:\t"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uptime_seconds="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "linux",
+      "arch": "ppc64le",
+      "path": "dist/linux/ppc64le/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uid="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "arp",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/arp.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "ARP table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "cacls",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/cacls.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Exists: yes",
+          "Total entries: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "dir",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/dir.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_DIR}"
+        },
+        {
+          "type": "int16",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Contents of",
+          "marker.txt"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "enumLocalSessions",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/enumLocalSessions.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "env",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/env.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "findLoadedModule",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/findLoadedModule.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "lib"
+        },
+        {
+          "type": "string",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Current-process loaded module matches:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "ipconfig",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/ipconfig.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Network interfaces:",
+          "hostname:",
+          "Resolver configuration:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "listmods",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/listmods.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Loaded modules:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "locale",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/locale.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Locale:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "md5",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/md5.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "b9b3a37829baa40ee941e901aab8671b"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netlocalgroup",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/netlocalgroup.o",
+      "args": [
+        {
+          "type": "int16",
+          "value": 0
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local groups:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/netloggedon.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Users logged on (local POSIX host):"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netloggedon2",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/netloggedon2.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Structured local POSIX sessions:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netstat",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/netstat.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 4369
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Network connections:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuser",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/netuser.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        },
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Local POSIX user information:",
+          "Total users: 1"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "netuserenum",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/netuserenum.o",
+      "args": [
+        {
+          "type": "int32",
+          "value": 0
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Local POSIX users:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "nslookup",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/nslookup.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "localhost"
+        },
+        {
+          "type": "string",
+          "value": ""
+        },
+        {
+          "type": "int16",
+          "value": 1
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "DNS results for"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "probe",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/probe.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "127.0.0.1"
+        },
+        {
+          "type": "int32",
+          "value": 1
+        },
+        {
+          "type": "int32",
+          "value": 1
+        }
+      ],
+      "tcp_listener": {
+        "port_argument": 1
+      },
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_all": [
+          "OPEN"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "resources",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/resources.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "System resources:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "routeprint",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/routeprint.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "Routing table:"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha1",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/sha1.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "a7251fd58489a73e2823956299fb6fa7c250d393"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "sha256",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/sha256.o",
+      "args": [
+        {
+          "type": "string",
+          "value": "${FIXTURE_FILE}"
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb"
+        ],
+        "case_insensitive": true,
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "tasklist",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/tasklist.o",
+      "args": [
+        {
+          "type": "wstring",
+          "value": ""
+        }
+      ],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_all": [
+          "Processes:",
+          "Name:\t",
+          "Pid:\t",
+          "PPid:\t"
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "uptime",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/uptime.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uptime_seconds="
+        ],
+        "min_callbacks": 1
+      }
+    },
+    {
+      "name": "whoami",
+      "os": "linux",
+      "arch": "riscv64",
+      "path": "dist/linux/riscv64/whoami.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13
+        ],
+        "contains_any": [
+          "uid="
+        ],
+        "min_callbacks": 1
+      }
+    }
+  ]
+}

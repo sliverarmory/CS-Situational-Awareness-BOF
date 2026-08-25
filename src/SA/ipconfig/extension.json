@@ -5,7 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Lists network adapters with IPv4 addresses, MAC addresses, hostname, DNS suffix and DNS servers",
+    "help": "Lists local network interface and resolver configuration.",
+    "long_help": "On Windows, lists adapters with IPv4 addresses, MAC addresses, hostname, DNS suffix, and DNS servers. On Linux and macOS, lists the hostname plus IPv4 and IPv6 interface addresses and displays the system resolver configuration; Windows-specific adapter and MAC metadata are not reported.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

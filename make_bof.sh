@@ -1,47 +1,39 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-cd ./src/SA/$1
-make
-VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0-dev")
-
-# Check extension.json for required fields (supports both V1 and V2 manifests)
-# V1: fields at top level
-# V2: fields inside commands[0]
-
-HELP=$(cat extension.json | jq -M '.help // .commands[0].help')
-if [ "null" = "$HELP" ]; then
-    echo "WARN: $1 extension.json is missing 'help' property"
-    exit 1
-fi
-NAME=$(cat extension.json | jq -M .name)
-if [ "null" = "$NAME" ]; then
-    echo "WARN: $1 extension.json is missing 'name' property"
-    exit 1
-fi
-CMD_NAME=$(cat extension.json | jq -M '.command_name // .commands[0].command_name')
-if [ "null" = "$CMD_NAME" ]; then
-    echo "WARN: $1 extension.json is missing 'command_name' property"
-    exit 1
-fi
-ENTRYPOINT=$(cat extension.json | jq -M '.entrypoint // .commands[0].entrypoint')
-if [ "null" = "$ENTRYPOINT" ]; then
-    echo "WARN: $1 extension.json is missing 'entrypoint' property"
-    exit 1
-fi
-DEPENDS_ON=$(cat extension.json | jq -M '.depends_on // .commands[0].depends_on')
-if [ "null" = "$DEPENDS_ON" ]; then
-    echo "WARN: $1 extension.json is missing 'depends_on' property"
-    exit 1
+if [[ "$#" -ne 1 ]]; then
+    echo "usage: $0 <src/SA source-directory name>" >&2
+    exit 2
 fi
 
-cat extension.json | jq ".version |= \"$VERSION\"" > ../../../SA/$1/extension.json
-cd ../../../SA/$1/
-cp ../../LICENSE .
-MANIFEST=$(cat ./extension.json | base64 -w 0)
-# Use package_name if available, otherwise command_name (for V1 manifests)
-PACKAGE_NAME=$(cat extension.json | jq -r '.package_name // .command_name // .commands[0].command_name')
-tar -czvf ../../packages/$PACKAGE_NAME.tar.gz .
-cd ../../packages
-if [ -f ~/minisign.key ]; then
-    bash -c "echo \"\" | ~/minisign -s ~/minisign.key -S -m ./$PACKAGE_NAME.tar.gz -t \"$MANIFEST\" -x $PACKAGE_NAME.minisig"
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$repo_root"
+
+version="${ARMORY_VERSION:-}"
+if [[ -z "$version" ]]; then
+    version="$(git describe --tags --exact-match --match 'v[0-9]*' 2>/dev/null || printf 'v0.0.0-dev')"
 fi
+output="${ARMORY_OUTPUT_DIR:-packages}"
+
+# The shared matrix build is authoritative even for a single Armory package.
+# This prevents the compatibility wrapper from drifting to another compiler or
+# artifact layout.
+"$repo_root/scripts/build-matrix.sh"
+
+package_args=(
+    build
+    --version "$version"
+    --output "$output"
+    --package "$1"
+)
+if [[ -n "${ARMORY_SOURCE_DATE_EPOCH:-}" ]]; then
+    package_args+=(--source-date-epoch "$ARMORY_SOURCE_DATE_EPOCH")
+fi
+if [[ -n "${ARMORY_SIGNING_KEY:-}" ]]; then
+    package_args+=(
+        --signing-key "$ARMORY_SIGNING_KEY"
+        --minisign "${MINISIGN:-minisign}"
+    )
+fi
+
+python3 "$repo_root/packaging/armory_packages.py" "${package_args[@]}"
