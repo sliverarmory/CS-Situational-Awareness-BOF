@@ -120,7 +120,9 @@ Windows account-state modes are rejected explicitly instead of being ignored.
 - Unix `tasklist` is local-only. An absent or empty UTF-16 resource selects the
   local host; a nonempty Windows/WMI resource is rejected explicitly.
 - Linux 386 and the corpus-only ARMv7 hard-float, ppc64le, and riscv64 targets
-  use the `dirent` ABI exercised by the current Reflektor images.
+  use the `dirent` ABI exercised by the current Reflektor images. ARMv7
+  explicitly uses the large-inode `readdir64` record so directory enumeration
+  cannot stop with `EOVERFLOW` on filesystems whose inode values exceed 32 bits.
 - Darwin `arp` invokes the bounded system command `/usr/sbin/arp -an`; Linux
   reads `/proc/net/arp` directly.
 - Unix `nslookup` uses the host resolver and supports A, AAAA, and ANY address

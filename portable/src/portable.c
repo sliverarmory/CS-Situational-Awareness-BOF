@@ -53,7 +53,11 @@ extern int open(const char *path, int flags, ...);
 extern bof_sptr read(int descriptor, void *buffer, bof_uptr length);
 extern int close(int descriptor);
 extern bof_dir *opendir(const char *path);
+#if defined(BOF_LINUX) && defined(__arm__)
+extern void *readdir64(bof_dir *directory);
+#else
 extern void *readdir(bof_dir *directory);
+#endif
 extern int closedir(bof_dir *directory);
 extern unsigned int getuid(void);
 extern unsigned int geteuid(void);
@@ -215,12 +219,31 @@ static int bof_emit_command(bof_writer *writer, const char *command) {
 
 static const char *bof_dirent_name(void *entry) {
     bof_u8 *raw = (bof_u8 *)entry;
-#if defined(BOF_DARWIN)
+#if defined(BOF_DARWIN) && defined(__x86_64__)
+    /*
+     * The plain readdir symbol retains Darwin's legacy x86_64 dirent ABI.
+     * Modern headers redirect source calls to readdir$INODE64, but Reflektor
+     * resolves this explicit import by its literal symbol name.
+     */
+    return (const char *)(raw + 8U);
+#elif defined(BOF_DARWIN)
     return (const char *)(raw + 21U);
-#elif defined(__i386__) || defined(__arm__)
+#elif defined(__i386__)
     return (const char *)(raw + 11U);
 #else
     return (const char *)(raw + 19U);
+#endif
+}
+
+static void *bof_readdir_entry(bof_dir *directory) {
+#if defined(BOF_LINUX) && defined(__arm__)
+    /*
+     * ARMv7's legacy readdir can stop with EOVERFLOW when an inode does not
+     * fit its 32-bit dirent. Request the large-file record explicitly.
+     */
+    return readdir64(directory);
+#else
+    return readdir(directory);
 #endif
 }
 
@@ -425,7 +448,7 @@ static void run_command(char *buffer, int length) {
     bof_puts(&writer, "Contents of ");
     bof_puts(&writer, path);
     bof_puts(&writer, ":\n");
-    while ((entry = readdir(directory)) != (void *)0) {
+    while ((entry = bof_readdir_entry(directory)) != (void *)0) {
         const char *name = bof_dirent_name(entry);
         if (!bof_streq(name, ".") && !bof_streq(name, "..")) {
             bof_puts(&writer, name);
@@ -941,7 +964,7 @@ static void run_command(char *buffer, int length) {
         if (directory == (bof_dir *)0) {
             bof_puts(&writer, "process enumeration unavailable\n");
         } else {
-            while ((entry = readdir(directory)) != (void *)0) {
+            while ((entry = bof_readdir_entry(directory)) != (void *)0) {
                 const char *name = bof_dirent_name(entry);
                 if (bof_is_decimal(name)) {
                     bof_emit_process_status(&writer, name);

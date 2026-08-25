@@ -282,6 +282,24 @@ for command in "${commands[@]}"; do
     verify_reflektor_abi "$artifact"
 done
 
+if [[ "$goos/$goarch" == linux/arm ]]; then
+    for command in dir tasklist; do
+        artifact="dist/$goos/$goarch/$command.o"
+        if ! undefined_symbols="$("$nm_bin" -u "$artifact")"; then
+            echo "error: cannot inspect Linux/arm directory imports in $artifact with $nm_bin" >&2
+            exit 1
+        fi
+        if ! awk '$NF == "readdir64" { found = 1 } END { exit found ? 0 : 1 }' <<<"$undefined_symbols"; then
+            echo "error: Linux/arm directory enumeration must import readdir64: $artifact" >&2
+            exit 1
+        fi
+        if awk '$NF == "readdir" { found = 1 } END { exit found ? 0 : 1 }' <<<"$undefined_symbols"; then
+            echo "error: Linux/arm directory enumeration imports legacy readdir: $artifact" >&2
+            exit 1
+        fi
+    done
+fi
+
 if [[ "$goos/$goarch" == darwin/arm64 ]]; then
     if [[ -n "${OBJDUMP:-}" ]]; then
         objdump_bin="$OBJDUMP"
