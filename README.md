@@ -39,13 +39,14 @@ GitHub-verified signed annotated tag named exactly `vMAJOR.MINOR.PATCH` on a
 commit that is still the exact head of `origin/master`. The workflow rechecks
 the remote tag before draft creation and publication and never creates a tag.
 Before the first release, maintainers must also protect `v*` tags from updates
-and deletion and restrict their creation to the release process; a workflow
-cannot make those remote reference updates atomic by itself. Create a protected
-`armory-release` environment with a required reviewer, store the signing key
-there as `ARMORY_MINISIGN_PRIVATE_KEY`, and remove the legacy repository-level
-`MINISIGN_PRIVATE_KEY` secret before using the new workflow. That secret split
-prevents a tag aimed at an older commit from invoking the historical release
-workflow with current signing authority.
+and deletion and restrict their creation to organization administrators; a
+workflow cannot make those remote reference updates atomic by itself. Create a
+protected `armory-release` environment with a required reviewer before using
+the release workflow. The workflow uses the repository's established
+`MINISIGN_PRIVATE_KEY` so existing Armory installations retain signing-key
+continuity. Environment approval, exact-master tag verification, and the tag
+ruleset gate use of that key; rotate or move it only together with the public
+key in `packaging/release-config.json` and the official Armory index.
 
 See [`UPSTREAM.md`](UPSTREAM.md) before synchronizing TrustedSec changes. It
 documents the source ownership boundaries, merge procedure, and validation

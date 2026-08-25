@@ -106,7 +106,7 @@ jobs:
       - name: Materialize signing key outside the workspace
         shell: bash
         env:
-          MINISIGN_PRIVATE_KEY: ${{ secrets.ARMORY_MINISIGN_PRIVATE_KEY }}
+          MINISIGN_PRIVATE_KEY: ${{ secrets.MINISIGN_PRIVATE_KEY }}
         run: |
           set -euo pipefail
           umask 077
