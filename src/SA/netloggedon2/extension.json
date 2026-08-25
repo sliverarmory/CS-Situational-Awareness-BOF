@@ -5,8 +5,8 @@
     "extension_author": "c2biz",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "List logged-on users with structured output for BOFHound.",
-    "long_help": "Enhanced version of netloggedon that outputs logged-on user information in a structured format optimized for BOFHound ingestion. Includes hostname (FQDN for local queries), username, domain, other domains, and logon server for each logged-on user.",
+    "help": "Lists logged-on users with structured output; Linux and macOS are local-only.",
+    "long_help": "On Windows, emits BOFHound-oriented structured workstation-user records with hostname, username, domain, other domains, and logon server. On Linux and macOS, wraps each local /usr/bin/who record in structured session delimiters and rejects a non-empty remote computer argument; Windows domain and logon-server fields are not available.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

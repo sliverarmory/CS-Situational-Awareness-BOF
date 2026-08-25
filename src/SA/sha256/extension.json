@@ -6,7 +6,7 @@
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
     "help": "Calculates the SHA256 hash of a file.",
-    "long_help": "Computes and displays the SHA256 (256-bit) hash of a file using the Windows CryptoAPI. Recommended for file integrity verification as SHA256 provides strong cryptographic security.",
+    "long_help": "Computes and displays the SHA256 (256-bit) hash of a local file. Windows uses CryptoAPI; Linux and macOS use the portable in-process implementation. SHA256 is suitable for file-integrity verification.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

@@ -5,8 +5,8 @@
     "extension_author": "c2biz",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "List process environment variables",
-    "long_help": "",
+    "help": "Lists environment variables for the current process.",
+    "long_help": "Lists the environment inherited by the process hosting the BOF. Windows reads the current process environment block, Linux reads /proc/self/environ, and macOS reads the current process environment through the native runtime.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

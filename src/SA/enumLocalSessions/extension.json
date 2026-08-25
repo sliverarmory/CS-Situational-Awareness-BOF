@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Enumerate active and disconnected user sessions on the local system (console and RDP)",
-    "long_help": "Uses WTSEnumerateSessions to list all user sessions on the local machine. Shows session ID, station name (console/RDP), domain, and username for each active or disconnected session.",
+    "help": "Enumerates user sessions on the local system.",
+    "long_help": "On Windows, uses WTSEnumerateSessions to list local active and disconnected console or RDP sessions with session, station, domain, and user details. On Linux and macOS, lists only the local login records returned by /usr/bin/who; remote-session enumeration and Windows session metadata are not available.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Enumerate user accounts on local system or domain.",
-    "long_help": "Lists user accounts with optional filtering by account status. Can query the local system or domain depending on the 'use domain' parameter. Filter options allow targeting all users, locked out accounts, disabled accounts, or only active accounts.",
+    "help": "Enumerates user accounts; Linux and macOS support the local POSIX database only.",
+    "long_help": "On Windows, enumerates local or domain users and supports all, locked, disabled, or active account filters. On Linux and macOS, only domain=0 and filter=1 are supported and enumerate the local POSIX account database; domain mode and Windows locked/disabled account-state filters are rejected.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [

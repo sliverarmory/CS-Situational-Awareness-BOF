@@ -5,8 +5,8 @@
     "extension_author": "moloch--",
     "original_author": "TrustedSec",
     "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
-    "help": "Lists file or directory DACL permissions, with wildcard support.",
-    "long_help": "Displays Access Control List (ACL) entries for files and directories. Shows each ACE with the trustee (domain\\user or SID), inheritance flags (CI=Container Inherit, OI=Object Inherit, IO=Inherit Only), and access rights (Full, Read, Write, Change, or specific permissions). Supports wildcards (e.g., C:\\Windows\\*.exe) to list permissions for multiple files.",
+    "help": "Reports file or directory access; Windows supports DACL details and wildcards.",
+    "long_help": "On Windows, displays DACL entries for files and directories, including trustees, inheritance flags, and access rights, with wildcard support. On Linux and macOS, reports only whether one literal path exists and whether the current real UID/GID can read, write, and execute or search it. The POSIX implementation does not enumerate ACL entries, ownership, mode bits, or wildcards.",
     "depends_on": "coff-loader",
     "entrypoint": "go",
     "files": [
