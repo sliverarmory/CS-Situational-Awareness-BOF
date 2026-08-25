@@ -1,39 +1,92 @@
-name: Dev Build
+name: Armory Candidate Build
 
 on:
   push:
-    branches-ignore: [master]
+    branches:
+      - master
+      - "feat/**"
   pull_request:
     branches: [master]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: armory-candidate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  SOURCE_DATE_EPOCH: "0"
+
 jobs:
-  bof-build:
-    name: Build and validate BOFs
-    runs-on: ubuntu-latest
-    container:
-      image: freefirex2/ts_bof_builder@sha256:e203ba628c97abb51ef65914b216fa1e088401710107027c353d15f09e0cfb62
-    timeout-minutes: 10
+  reflektor-runtime:
+    name: Execute the complete BOF corpus through Reflektor
+    uses: sliverarmory/reflektor/.github/workflows/bof-corpus.yml@becda82f5763b48e23c8e55c244653ad47a3db5c
+    with:
+      corpus_repository: ${{ github.repository }}
+      corpus_ref: ${{ github.sha }}
+      reflektor_ref: becda82f5763b48e23c8e55c244653ad47a3db5c
+
+  build-candidate:
+    name: Build and verify unsigned packages
+    needs: reflektor-runtime
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
-      - name: OS Packages
-        run: dnf install -y jq
-
       - name: Check out code
-        uses: actions/checkout@v2
-
-      - name: Build all BOFs
-        run: |
-          mkdir -p packages SA
-          for makefile in src/SA/*/Makefile; do
-            bof_dir=$(dirname "$makefile")
-            bof_name=$(basename "$bof_dir")
-            echo "::group::$bof_name"
-            ./make_bof.sh "$bof_name"
-            echo "::endgroup::"
-          done
-
-      - name: Upload packages
-        uses: actions/upload-artifact@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          name: bof-packages
+          persist-credentials: false
+
+      - name: Install pinned Zig
+        uses: mlugg/setup-zig@d1434d08867e3ee9daa34448df10607b98908d29 # v2
+        with:
+          version: 0.14.0
+
+      - name: Verify runner tools and select LLVM inspectors
+        shell: bash
+        run: |
+          set -euo pipefail
+          for tool in bash file jq node python3; do
+            command -v "$tool" >/dev/null
+          done
+          test "$(zig version)" = "0.14.0"
+          llvm_nm="$(command -v llvm-nm-18 || command -v llvm-nm || true)"
+          llvm_objdump="$(command -v llvm-objdump-18 || command -v llvm-objdump || true)"
+          test -n "$llvm_nm"
+          test -n "$llvm_objdump"
+          {
+            printf 'LLVM_NM=%s\n' "$llvm_nm"
+            printf 'NM=%s\n' "$llvm_nm"
+            printf 'OBJDUMP=%s\n' "$llvm_objdump"
+          } >> "$GITHUB_ENV"
+
+      - name: Build unsigned package candidate
+        shell: bash
+        env:
+          ARMORY_VERSION: v0.0.0-dev.${{ github.run_id }}.${{ github.run_attempt }}
+        run: ./make_all.sh
+
+      - name: Verify exact inventory and reproducibility
+        shell: bash
+        env:
+          ARMORY_VERSION: v0.0.0-dev.${{ github.run_id }}.${{ github.run_attempt }}
+        run: |
+          set -euo pipefail
+          python3 packaging/armory_packages.py verify \
+            --version "$ARMORY_VERSION" \
+            --input packages \
+            --forbid-signatures
+          python3 packaging/armory_packages.py build \
+            --version "$ARMORY_VERSION" \
+            --output packages-repro
+          diff --recursive --brief packages packages-repro
+
+      - name: Upload unsigned package candidate
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: armory-package-candidates-${{ github.sha }}
           path: packages/
+          if-no-files-found: error
           retention-days: 14
+          compression-level: 0

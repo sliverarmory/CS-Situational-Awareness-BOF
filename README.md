@@ -3,6 +3,54 @@ This repo intends to serve two purposes.  First it provides a nice set of basic 
 
 Its larger goal is providing a code example and workflow for others to begin making more BOFs. It is a companion document of the blog post made here: https://www.trustedsec.com/blog/a-developers-introduction-to-beacon-object-files/
 
+## Cross-platform BOFs
+
+This fork retains the complete upstream Windows command corpus and adds a
+curated subset implemented for Linux and macOS (`darwin`) through Reflektor.
+Commands that depend on Windows-only facilities such as Active Directory, COM,
+DPAPI, the Registry, SCM, scheduled tasks, or WMI remain Windows-only rather
+than advertising partial Unix behavior.
+
+[`portable/manifest.json`](portable/manifest.json) is the authoritative target
+and command classification. See [`PORTABILITY.md`](PORTABILITY.md) for the exact
+portable command set, target matrix, behavior differences, and runtime limits.
+
+## Cross-platform build
+
+The matrix build requires Bash, Zig, Node.js, `jq`, `file`, and an object-file
+disassembler. Build and verify the complete declared matrix with:
+
+```sh
+make matrix
+make verify
+```
+
+To build one target for Reflektor integration, run:
+
+```sh
+./scripts/build-target.sh linux amd64
+```
+
+Objects are generated below `dist/<goos>/<goarch>/`; they are build artifacts
+and are not committed. A successful matrix build does not itself publish an
+Armory release. Armory packages are published only by the tag-gated release
+workflow after a maintainer deliberately creates and pushes an approved,
+GitHub-verified signed annotated tag named exactly `vMAJOR.MINOR.PATCH` on a
+commit that is still the exact head of `origin/master`. The workflow rechecks
+the remote tag before draft creation and publication and never creates a tag.
+Before the first release, maintainers must also protect `v*` tags from updates
+and deletion and restrict their creation to the release process; a workflow
+cannot make those remote reference updates atomic by itself. Create a protected
+`armory-release` environment with a required reviewer, store the signing key
+there as `ARMORY_MINISIGN_PRIVATE_KEY`, and remove the legacy repository-level
+`MINISIGN_PRIVATE_KEY` secret before using the new workflow. That secret split
+prevents a tag aimed at an older commit from invoking the historical release
+workflow with current signing authority.
+
+See [`UPSTREAM.md`](UPSTREAM.md) before synchronizing TrustedSec changes. It
+documents the source ownership boundaries, merge procedure, and validation
+gates that keep future upstream pulls reviewable.
+
 ## Making a new BOF
 If you want to use the same workflow as this repository, your basic steps are as follows:
 1. Make a folder that covers the target topic, for example in this repo we are using SA
@@ -97,11 +145,20 @@ The driversigs codebase comes from https://gist.github.com/jthuraisamy/4c4c751df
 
 Thanks all of the contributors listed under contributors. Each of you have contributed something meaningful to this repository and dealt with me and my review processes. I appreciate each and every one of you for teaching me and helping make this BOF repository the best it can be!
 
-##### Compiler used
-BOF's are built against [freefirex2/ts_bof_builder:latest](https://hub.docker.com/r/freefirex2/ts_bof_builder)
+##### Compilers used
+
+The legacy per-command Windows Makefiles use the
+[TrustedSec BOF builder](https://hub.docker.com/r/freefirex2/ts_bof_builder).
+The cross-platform matrix uses Zig to produce native COFF, ELF relocatable, and
+Mach-O object files for the targets declared in `portable/manifest.json`.
 
 ## System Support
-These BOF's are written with support for Windows Vista+ in mind. A new branch called [winxp_2003](https://github.com/trustedsec/CS-Situational-Awareness-BOF/tree/winxp_2003) has been created if you need to use the main set of BOF's on those older systems. This branch will remain in a less supported state. It will be functional, but not updated with every new push / feature that we may add.
+
+The complete upstream BOF set targets Windows Vista+. A curated subset also
+targets Linux and macOS; consult `portable/manifest.json` rather than assuming
+that every command is available on every operating system. TrustedSec maintains
+a less frequently updated [winxp_2003 branch](https://github.com/trustedsec/CS-Situational-Awareness-BOF/tree/winxp_2003)
+for older Windows systems.
 
 ## Want to Learn More?
 If you've found these beacon object files helpful and want to write some of your own bofs following a similar style we invite you to check out our [Beacon Object File (BOF) Development](https://learn.trustedsec.com/courses/cd84409a-36af-4507-be2c-ca7ad1e9fd2d) course.
