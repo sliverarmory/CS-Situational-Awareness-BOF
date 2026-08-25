@@ -1,0 +1,25 @@
+{
+    "name": "Hostname (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-hostname",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Display the computer name and domain-joined FQDN",
+    "long_help": "Displays the target's NetBIOS computer name. If the system is domain-joined, it also displays the fully qualified domain name; otherwise it reports the workgroup or join status.",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "hostname.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "hostname.x86.o"
+        }
+    ],
+    "arguments": []
+}

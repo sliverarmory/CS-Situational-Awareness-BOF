@@ -1,0 +1,32 @@
+{
+    "name": "Volume Information (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-vol",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Display a drive's volume label and serial number",
+    "long_help": "Displays the volume label and serial number for a drive letter. When no drive is supplied, the command uses the drive containing the current working directory.",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "vol.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "vol.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "drive",
+            "desc": "Drive letter to inspect, such as C (default: current working directory drive)",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}

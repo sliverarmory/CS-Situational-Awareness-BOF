@@ -1,0 +1,25 @@
+{
+    "name": "AD Recycle Bin Status (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-adrbstatus",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Check whether the Active Directory Recycle Bin is enabled",
+    "long_help": "Queries the current domain and reports whether the Active Directory Recycle Bin optional feature is enabled.",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "adrbstatus.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "adrbstatus.x86.o"
+        }
+    ],
+    "arguments": []
+}

@@ -1,0 +1,32 @@
+{
+    "name": "Cat (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-cat",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Display the contents of a text file",
+    "long_help": "Reads a file from the target and prints its contents. The command rejects empty paths and reports file-open, size, allocation, and read failures.",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "cat.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "cat.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "filepath",
+            "desc": "Path of the text file to read",
+            "type": "string",
+            "optional": false
+        }
+    ]
+}

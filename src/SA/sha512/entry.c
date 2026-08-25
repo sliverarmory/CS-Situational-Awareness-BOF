@@ -4,13 +4,13 @@
 #include "bofdefs.h"
 #include "base.c"
 
-BOOL SHAFile(LPCSTR lpszFile) {
+BOOL SHA512File(LPCSTR lpszFile) {
     HCRYPTPROV	hProv;
     HCRYPTHASH	hHash;
     HANDLE		hFile;
     DWORD		dwBytesRead;
     BYTE		bReadFile[0x512];
-    BYTE		bSHA[32]; // 32 Bytes, 256 bits
+    BYTE		bSHA[64]; // 64 Bytes, 512 bits
 
 	// Open existing file, if it does not exist the call will fail and alert user.
     hFile = KERNEL32$CreateFileA(lpszFile, FILE_READ_ACCESS, FILE_SHARE_READ, 0, OPEN_EXISTING, 0, 0);
@@ -25,7 +25,7 @@ BOOL SHAFile(LPCSTR lpszFile) {
 
         return(FALSE);
     }
-    if (!ADVAPI32$CryptCreateHash(hProv, CALG_SHA_256, 0, 0, &hHash)) {
+    if (!ADVAPI32$CryptCreateHash(hProv, CALG_SHA_512, 0, 0, &hHash)) {
         KERNEL32$CloseHandle(hFile);
         ADVAPI32$CryptReleaseContext(hProv, 0);
         BeaconPrintf(CALLBACK_ERROR, "Error: CryptCreateHash failed");
@@ -37,15 +37,15 @@ BOOL SHAFile(LPCSTR lpszFile) {
         }
         ADVAPI32$CryptHashData(hHash, bReadFile, dwBytesRead, 0);
     }
-    dwBytesRead = 32; 
-    CHAR hash[256] = "";
+    dwBytesRead = 64;
+    CHAR hash[512] = "";
     if (ADVAPI32$CryptGetHashParam(hHash, HP_HASHVAL, bSHA, &dwBytesRead, 0)) {
         for (DWORD i = 0; i < dwBytesRead; i++){
            CHAR digits[3];
            MSVCRT$sprintf(digits, "%02X", bSHA[i]);
            MSVCRT$strcat(hash, digits);
         }
-        BeaconPrintf(CALLBACK_OUTPUT, "SHA-256 Hash for %s: %s", lpszFile, hash);
+        BeaconPrintf(CALLBACK_OUTPUT, "SHA-512 Hash for %s: %s", lpszFile, hash);
     }
     ADVAPI32$CryptDestroyHash(hHash);
     ADVAPI32$CryptReleaseContext(hProv, 0);
@@ -57,10 +57,10 @@ BOOL SHAFile(LPCSTR lpszFile) {
 #ifdef BOF
 
 #include<bofdefs.h>
-VOID go( 
-	IN PCHAR Buffer, 
-	IN ULONG Length 
-) 
+VOID go(
+	IN PCHAR Buffer,
+	IN ULONG Length
+)
 {
     LPCSTR server;
     datap parser;
@@ -69,16 +69,17 @@ VOID go(
 	if (!bofstart())
 	{
 		return;
-	}	
-	SHAFile(server);
+	}
+	SHA512File(server);
+	printoutput(TRUE);
 };
 
 #else
 int main(int argc, char ** argv)
-{   
+{
 	if(argc >= 2){
 		LPCSTR server = (LPCSTR)argv[1];
-		SHAFile(server);
+		SHA512File(server);
 	}
 }
 

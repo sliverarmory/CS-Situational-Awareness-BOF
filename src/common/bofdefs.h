@@ -20,6 +20,8 @@
 #include <security.h>
 #include <aclapi.h>
 #include <bcrypt.h>
+
+#define HKCU_LOCAL_IMP (HKEY)4
 //KERNEL32
 #ifdef BOF
 WINBASEAPI void* WINAPI KERNEL32$VirtualAlloc(LPVOID lpAddress, SIZE_T dwSize, DWORD flAllocationType, DWORD flProtect);
@@ -98,6 +100,8 @@ DECLSPEC_IMPORT LCID WINAPI KERNEL32$LocaleNameToLCID(LPCWSTR lpName, DWORD dwFl
 DECLSPEC_IMPORT int WINAPI KERNEL32$GetDateFormatEx(LPCWSTR lpLocaleName, DWORD dwFlags, const SYSTEMTIME* lpData, LPCWSTR lpFormat, LPWSTR lpDateStr, int cchDate, LPCWSTR lpCalendar);
 WINBASEAPI BOOL WINAPI KERNEL32$OpenProcessToken(HANDLE ProcessHandle, DWORD DesiredAccess, PHANDLE TokenHandle);
 DECLSPEC_IMPORT BOOL WINAPI KERNEL32$QueryFullProcessImageNameA(HANDLE hProcess, DWORD dwFlags, LPSTR lpExeName, PDWORD lpdwSize);
+WINBASEAPI WINBOOL WINAPI KERNEL32$GetVolumeInformationW(LPCWSTR lpRootPathName, LPWSTR lpVolumeNameBuffer, DWORD nVolumeNameSize, LPDWORD lpVolumeSerialNumber, LPDWORD lpMaximumComponentLength, LPDWORD lpFileSystemFlags, LPWSTR lpFileSystemNameBuffer, DWORD nFileSystemNameSize);
+
 //WTSAPI32
 DECLSPEC_IMPORT DWORD WINAPI WTSAPI32$WTSEnumerateSessionsA(LPVOID, DWORD, DWORD, PWTS_SESSION_INFO*, DWORD*);
 DECLSPEC_IMPORT DWORD WINAPI WTSAPI32$WTSQuerySessionInformationA(LPVOID, DWORD, WTS_INFO_CLASS, LPSTR*, DWORD*);
@@ -193,6 +197,7 @@ WINBASEAPI DWORD WINAPI NETAPI32$NetWkstaUserEnum(LMSTR servername, DWORD level,
 WINBASEAPI DWORD WINAPI NETAPI32$NetWkstaGetInfo(LMSTR servername, DWORD level, LPBYTE* bufptr);
 WINBASEAPI DWORD WINAPI NETAPI32$NetStatisticsGet(LMSTR server, LMSTR service, DWORD level, DWORD options, LPBYTE* bufptr);
 WINBASEAPI DWORD WINAPI NETAPI32$NetRemoteTOD(LPCWSTR UncServerName, LPBYTE* BufferPtr);
+WINBASEAPI DWORD WINAPI NETAPI32$NetGetJoinInformation(LPCWSTR lpServer, LPWSTR* lpNameBuffer, DWORD* BufferType);
 
 //mpr
 WINBASEAPI DWORD WINAPI MPR$WNetOpenEnumW(DWORD dwScope, DWORD dwType, DWORD dwUsage, LPNETRESOURCEW lpNetResource, LPHANDLE lphEnum);
@@ -298,6 +303,7 @@ WINIMPM WINBOOL WINAPI ADVAPI32$CryptDestroyHash (HCRYPTHASH hHash);
 WINBASEAPI LONG WINAPI ADVAPI32$RegGetKeySecurity(HKEY hKey, SECURITY_INFORMATION SecurityInformation, PSECURITY_DESCRIPTOR pSecurityDescriptor, LPDWORD lpcbSecurityDescriptor);
 WINBASEAPI LONG WINAPI ADVAPI32$RegSetKeySecurity(HKEY hKey, SECURITY_INFORMATION SecurityInformation, PSECURITY_DESCRIPTOR pSecurityDescriptor);
 WINBASEAPI DWORD WINAPI ADVAPI32$SetEntriesInAclA(ULONG cCountOfExplicitEntries, PEXPLICIT_ACCESS_A pListOfExplicitEntries, PACL OldAcl, PACL *NewAcl);
+WINADVAPI LONG WINAPI ADVAPI32$RegOpenCurrentUser(REGSAM samDesired, PHKEY phkResult);
 
 
 //NTDLL
@@ -472,6 +478,9 @@ WINLDAPAPI VOID LDAPAPI WLDAP32$ldap_memfree(PCHAR);
 WINLDAPAPI ULONG LDAPAPI WLDAP32$ldap_unbind(LDAP*);
 WINLDAPAPI ULONG LDAPAPI WLDAP32$ldap_unbind_s(LDAP*);
 WINLDAPAPI ULONG LDAPAPI WLDAP32$ldap_msgfree(LDAPMessage*);
+WINLDAPAPI ULONG LDAPAPI WLDAP32$ldap_search_ext_s(LDAP* ld, const PSTR base, ULONG scope, const PSTR filter, PZPSTR attrs, ULONG attrsonly, PLDAPControlA* serverctrls, PLDAPControlA* clientctrls, LDAP_TIMEVAL* timeout, ULONG sizelimit, PLDAPMessage* res);
+WINLDAPAPI ULONG LDAPAPI WLDAP32$ldap_create_page_controlA(LDAP* ExternalHandle, ULONG PageSize, struct berval* Cookie, UCHAR CriticalityValue, PLDAPControlA* Control);
+WINLDAPAPI PCHAR LDAPAPI WLDAP32$ldap_get_dn(LDAP* ld, LDAPMessage* entry);
 
 DECLSPEC_IMPORT LDAP* LDAPAPI WLDAP32$ldap_initW(const PWSTR HostName, ULONG PortNumber);
 DECLSPEC_IMPORT ULONG LDAPAPI WLDAP32$ldap_connect(LDAP* ld, LDAP_TIMEVAL* timeout);
@@ -493,10 +502,7 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$GetFileVersionInfoA(LPCSTR lptstrFilename
 DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpSubBlock, LPVOID* lplpBuffer, PUINT puLen);
 
 
-
-
 #else
-
 
 #define intAlloc(size) KERNEL32$HeapAlloc(KERNEL32$GetProcessHeap(), HEAP_ZERO_MEMORY, size)
 #define intRealloc(ptr, size) (ptr) ? KERNEL32$HeapReAlloc(KERNEL32$GetProcessHeap(), HEAP_ZERO_MEMORY, ptr, size) : KERNEL32$HeapAlloc(KERNEL32$GetProcessHeap(), HEAP_ZERO_MEMORY, size)
@@ -578,6 +584,7 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define KERNEL32$LocaleNameToLCID LocaleNameToLCID
 #define KERNEL32$GetDateFormatEx GetDateFormatEx
 #define KERNEL32$QueryFullProcessImageNameA QueryFullProcessImageNameA
+#define KERNEL32$GetVolumeInformationW GetVolumeInformationW
 
 
 #define WTSAPI32$WTSEnumerateSessionsA WTSEnumerateSessionsA
@@ -670,6 +677,10 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define NETAPI32$NetSessionEnum NetSessionEnum
 #define NETAPI32$NetGetAadJoinInformation NetGetAadJoinInformation
 #define NETAPI32$NetFreeAadJoinInformation NetFreeAadJoinInformation
+#define NETSETUP_JOIN_STATUS_UNKNOWN 0
+#define NETSETUP_JOIN_STATUS_UNJOINED 1
+#define NETSETUP_JOIN_STATUS_WORKGROUPNAME 2
+#define NETSETUP_JOIN_STATUS_DOMAINNAME 3
 #define MPR$WNetOpenEnumW WNetOpenEnumW
 #define MPR$WNetEnumResourceW WNetEnumResourceW
 #define MPR$WNetCloseEnum WNetCloseEnum
@@ -750,6 +761,7 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define ADVAPI32$ControlService ControlService
 #define ADVAPI32$EnumDependentServicesA EnumDependentServicesA
 #define ADVAPI32$RegQueryInfoKeyA RegQueryInfoKeyA
+#define ADVAPI32$RegOpenCurrentUser RegOpenCurrentUser
 #define NTDLL$NtCreateFile NtCreateFile
 #define NTDLL$NtClose NtClose
 #define NTDLL$NtFsControlFile NtFsControlFile
@@ -873,4 +885,11 @@ DECLSPEC_IMPORT WINBOOL WINAPI VERSION$VerQueryValueA(LPCVOID pBlock, LPCSTR lpS
 #define VERSION$VerQueryValueA VerQueryValueA
 #define BeaconPrintf(x, y, ...) printf(y, ##__VA_ARGS__)
 #define internal_printf printf
+#endif
+
+#ifdef BOF
+// LDAP Control OIDs
+#define LDAP_CONTROL_PAGE_OID_STRING "1.2.840.113556.1.4.319"
+#define LDAP_CONTROL_SHOW_DELETED_OID_STRING "1.2.840.113556.1.4.417"
+#define LDAP_MATCHING_RULE_IN_CHAIN_OID_STRING "1.2.840.113556.1.4.1941"
 #endif

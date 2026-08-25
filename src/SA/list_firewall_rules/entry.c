@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <netfw.h>
-#include <comutil.h>
+//#include <comutil.h>
 #include "bofdefs.h"
 #include "base.c"
 

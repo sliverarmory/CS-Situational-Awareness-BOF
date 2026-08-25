@@ -40,6 +40,18 @@ jobs:
         run: |
           mkdir packages
 
+      - name: AD Recycle Bin List
+        run: |
+          ./make_bof.sh adrblist
+
+      - name: AD Recycle Bin Permissions
+        run: |
+          ./make_bof.sh adrbperms
+
+      - name: AD Recycle Bin Status
+        run: |
+          ./make_bof.sh adrbstatus
+
       - name: ADCS Enum
         run: |
           ./make_bof.sh adcs_enum
@@ -63,6 +75,10 @@ jobs:
       - name: Cacls
         run: |
           ./make_bof.sh cacls
+
+      - name: Cat
+        run: |
+          ./make_bof.sh cat
 
       - name: Driver Sigs
         run: |
@@ -280,6 +296,10 @@ jobs:
         run: |
           ./make_bof.sh get_session_info
 
+      - name: hostname
+        run: |
+          ./make_bof.sh hostname
+
       - name: md5
         run: |
           ./make_bof.sh md5
@@ -292,9 +312,17 @@ jobs:
         run: |
           ./make_bof.sh sha256
 
+      - name: sha512
+        run: |
+          ./make_bof.sh sha512
+
       - name: useridletime
         run: |
           ./make_bof.sh useridletime
+
+      - name: vol
+        run: |
+          ./make_bof.sh vol
 
       - name: "Publish Release"
         uses: "marvinpinto/action-automatic-releases@latest"

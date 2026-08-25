@@ -1,7 +1,7 @@
 
 #include <windows.h>
 #include "beacon.h"
-#include "../../common/bofdefs.h"
+#include "bofdefs.h"
 
 VERIFYSERVERCERT ServerCertCallback;
 BOOLEAN _cdecl ServerCertCallback(PLDAP Connection, PCCERT_CONTEXT pServerCert) {

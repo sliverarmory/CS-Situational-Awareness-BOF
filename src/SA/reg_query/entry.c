@@ -32,7 +32,10 @@ void set_hive_name(DWORD h)
     if(h == 2)
     {
         gHiveName = "HKEY_LOCAL_MACHINE";
-    }else if (h == 1)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wint-to-pointer-cast"
+    }else if (h == 1 || (HKEY)h == HKCU_LOCAL_IMP)
+#pragma GCC diagnostic pop
     {
         gHiveName = "HKEY_CURRENT_USER";
     }else if (h == 3)
@@ -108,7 +111,7 @@ void Reg_InternalPrintKey(char * data, const char * valuename, DWORD type, DWORD
         {
             if(i % 16 == 0)
                 internal_printf("\n");
-            internal_printf(" %2.2x ", data[i] & 0xff);  
+            internal_printf(" %2.2x ", data[i] & 0xff);
         }
         internal_printf("\n");
     }
@@ -145,22 +148,31 @@ DWORD Reg_GetValue(const char * hostname, HKEY hivekey, DWORD Arch, const char* 
     DWORD size = 0;
 	if(hostname == NULL)
 	{
-		dwRet = ADVAPI32$RegOpenKeyExA(hivekey, keystring, 0, KEY_READ, &key);
+        if(hivekey == HKCU_LOCAL_IMP)
+        {
+            dwRet = ADVAPI32$RegOpenCurrentUser(KEY_READ, &RemoteKey); //Reusing this var for LOCAL_IMP
+            if(dwRet){ goto END;}
+            dwRet = ADVAPI32$RegOpenKeyExA(RemoteKey, keystring, 0, KEY_READ, &key);
+        }
+        else
+        {
+		    dwRet = ADVAPI32$RegOpenKeyExA(hivekey, keystring, 0, KEY_READ, &key);
+        }
 
-		if(dwRet){ goto END;}
+        if(dwRet){ goto END;}
 	}
 	else
 	{
 		dwRet = ADVAPI32$RegConnectRegistryA(hostname, hivekey, &RemoteKey);
 
 		if(dwRet){
-			internal_printf("failed to connect"); 
+			internal_printf("failed to connect");
 			goto END;
 			}
 		dwRet = ADVAPI32$RegOpenKeyExA(RemoteKey, keystring, 0, KEY_READ, &key);
 
 		if(dwRet){
-			internal_printf("failed to open remote key"); 
+			internal_printf("failed to open remote key");
 			goto END;
 			}
 	}
@@ -180,7 +192,7 @@ DWORD Reg_GetValue(const char * hostname, HKEY hivekey, DWORD Arch, const char* 
         dwRet =  E_OUTOFMEMORY;
         goto END;
     }
-    dwRet = ADVAPI32$RegQueryValueExA( 
+    dwRet = ADVAPI32$RegQueryValueExA(
         key,
         value,
         NULL,
@@ -209,12 +221,12 @@ DWORD Reg_GetValue(const char * hostname, HKEY hivekey, DWORD Arch, const char* 
 
 DWORD Reg_EnumKey(const char * hostname, HKEY hivekey, DWORD Arch, const char* keystring, BOOL recursive){
     DWORD testval = 0;
-    DWORD    cbName = 0;                   // size of name string 
-    DWORD    cSubKeys=0;               // number of subkeys 
-    DWORD    cbMaxSubKey = 0;              // longest subkey size 
-    DWORD    cchMaxClass = 0;              // longest class string 
-    DWORD    cValues = 0;              // number of values for key 
-    DWORD    cchMaxValue = 0;          // longest value name 
+    DWORD    cbName = 0;                   // size of name string
+    DWORD    cSubKeys=0;               // number of subkeys
+    DWORD    cbMaxSubKey = 0;              // longest subkey size
+    DWORD    cchMaxClass = 0;              // longest class string
+    DWORD    cValues = 0;              // number of values for key
+    DWORD    cchMaxValue = 0;          // longest value name
     DWORD cchMaxData = 0;
     DWORD cchData = 0;
     DWORD cchValue = 0;
@@ -226,29 +238,39 @@ DWORD Reg_EnumKey(const char * hostname, HKEY hivekey, DWORD Arch, const char* k
 	HKEY RemoteKey = 0;
     Pstack keyStack = NULL;
     pregkeyval curitem = NULL;
-    char * errormsg = NULL; 
+    char * errormsg = NULL;
     char * currentkeyname = NULL;
     char * currentvaluename = NULL;
     char * currentdata = NULL;
     //char * fullkeyname = NULL;
 	if(hostname == NULL)
 	{
-		dwresult = ADVAPI32$RegOpenKeyExA(hivekey, keystring, 0, KEY_READ, &rootkey);
+        if(hivekey == HKCU_LOCAL_IMP)
+        {
+            dwresult = ADVAPI32$RegOpenCurrentUser(KEY_READ, &RemoteKey); //Reusing this var for LOCAL_IMP
+            if(dwresult){ goto END;}
+            dwresult = ADVAPI32$RegOpenKeyExA(RemoteKey, keystring, 0, KEY_READ, &rootkey);
+        }
+        else
+        {
+		    dwresult = ADVAPI32$RegOpenKeyExA(hivekey, keystring, 0, KEY_READ, &rootkey);
+        }
 
 		if(dwresult){ goto END;}
+
 	}
 	else
 	{
 		dwresult = ADVAPI32$RegConnectRegistryA(hostname, hivekey, &RemoteKey);
 
 		if(dwresult){
-			internal_printf("failed to connect"); 
+			internal_printf("failed to connect");
 			goto END;
 			}
 		dwresult = ADVAPI32$RegOpenKeyExA(RemoteKey, keystring, 0, KEY_READ, &rootkey);
 
 		if(dwresult){
-			internal_printf("failed to open remote key"); 
+			internal_printf("failed to open remote key");
 			goto END;
 			}
 	}
@@ -259,65 +281,65 @@ DWORD Reg_EnumKey(const char * hostname, HKEY hivekey, DWORD Arch, const char* k
     {
         char stringDate[19];
         Reg_KeyToTimestamp(curitem->hreg, stringDate);
-        
+
         internal_printf("%-24s %s\\%s\n", stringDate, gHiveName, curitem->keypath);
         // Get the class name and the value count.
         dwresult = ADVAPI32$RegQueryInfoKeyA(
-            curitem->hreg,                    // key handle 
-            NULL,                // buffer for class name 
-            NULL,                // size of class string 
-            NULL,                    // reserved 
-            &cSubKeys,               // number of subkeys 
-            &cbMaxSubKey,            // longest subkey size 
-            NULL,            // longest class string 
-            &cValues,                // number of values for this key 
-            &cchMaxValue,            // longest value name 
-            &cchMaxData,         // longest value data 
-            NULL,   // security descriptor 
-            NULL);       // last write time 
-    
+            curitem->hreg,                    // key handle
+            NULL,                // buffer for class name
+            NULL,                // size of class string
+            NULL,                    // reserved
+            &cSubKeys,               // number of subkeys
+            &cbMaxSubKey,            // longest subkey size
+            NULL,            // longest class string
+            &cValues,                // number of values for this key
+            &cchMaxValue,            // longest value name
+            &cchMaxData,         // longest value data
+            NULL,   // security descriptor
+            NULL);       // last write time
+
             if(dwresult){
-                internal_printf("failed to query info about key"); 
+                internal_printf("failed to query info about key");
                 goto nextloop;
                 }
         // Enumerate the subkeys, until RegEnumKeyEx fails.
         currentkeyname = intAlloc(cbMaxSubKey +1);
         currentvaluename = intAlloc(cchMaxValue+2);
         currentdata = intAlloc(cchMaxData);
-        if (cValues) 
+        if (cValues)
         {
-            for (i=0, retCode=ERROR_SUCCESS; i<cValues; i++) 
-            { 
-                cchValue = cchMaxValue+2; 
+            for (i=0, retCode=ERROR_SUCCESS; i<cValues; i++)
+            {
+                cchValue = cchMaxValue+2;
                 cchData = cchMaxData;
-                retCode = ADVAPI32$RegEnumValueA(curitem->hreg, i, 
-                    currentvaluename, 
-                    &cchValue, 
-                    NULL, 
+                retCode = ADVAPI32$RegEnumValueA(curitem->hreg, i,
+                    currentvaluename,
+                    &cchValue,
+                    NULL,
                     &regType,
                     (LPBYTE)currentdata,
                     &cchData);
-                if (retCode == ERROR_SUCCESS ) 
+                if (retCode == ERROR_SUCCESS )
                 {
                     Reg_InternalPrintKey(currentdata, currentvaluename, regType, cchData, (HKEY) curitem->hreg);
-                } 
-                
+                }
+
             }
             internal_printf("\n");
         }
         if (cSubKeys)
         {
-            for (i=0; i<cSubKeys; i++) 
-            { 
+            for (i=0; i<cSubKeys; i++)
+            {
                 cbName = cbMaxSubKey +1;
                 retCode = ADVAPI32$RegEnumKeyExA(curitem->hreg, i,
-                        currentkeyname, 
-                        &cbName, 
-                        NULL, 
-                        NULL, 
-                        NULL, 
-                        NULL); 
-                if (retCode == ERROR_SUCCESS) 
+                        currentkeyname,
+                        &cbName,
+                        NULL,
+                        NULL,
+                        NULL,
+                        NULL);
+                if (retCode == ERROR_SUCCESS)
                 {
                     if(recursive)
                     {
@@ -340,7 +362,7 @@ DWORD Reg_EnumKey(const char * hostname, HKEY hivekey, DWORD Arch, const char* k
                     }
                 }
             }
-        } 
+        }
         nextloop:
         if(currentkeyname)
         {intFree(currentkeyname); currentkeyname = NULL;}
@@ -379,10 +401,10 @@ DWORD Reg_EnumKey(const char * hostname, HKEY hivekey, DWORD Arch, const char* k
 
 #ifdef BOF
 
-VOID go( 
-	IN PCHAR Buffer, 
-	IN ULONG Length 
-) 
+VOID go(
+	IN PCHAR Buffer,
+	IN ULONG Length
+)
 {
 	datap parser = {0};
 	const char * hostname = NULL;
@@ -400,7 +422,7 @@ VOID go(
     set_hive_name(t);
     #pragma GCC diagnostic ignored "-Wint-to-pointer-cast"
 	#pragma GCC diagnostic ignored "-Wpointer-to-int-cast"
-	hive = (HKEY)((DWORD) hive + (DWORD)t);
+	hive = ((HKEY)t == HKCU_LOCAL_IMP) ? HKCU_LOCAL_IMP :(HKEY)((DWORD) hive + (DWORD)t);
     #pragma GCC diagnostic pop
 	path = BeaconDataExtract(&parser, NULL);
 	key = BeaconDataExtract(&parser, NULL);
@@ -418,6 +440,11 @@ VOID go(
 	{
 		return;
 	}
+    if(hostname != NULL && hive == HKCU_LOCAL_IMP)
+    {
+        BeaconPrintf(CALLBACK_ERROR, "Refusing to use HKCU_LOCAL_IMP with a remote host");
+        goto end;
+    }
 	if(key)
 	{
 		dwresult = Reg_GetValue(hostname,hive,0,path,key);
@@ -430,6 +457,7 @@ VOID go(
 	{
 		BeaconPrintf(CALLBACK_ERROR, "Failed to query Regkey, error value: %d", dwresult);
 	}
+    end:
 	printoutput(TRUE);
     free_enums();
 };

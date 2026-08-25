@@ -1,0 +1,25 @@
+{
+    "name": "AD Recycle Bin Permissions (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-adrbperms",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Check whether the current user can read the Active Directory Recycle Bin",
+    "long_help": "Binds to LDAP with the current user's credentials and attempts to read deleted objects from the Active Directory Recycle Bin. A successful search with at least one result is reported as readable; an empty recycle bin cannot confirm access.",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "adrbperms.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "adrbperms.x86.o"
+        }
+    ],
+    "arguments": []
+}

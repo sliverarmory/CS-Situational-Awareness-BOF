@@ -1,0 +1,32 @@
+{
+    "name": "SHA512 (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-sha512",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Calculate the SHA-512 hash of a file",
+    "long_help": "Computes and displays the SHA-512 hash of a file using the Windows CryptoAPI for file integrity verification.",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "sha512.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "sha512.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "filepath",
+            "desc": "The file path to hash",
+            "type": "string",
+            "optional": false
+        }
+    ]
+}

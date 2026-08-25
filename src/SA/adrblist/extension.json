@@ -1,0 +1,25 @@
+{
+    "name": "AD Recycle Bin List (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-adrblist",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Enumerate deleted objects in the Active Directory Recycle Bin",
+    "long_help": "Enumerates deleted objects in the current domain's Active Directory Recycle Bin, including names, account identifiers, object types, deletion times, and other useful attributes. The current user must have permission to read deleted objects.",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "adrblist.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "adrblist.x86.o"
+        }
+    ],
+    "arguments": []
+}
