@@ -35,6 +35,7 @@ jobs:
       - name: Check out the approved tag
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          ref: ${{ github.ref }}
           fetch-depth: 0
           persist-credentials: false
 
@@ -162,6 +163,7 @@ jobs:
       - name: Check out the approved tag
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          ref: ${{ github.ref }}
           fetch-depth: 0
           persist-credentials: false
 
