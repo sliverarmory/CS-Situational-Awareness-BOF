@@ -907,7 +907,7 @@
       "args": [
         {
           "type": "wstring",
-          "value": "Administrator"
+          "value": "Guest"
         },
         {
           "type": "wstring",
@@ -2524,7 +2524,7 @@
       "args": [
         {
           "type": "wstring",
-          "value": "Administrator"
+          "value": "Guest"
         },
         {
           "type": "wstring",
@@ -4141,7 +4141,7 @@
       "args": [
         {
           "type": "wstring",
-          "value": "Administrator"
+          "value": "Guest"
         },
         {
           "type": "wstring",

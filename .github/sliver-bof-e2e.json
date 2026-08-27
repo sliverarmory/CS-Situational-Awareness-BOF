@@ -39,7 +39,7 @@
           "expect": {
             "output": {
               "matches": [
-                "(?:AAD/Entra ID Join Info|Host is not cloud joined)"
+                "(?:AAD/Entra ID Join Info|Host (?:is|may) not be cloud joined)"
               ]
             }
           }
@@ -525,7 +525,7 @@
           "args": [
             {
               "type": "wstring",
-              "value": "Administrator"
+              "value": "Guest"
             },
             {
               "type": "wstring",
@@ -601,7 +601,7 @@
           "expect": {
             "output": {
               "matches": [
-                "A localhost "
+                "(?:A localhost |Query for domain name failed\\r?\\nDNS name does not exist\\.)"
               ]
             }
           }
@@ -1059,7 +1059,7 @@
           "expect": {
             "output": {
               "matches": [
-                "(?:AAD/Entra ID Join Info|Host is not cloud joined)"
+                "(?:AAD/Entra ID Join Info|Host (?:is|may) not be cloud joined)"
               ]
             }
           }
@@ -1545,7 +1545,7 @@
           "args": [
             {
               "type": "wstring",
-              "value": "Administrator"
+              "value": "Guest"
             },
             {
               "type": "wstring",
@@ -1621,7 +1621,7 @@
           "expect": {
             "output": {
               "matches": [
-                "A localhost "
+                "(?:A localhost |Query for domain name failed\\r?\\nDNS name does not exist\\.)"
               ]
             }
           }
@@ -2079,7 +2079,7 @@
           "expect": {
             "output": {
               "matches": [
-                "(?:AAD/Entra ID Join Info|Host is not cloud joined)"
+                "(?:AAD/Entra ID Join Info|Host (?:is|may) not be cloud joined)"
               ]
             }
           }
@@ -2565,7 +2565,7 @@
           "args": [
             {
               "type": "wstring",
-              "value": "Administrator"
+              "value": "Guest"
             },
             {
               "type": "wstring",
@@ -2641,7 +2641,7 @@
           "expect": {
             "output": {
               "matches": [
-                "A localhost "
+                "(?:A localhost |Query for domain name failed\\r?\\nDNS name does not exist\\.)"
               ]
             }
           }

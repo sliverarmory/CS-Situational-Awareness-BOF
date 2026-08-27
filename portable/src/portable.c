@@ -53,7 +53,7 @@ extern int open(const char *path, int flags, ...);
 extern bof_sptr read(int descriptor, void *buffer, bof_uptr length);
 extern int close(int descriptor);
 extern bof_dir *opendir(const char *path);
-#if defined(BOF_LINUX) && defined(__arm__)
+#if defined(BOF_LINUX) && (defined(__arm__) || defined(__i386__))
 extern void *readdir64(bof_dir *directory);
 #else
 extern void *readdir(bof_dir *directory);
@@ -228,18 +228,16 @@ static const char *bof_dirent_name(void *entry) {
     return (const char *)(raw + 8U);
 #elif defined(BOF_DARWIN)
     return (const char *)(raw + 21U);
-#elif defined(__i386__)
-    return (const char *)(raw + 11U);
 #else
     return (const char *)(raw + 19U);
 #endif
 }
 
 static void *bof_readdir_entry(bof_dir *directory) {
-#if defined(BOF_LINUX) && defined(__arm__)
+#if defined(BOF_LINUX) && (defined(__arm__) || defined(__i386__))
     /*
-     * ARMv7's legacy readdir can stop with EOVERFLOW when an inode does not
-     * fit its 32-bit dirent. Request the large-file record explicitly.
+     * The legacy 32-bit Linux readdir can stop with EOVERFLOW when an inode
+     * does not fit its dirent. Request the large-file record explicitly.
      */
     return readdir64(directory);
 #else

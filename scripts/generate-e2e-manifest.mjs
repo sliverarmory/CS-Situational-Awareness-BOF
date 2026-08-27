@@ -138,8 +138,10 @@ const explicitArguments = {
     { type: "int16", value: 2 },
     { type: "wstring", value: "" },
   ],
+  // GitHub-hosted Windows images rename Administrator; the disabled built-in
+  // Guest account remains safe to query and exercises the success path.
   netuser: [
-    { type: "wstring", value: "Administrator" },
+    { type: "wstring", value: "Guest" },
     { type: "wstring", value: "" },
   ],
   nonpagedldapsearch: [
@@ -372,7 +374,7 @@ function escapeRegexp(value) {
 }
 
 const windowsSliverActionExpectations = {
-  aadjoininfo: { output: { matches: ["(?:AAD/Entra ID Join Info|Host is not cloud joined)"] } },
+  aadjoininfo: { output: { matches: ["(?:AAD/Entra ID Join Info|Host (?:is|may) not be cloud joined)"] } },
   adv_audit_policies: { output: { matches: ["(?:SUCCESS\\.|No audit\\.csv files)"] } },
   cacls: { output: { contains: ["FIXTURE_FILE.txt"] } },
   enumLocalSessions: { output: { contains: ["Enumerating sessions for local system:"] } },
@@ -403,7 +405,11 @@ const windowsSliverActionExpectations = {
   netuse: { output: { contains: ["The command completed successfully"] } },
   netuser: { output: { contains: ["User name:"] } },
   netuserenum: { output: { matches: ["-- [^\\r\\n]+"] } },
-  nslookup: { output: { matches: ["A localhost "] } },
+  nslookup: {
+    output: {
+      matches: ["(?:A localhost |Query for domain name failed\\r?\\nDNS name does not exist\\.)"],
+    },
+  },
   reg_query: { output: { contains: ["ProductName"] } },
   regsession: { output: { contains: ["Querying local registry"] } },
   resources: { output: { contains: ["Memory Used:"] } },

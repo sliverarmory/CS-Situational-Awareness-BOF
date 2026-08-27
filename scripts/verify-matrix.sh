@@ -180,6 +180,23 @@ verify_artifact() {
                 fi
             fi
             ;;
+        linux/386)
+            if [[ "$command" == dir || "$command" == tasklist ]]; then
+                if ! undefined_symbols="$("$nm_bin" -u "$artifact")"; then
+                    echo "cannot inspect Linux/386 directory imports: $artifact with $nm_bin" >&2
+                    failures=$((failures + 1))
+                else
+                    if ! awk '$NF == "readdir64" { found = 1 } END { exit found ? 0 : 1 }' <<<"$undefined_symbols"; then
+                        echo "Linux/386 directory enumeration does not import readdir64: $artifact" >&2
+                        failures=$((failures + 1))
+                    fi
+                    if awk '$NF == "readdir" { found = 1 } END { exit found ? 0 : 1 }' <<<"$undefined_symbols"; then
+                        echo "Linux/386 directory enumeration imports legacy readdir: $artifact" >&2
+                        failures=$((failures + 1))
+                    fi
+                fi
+            fi
+            ;;
         linux/ppc64le)
             if ! flags="$(read_le_u32 "$artifact" 48)"; then
                 echo "cannot read ELF/ppc64le flags: $artifact" >&2
