@@ -273,6 +273,12 @@ if ! diff -u \
     echo "e2e manifest is stale; regenerate it with scripts/generate-e2e-manifest.mjs --write" >&2
     exit 1
 fi
+if ! diff -u \
+    <(tr -d '\r' < .github/sliver-bof-e2e.json) \
+    <(node scripts/generate-e2e-manifest.mjs --sliver-action | tr -d '\r'); then
+    echo "Sliver action E2E manifest is stale; regenerate it with scripts/generate-e2e-manifest.mjs --sliver-action --write" >&2
+    exit 1
+fi
 if ! jq -e '
     (.command_sets.portable | type == "array" and length > 0 and length == (unique | length)) and
     (.command_sets["windows-only"] | type == "array" and length == (unique | length)) and

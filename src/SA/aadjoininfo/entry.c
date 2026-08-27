@@ -8,10 +8,10 @@ void GetAadJoinInfo()
 	// https://learn.microsoft.com/en-us/windows/win32/api/lmjoin/nf-lmjoin-netgetaadjoininformation
 	
 	DWORD res;
-	PDSREG_JOIN_INFO pJoinInfo;
+	PDSREG_JOIN_INFO pJoinInfo = NULL;
 	res = NETAPI32$NetGetAadJoinInformation(NULL, &pJoinInfo);
 	
-	if (res == 0)
+	if (res == 0 && pJoinInfo != NULL)
 	{
 		internal_printf("\n================== AAD/Entra ID Join Info ==================\n");
 		switch (pJoinInfo->joinType)
@@ -64,11 +64,13 @@ void GetAadJoinInfo()
 			}
 		} else {
 			internal_printf("\n[-] Join user info was null or host is not device joined\n");
-		}	
+		}
 	
 	//
-	// NetGetAadJoinInformation failed 
+	// Handle an unjoined host or NetGetAadJoinInformation failure
 	//
+	} else if (res == 0) {
+		internal_printf("[-] Host is not cloud joined and has no Entra ID work accounts\n");
 	} else {
 		internal_printf("[-] Error: %d\n", res);
 		internal_printf("[-] Host may not be cloud joined\n");

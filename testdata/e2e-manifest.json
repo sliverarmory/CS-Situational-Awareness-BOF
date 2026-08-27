@@ -146,7 +146,7 @@
       "args": [
         {
           "type": "int32",
-          "value": 0
+          "value": 1
         }
       ],
       "expect": {

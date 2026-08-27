@@ -1,0 +1,5239 @@
+{
+  "schema": "sliver-bof-e2e/v1",
+  "sliver": {
+    "version": "b19e383111dbf8b04096806b249f6238274edff4"
+  },
+  "defaults": {
+    "bof_executor": "reflektor",
+    "entrypoint": "go",
+    "modes": [
+      "session",
+      "beacon"
+    ],
+    "repeat": 1,
+    "command_timeout": "2m"
+  },
+  "fixtures": {
+    "file": {
+      "variable": "FIXTURE_FILE",
+      "contents_utf8": "reflektor-bof-e2e\n"
+    },
+    "directory": {
+      "variable": "FIXTURE_DIR",
+      "files": {
+        "marker.txt": "reflektor-bof-e2e\n"
+      }
+    }
+  },
+  "suites": [
+    {
+      "name": "windows-386",
+      "target": {
+        "os": "windows",
+        "arch": "386"
+      },
+      "tests": [
+        {
+          "name": "aadjoininfo",
+          "object": "dist/windows/386/aadjoininfo.o",
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:AAD/Entra ID Join Info|Host is not cloud joined)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "adv_audit_policies",
+          "object": "dist/windows/386/adv_audit_policies.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:SUCCESS\\.|No audit\\.csv files)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "arp",
+          "object": "dist/windows/386/arp.o",
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "cacls",
+          "object": "dist/windows/386/cacls.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "FIXTURE_FILE.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "cat",
+          "object": "dist/windows/386/cat.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "reflektor-bof-e2e"
+              ]
+            }
+          }
+        },
+        {
+          "name": "dir",
+          "object": "dist/windows/386/dir.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_DIR}"
+            },
+            {
+              "type": "short",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Contents of",
+                "marker.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "driversigs",
+          "object": "dist/windows/386/driversigs.o",
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "enumLocalSessions",
+          "object": "dist/windows/386/enumLocalSessions.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Enumerating sessions for local system:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "enum_filter_driver",
+          "object": "dist/windows/386/enum_filter_driver.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SUCCESS."
+              ]
+            }
+          }
+        },
+        {
+          "name": "env",
+          "object": "dist/windows/386/env.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Gathering Process Environment Variables:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "findLoadedModule",
+          "object": "dist/windows/386/findLoadedModule.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "kernel32.dll"
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:kernel32\\.dll|Successfully enumerated all processes)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get-netsession",
+          "object": "dist/windows/386/get-netsession.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "entries enumerated"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get-netsession2",
+          "object": "dist/windows/386/get-netsession2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Resolving client IPs to hostnames using"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get_password_policy",
+          "object": "dist/windows/386/get_password_policy.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Minimum password length:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get_session_info",
+          "object": "dist/windows/386/get_session_info.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "UserName:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "hostname",
+          "object": "dist/windows/386/hostname.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Computer Name:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ipconfig",
+          "object": "dist/windows/386/ipconfig.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Windows IP Configuration"
+              ]
+            }
+          }
+        },
+        {
+          "name": "list_firewall_rules",
+          "object": "dist/windows/386/list_firewall_rules.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "The number of rules in the Windows Firewall"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listdns",
+          "object": "dist/windows/386/listdns.o",
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:Cache record:|No results found)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listmods",
+          "object": "dist/windows/386/listmods.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Printing modules of process ID:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "locale",
+          "object": "dist/windows/386/locale.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Locale:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "md5",
+          "object": "dist/windows/386/md5.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:b9b3a37829baa40ee941e901aab8671b)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup",
+          "object": "dist/windows/386/netlocalgroup.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 0
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "Name:\\s+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup2",
+          "object": "dist/windows/386/netlocalgroup2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Querying Remote Desktop Users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon",
+          "object": "dist/windows/386/netloggedon.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Users logged on:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon2",
+          "object": "dist/windows/386/netloggedon2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "netshares",
+          "object": "dist/windows/386/netshares.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Share:              Remark:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netstat",
+          "object": "dist/windows/386/netstat.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 4369
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Active Connections"
+              ]
+            }
+          }
+        },
+        {
+          "name": "nettime",
+          "object": "dist/windows/386/nettime.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local time (GMT"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuptime",
+          "object": "dist/windows/386/netuptime.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "ServerName:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuse",
+          "object": "dist/windows/386/netuse.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 2
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "The command completed successfully"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuser",
+          "object": "dist/windows/386/netuser.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "Administrator"
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "User name:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuserenum",
+          "object": "dist/windows/386/netuserenum.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "-- [^\\r\\n]+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netview",
+          "object": "dist/windows/386/netview.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "notepad",
+          "object": "dist/windows/386/notepad.o",
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "nslookup",
+          "object": "dist/windows/386/nslookup.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "localhost"
+            },
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "A localhost "
+              ]
+            }
+          }
+        },
+        {
+          "name": "probe",
+          "object": "dist/windows/386/probe.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "127.0.0.1"
+            },
+            {
+              "type": "int",
+              "value": 1
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "tcp_listener": {
+            "port_argument": 1
+          },
+          "expect": {
+            "output": {
+              "contains": [
+                "OPEN"
+              ]
+            }
+          }
+        },
+        {
+          "name": "reg_query",
+          "object": "dist/windows/386/reg_query.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "int",
+              "value": 2
+            },
+            {
+              "type": "string",
+              "value": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
+            },
+            {
+              "type": "string",
+              "value": "ProductName"
+            },
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "ProductName"
+              ]
+            }
+          }
+        },
+        {
+          "name": "regsession",
+          "object": "dist/windows/386/regsession.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Querying local registry"
+              ]
+            }
+          }
+        },
+        {
+          "name": "resources",
+          "object": "dist/windows/386/resources.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Memory Used:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "routeprint",
+          "object": "dist/windows/386/routeprint.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Interface List"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_enum",
+          "object": "dist/windows/386/sc_enum.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_qc",
+          "object": "dist/windows/386/sc_qc.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME: EventLog"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_qdescription",
+          "object": "dist/windows/386/sc_qdescription.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "sc_qfailure",
+          "object": "dist/windows/386/sc_qfailure.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME: EventLog"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_qtriggerinfo",
+          "object": "dist/windows/386/sc_qtriggerinfo.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:SERVICE_NAME: EventLog|The service EventLog has not registered)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_query",
+          "object": "dist/windows/386/sc_query.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME: EventLog"
+              ]
+            }
+          }
+        },
+        {
+          "name": "schtasksenum",
+          "object": "dist/windows/386/schtasksenum.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "Task [0-9]+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "schtasksquery",
+          "object": "dist/windows/386/schtasksquery.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": "\\Microsoft\\Windows\\Defrag\\ScheduledDefrag"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Name:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha1",
+          "object": "dist/windows/386/sha1.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:a7251fd58489a73e2823956299fb6fa7c250d393)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha256",
+          "object": "dist/windows/386/sha256.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha512",
+          "object": "dist/windows/386/sha512.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:2a429bf6031684e95a16222aeb20f60edf30e67bec73e1a1fe47ba2e0a2b03b0be567830989d89c271ccd00896e820165034ac8b36e1056deb76c5efd8a12e57)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "tasklist",
+          "object": "dist/windows/386/tasklist.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "ROOT\\CIMV2"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "System\\s+[0-9]+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "uptime",
+          "object": "dist/windows/386/uptime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Uptime"
+              ]
+            }
+          }
+        },
+        {
+          "name": "useridletime",
+          "object": "dist/windows/386/useridletime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Current User idle time:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "vol",
+          "object": "dist/windows/386/vol.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Volume in drive"
+              ]
+            }
+          }
+        },
+        {
+          "name": "vssenum",
+          "object": "dist/windows/386/vssenum.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "localhost"
+            },
+            {
+              "type": "wstring",
+              "value": "C$"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Target = "
+              ]
+            }
+          }
+        },
+        {
+          "name": "whoami",
+          "object": "dist/windows/386/whoami.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "UserName",
+                "SID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "windowlist",
+          "object": "dist/windows/386/windowlist.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "wmi_query",
+          "object": "dist/windows/386/wmi_query.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": "ROOT\\CIMV2"
+            },
+            {
+              "type": "wstring",
+              "value": "SELECT Caption FROM Win32_OperatingSystem"
+            },
+            {
+              "type": "wstring",
+              "value": "ROOT\\CIMV2"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:Microsoft Windows)"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "windows-amd64",
+      "target": {
+        "os": "windows",
+        "arch": "amd64"
+      },
+      "tests": [
+        {
+          "name": "aadjoininfo",
+          "object": "dist/windows/amd64/aadjoininfo.o",
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:AAD/Entra ID Join Info|Host is not cloud joined)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "adv_audit_policies",
+          "object": "dist/windows/amd64/adv_audit_policies.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:SUCCESS\\.|No audit\\.csv files)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "arp",
+          "object": "dist/windows/amd64/arp.o",
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "cacls",
+          "object": "dist/windows/amd64/cacls.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "FIXTURE_FILE.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "cat",
+          "object": "dist/windows/amd64/cat.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "reflektor-bof-e2e"
+              ]
+            }
+          }
+        },
+        {
+          "name": "dir",
+          "object": "dist/windows/amd64/dir.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_DIR}"
+            },
+            {
+              "type": "short",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Contents of",
+                "marker.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "driversigs",
+          "object": "dist/windows/amd64/driversigs.o",
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "enumLocalSessions",
+          "object": "dist/windows/amd64/enumLocalSessions.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Enumerating sessions for local system:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "enum_filter_driver",
+          "object": "dist/windows/amd64/enum_filter_driver.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SUCCESS."
+              ]
+            }
+          }
+        },
+        {
+          "name": "env",
+          "object": "dist/windows/amd64/env.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Gathering Process Environment Variables:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "findLoadedModule",
+          "object": "dist/windows/amd64/findLoadedModule.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "kernel32.dll"
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:kernel32\\.dll|Successfully enumerated all processes)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get-netsession",
+          "object": "dist/windows/amd64/get-netsession.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "entries enumerated"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get-netsession2",
+          "object": "dist/windows/amd64/get-netsession2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Resolving client IPs to hostnames using"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get_password_policy",
+          "object": "dist/windows/amd64/get_password_policy.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Minimum password length:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get_session_info",
+          "object": "dist/windows/amd64/get_session_info.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "UserName:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "hostname",
+          "object": "dist/windows/amd64/hostname.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Computer Name:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ipconfig",
+          "object": "dist/windows/amd64/ipconfig.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Windows IP Configuration"
+              ]
+            }
+          }
+        },
+        {
+          "name": "list_firewall_rules",
+          "object": "dist/windows/amd64/list_firewall_rules.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "The number of rules in the Windows Firewall"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listdns",
+          "object": "dist/windows/amd64/listdns.o",
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:Cache record:|No results found)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listmods",
+          "object": "dist/windows/amd64/listmods.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Printing modules of process ID:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "locale",
+          "object": "dist/windows/amd64/locale.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Locale:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "md5",
+          "object": "dist/windows/amd64/md5.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:b9b3a37829baa40ee941e901aab8671b)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup",
+          "object": "dist/windows/amd64/netlocalgroup.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 0
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "Name:\\s+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup2",
+          "object": "dist/windows/amd64/netlocalgroup2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Querying Remote Desktop Users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon",
+          "object": "dist/windows/amd64/netloggedon.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Users logged on:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon2",
+          "object": "dist/windows/amd64/netloggedon2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "netshares",
+          "object": "dist/windows/amd64/netshares.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Share:              Remark:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netstat",
+          "object": "dist/windows/amd64/netstat.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 4369
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Active Connections"
+              ]
+            }
+          }
+        },
+        {
+          "name": "nettime",
+          "object": "dist/windows/amd64/nettime.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local time (GMT"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuptime",
+          "object": "dist/windows/amd64/netuptime.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "ServerName:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuse",
+          "object": "dist/windows/amd64/netuse.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 2
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "The command completed successfully"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuser",
+          "object": "dist/windows/amd64/netuser.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "Administrator"
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "User name:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuserenum",
+          "object": "dist/windows/amd64/netuserenum.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "-- [^\\r\\n]+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netview",
+          "object": "dist/windows/amd64/netview.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "notepad",
+          "object": "dist/windows/amd64/notepad.o",
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "nslookup",
+          "object": "dist/windows/amd64/nslookup.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "localhost"
+            },
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "A localhost "
+              ]
+            }
+          }
+        },
+        {
+          "name": "probe",
+          "object": "dist/windows/amd64/probe.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "127.0.0.1"
+            },
+            {
+              "type": "int",
+              "value": 1
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "tcp_listener": {
+            "port_argument": 1
+          },
+          "expect": {
+            "output": {
+              "contains": [
+                "OPEN"
+              ]
+            }
+          }
+        },
+        {
+          "name": "reg_query",
+          "object": "dist/windows/amd64/reg_query.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "int",
+              "value": 2
+            },
+            {
+              "type": "string",
+              "value": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
+            },
+            {
+              "type": "string",
+              "value": "ProductName"
+            },
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "ProductName"
+              ]
+            }
+          }
+        },
+        {
+          "name": "regsession",
+          "object": "dist/windows/amd64/regsession.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Querying local registry"
+              ]
+            }
+          }
+        },
+        {
+          "name": "resources",
+          "object": "dist/windows/amd64/resources.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Memory Used:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "routeprint",
+          "object": "dist/windows/amd64/routeprint.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Interface List"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_enum",
+          "object": "dist/windows/amd64/sc_enum.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_qc",
+          "object": "dist/windows/amd64/sc_qc.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME: EventLog"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_qdescription",
+          "object": "dist/windows/amd64/sc_qdescription.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "sc_qfailure",
+          "object": "dist/windows/amd64/sc_qfailure.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME: EventLog"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_qtriggerinfo",
+          "object": "dist/windows/amd64/sc_qtriggerinfo.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:SERVICE_NAME: EventLog|The service EventLog has not registered)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_query",
+          "object": "dist/windows/amd64/sc_query.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME: EventLog"
+              ]
+            }
+          }
+        },
+        {
+          "name": "schtasksenum",
+          "object": "dist/windows/amd64/schtasksenum.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "Task [0-9]+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "schtasksquery",
+          "object": "dist/windows/amd64/schtasksquery.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": "\\Microsoft\\Windows\\Defrag\\ScheduledDefrag"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Name:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha1",
+          "object": "dist/windows/amd64/sha1.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:a7251fd58489a73e2823956299fb6fa7c250d393)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha256",
+          "object": "dist/windows/amd64/sha256.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha512",
+          "object": "dist/windows/amd64/sha512.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:2a429bf6031684e95a16222aeb20f60edf30e67bec73e1a1fe47ba2e0a2b03b0be567830989d89c271ccd00896e820165034ac8b36e1056deb76c5efd8a12e57)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "tasklist",
+          "object": "dist/windows/amd64/tasklist.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "ROOT\\CIMV2"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "System\\s+[0-9]+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "uptime",
+          "object": "dist/windows/amd64/uptime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Uptime"
+              ]
+            }
+          }
+        },
+        {
+          "name": "useridletime",
+          "object": "dist/windows/amd64/useridletime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Current User idle time:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "vol",
+          "object": "dist/windows/amd64/vol.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Volume in drive"
+              ]
+            }
+          }
+        },
+        {
+          "name": "vssenum",
+          "object": "dist/windows/amd64/vssenum.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "localhost"
+            },
+            {
+              "type": "wstring",
+              "value": "C$"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Target = "
+              ]
+            }
+          }
+        },
+        {
+          "name": "whoami",
+          "object": "dist/windows/amd64/whoami.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "UserName",
+                "SID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "windowlist",
+          "object": "dist/windows/amd64/windowlist.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "wmi_query",
+          "object": "dist/windows/amd64/wmi_query.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": "ROOT\\CIMV2"
+            },
+            {
+              "type": "wstring",
+              "value": "SELECT Caption FROM Win32_OperatingSystem"
+            },
+            {
+              "type": "wstring",
+              "value": "ROOT\\CIMV2"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:Microsoft Windows)"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "windows-arm64",
+      "target": {
+        "os": "windows",
+        "arch": "arm64"
+      },
+      "tests": [
+        {
+          "name": "aadjoininfo",
+          "object": "dist/windows/arm64/aadjoininfo.o",
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:AAD/Entra ID Join Info|Host is not cloud joined)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "adv_audit_policies",
+          "object": "dist/windows/arm64/adv_audit_policies.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:SUCCESS\\.|No audit\\.csv files)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "arp",
+          "object": "dist/windows/arm64/arp.o",
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "cacls",
+          "object": "dist/windows/arm64/cacls.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "FIXTURE_FILE.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "cat",
+          "object": "dist/windows/arm64/cat.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "reflektor-bof-e2e"
+              ]
+            }
+          }
+        },
+        {
+          "name": "dir",
+          "object": "dist/windows/arm64/dir.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_DIR}"
+            },
+            {
+              "type": "short",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Contents of",
+                "marker.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "driversigs",
+          "object": "dist/windows/arm64/driversigs.o",
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "enumLocalSessions",
+          "object": "dist/windows/arm64/enumLocalSessions.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Enumerating sessions for local system:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "enum_filter_driver",
+          "object": "dist/windows/arm64/enum_filter_driver.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SUCCESS."
+              ]
+            }
+          }
+        },
+        {
+          "name": "env",
+          "object": "dist/windows/arm64/env.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Gathering Process Environment Variables:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "findLoadedModule",
+          "object": "dist/windows/arm64/findLoadedModule.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "kernel32.dll"
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:kernel32\\.dll|Successfully enumerated all processes)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get-netsession",
+          "object": "dist/windows/arm64/get-netsession.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "entries enumerated"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get-netsession2",
+          "object": "dist/windows/arm64/get-netsession2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Resolving client IPs to hostnames using"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get_password_policy",
+          "object": "dist/windows/arm64/get_password_policy.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Minimum password length:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "get_session_info",
+          "object": "dist/windows/arm64/get_session_info.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "UserName:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "hostname",
+          "object": "dist/windows/arm64/hostname.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Computer Name:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ipconfig",
+          "object": "dist/windows/arm64/ipconfig.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Windows IP Configuration"
+              ]
+            }
+          }
+        },
+        {
+          "name": "list_firewall_rules",
+          "object": "dist/windows/arm64/list_firewall_rules.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "The number of rules in the Windows Firewall"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listdns",
+          "object": "dist/windows/arm64/listdns.o",
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:Cache record:|No results found)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listmods",
+          "object": "dist/windows/arm64/listmods.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Printing modules of process ID:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "locale",
+          "object": "dist/windows/arm64/locale.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Locale:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "md5",
+          "object": "dist/windows/arm64/md5.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:b9b3a37829baa40ee941e901aab8671b)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup",
+          "object": "dist/windows/arm64/netlocalgroup.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 0
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "Name:\\s+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup2",
+          "object": "dist/windows/arm64/netlocalgroup2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Querying Remote Desktop Users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon",
+          "object": "dist/windows/arm64/netloggedon.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Users logged on:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon2",
+          "object": "dist/windows/arm64/netloggedon2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "netshares",
+          "object": "dist/windows/arm64/netshares.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Share:              Remark:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netstat",
+          "object": "dist/windows/arm64/netstat.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 4369
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Active Connections"
+              ]
+            }
+          }
+        },
+        {
+          "name": "nettime",
+          "object": "dist/windows/arm64/nettime.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local time (GMT"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuptime",
+          "object": "dist/windows/arm64/netuptime.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "ServerName:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuse",
+          "object": "dist/windows/arm64/netuse.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 2
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "The command completed successfully"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuser",
+          "object": "dist/windows/arm64/netuser.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "Administrator"
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "User name:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuserenum",
+          "object": "dist/windows/arm64/netuserenum.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "-- [^\\r\\n]+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netview",
+          "object": "dist/windows/arm64/netview.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "notepad",
+          "object": "dist/windows/arm64/notepad.o",
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "nslookup",
+          "object": "dist/windows/arm64/nslookup.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "localhost"
+            },
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "A localhost "
+              ]
+            }
+          }
+        },
+        {
+          "name": "probe",
+          "object": "dist/windows/arm64/probe.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "127.0.0.1"
+            },
+            {
+              "type": "int",
+              "value": 1
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "tcp_listener": {
+            "port_argument": 1
+          },
+          "expect": {
+            "output": {
+              "contains": [
+                "OPEN"
+              ]
+            }
+          }
+        },
+        {
+          "name": "reg_query",
+          "object": "dist/windows/arm64/reg_query.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "int",
+              "value": 2
+            },
+            {
+              "type": "string",
+              "value": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion"
+            },
+            {
+              "type": "string",
+              "value": "ProductName"
+            },
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "ProductName"
+              ]
+            }
+          }
+        },
+        {
+          "name": "regsession",
+          "object": "dist/windows/arm64/regsession.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Querying local registry"
+              ]
+            }
+          }
+        },
+        {
+          "name": "resources",
+          "object": "dist/windows/arm64/resources.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Memory Used:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "routeprint",
+          "object": "dist/windows/arm64/routeprint.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Interface List"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_enum",
+          "object": "dist/windows/arm64/sc_enum.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_qc",
+          "object": "dist/windows/arm64/sc_qc.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME: EventLog"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_qdescription",
+          "object": "dist/windows/arm64/sc_qdescription.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "sc_qfailure",
+          "object": "dist/windows/arm64/sc_qfailure.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME: EventLog"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_qtriggerinfo",
+          "object": "dist/windows/arm64/sc_qtriggerinfo.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?:SERVICE_NAME: EventLog|The service EventLog has not registered)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sc_query",
+          "object": "dist/windows/arm64/sc_query.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "string",
+              "value": "EventLog"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "SERVICE_NAME: EventLog"
+              ]
+            }
+          }
+        },
+        {
+          "name": "schtasksenum",
+          "object": "dist/windows/arm64/schtasksenum.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "Task [0-9]+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "schtasksquery",
+          "object": "dist/windows/arm64/schtasksquery.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": "\\Microsoft\\Windows\\Defrag\\ScheduledDefrag"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Name:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha1",
+          "object": "dist/windows/arm64/sha1.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:a7251fd58489a73e2823956299fb6fa7c250d393)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha256",
+          "object": "dist/windows/arm64/sha256.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha512",
+          "object": "dist/windows/arm64/sha512.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:2a429bf6031684e95a16222aeb20f60edf30e67bec73e1a1fe47ba2e0a2b03b0be567830989d89c271ccd00896e820165034ac8b36e1056deb76c5efd8a12e57)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "tasklist",
+          "object": "dist/windows/arm64/tasklist.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "ROOT\\CIMV2"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "System\\s+[0-9]+"
+              ]
+            }
+          }
+        },
+        {
+          "name": "uptime",
+          "object": "dist/windows/arm64/uptime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Uptime"
+              ]
+            }
+          }
+        },
+        {
+          "name": "useridletime",
+          "object": "dist/windows/arm64/useridletime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Current User idle time:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "vol",
+          "object": "dist/windows/arm64/vol.o",
+          "args": [
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Volume in drive"
+              ]
+            }
+          }
+        },
+        {
+          "name": "vssenum",
+          "object": "dist/windows/arm64/vssenum.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "localhost"
+            },
+            {
+              "type": "wstring",
+              "value": "C$"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Target = "
+              ]
+            }
+          }
+        },
+        {
+          "name": "whoami",
+          "object": "dist/windows/arm64/whoami.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "UserName",
+                "SID"
+              ]
+            }
+          }
+        },
+        {
+          "name": "windowlist",
+          "object": "dist/windows/arm64/windowlist.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "success_only": true
+          }
+        },
+        {
+          "name": "wmi_query",
+          "object": "dist/windows/arm64/wmi_query.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": "ROOT\\CIMV2"
+            },
+            {
+              "type": "wstring",
+              "value": "SELECT Caption FROM Win32_OperatingSystem"
+            },
+            {
+              "type": "wstring",
+              "value": "ROOT\\CIMV2"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:Microsoft Windows)"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "linux-386",
+      "target": {
+        "os": "linux",
+        "arch": "386"
+      },
+      "tests": [
+        {
+          "name": "arp",
+          "object": "dist/linux/386/arp.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "ARP table:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "cacls",
+          "object": "dist/linux/386/cacls.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Exists: yes",
+                "Total entries: 1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "dir",
+          "object": "dist/linux/386/dir.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_DIR}"
+            },
+            {
+              "type": "short",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Contents of",
+                "marker.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "enumLocalSessions",
+          "object": "dist/linux/386/enumLocalSessions.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Local sessions:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "env",
+          "object": "dist/linux/386/env.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "="
+              ]
+            }
+          }
+        },
+        {
+          "name": "findLoadedModule",
+          "object": "dist/linux/386/findLoadedModule.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "lib"
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Current-process loaded module matches:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ipconfig",
+          "object": "dist/linux/386/ipconfig.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Network interfaces:",
+                "hostname:",
+                "Resolver configuration:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listmods",
+          "object": "dist/linux/386/listmods.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Loaded modules:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "locale",
+          "object": "dist/linux/386/locale.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Locale:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "md5",
+          "object": "dist/linux/386/md5.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:b9b3a37829baa40ee941e901aab8671b)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup",
+          "object": "dist/linux/386/netlocalgroup.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 0
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local groups:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon",
+          "object": "dist/linux/386/netloggedon.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Users logged on (local POSIX host):"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon2",
+          "object": "dist/linux/386/netloggedon2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Structured local POSIX sessions:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netstat",
+          "object": "dist/linux/386/netstat.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 4369
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Network connections:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuser",
+          "object": "dist/linux/386/netuser.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local POSIX user information:",
+                "Total users: 1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuserenum",
+          "object": "dist/linux/386/netuserenum.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local POSIX users:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "nslookup",
+          "object": "dist/linux/386/nslookup.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "localhost"
+            },
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "DNS results for"
+              ]
+            }
+          }
+        },
+        {
+          "name": "probe",
+          "object": "dist/linux/386/probe.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "127.0.0.1"
+            },
+            {
+              "type": "int",
+              "value": 1
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "tcp_listener": {
+            "port_argument": 1
+          },
+          "expect": {
+            "output": {
+              "contains": [
+                "OPEN"
+              ]
+            }
+          }
+        },
+        {
+          "name": "resources",
+          "object": "dist/linux/386/resources.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "System resources:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "routeprint",
+          "object": "dist/linux/386/routeprint.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Routing table:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha1",
+          "object": "dist/linux/386/sha1.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:a7251fd58489a73e2823956299fb6fa7c250d393)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha256",
+          "object": "dist/linux/386/sha256.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "tasklist",
+          "object": "dist/linux/386/tasklist.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Processes:",
+                "Name:\t",
+                "Pid:\t",
+                "PPid:\t"
+              ]
+            }
+          }
+        },
+        {
+          "name": "uptime",
+          "object": "dist/linux/386/uptime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "uptime_seconds="
+              ]
+            }
+          }
+        },
+        {
+          "name": "whoami",
+          "object": "dist/linux/386/whoami.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "uid="
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "linux-amd64",
+      "target": {
+        "os": "linux",
+        "arch": "amd64"
+      },
+      "tests": [
+        {
+          "name": "arp",
+          "object": "dist/linux/amd64/arp.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "ARP table:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "cacls",
+          "object": "dist/linux/amd64/cacls.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Exists: yes",
+                "Total entries: 1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "dir",
+          "object": "dist/linux/amd64/dir.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_DIR}"
+            },
+            {
+              "type": "short",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Contents of",
+                "marker.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "enumLocalSessions",
+          "object": "dist/linux/amd64/enumLocalSessions.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Local sessions:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "env",
+          "object": "dist/linux/amd64/env.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "="
+              ]
+            }
+          }
+        },
+        {
+          "name": "findLoadedModule",
+          "object": "dist/linux/amd64/findLoadedModule.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "lib"
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Current-process loaded module matches:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ipconfig",
+          "object": "dist/linux/amd64/ipconfig.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Network interfaces:",
+                "hostname:",
+                "Resolver configuration:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listmods",
+          "object": "dist/linux/amd64/listmods.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Loaded modules:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "locale",
+          "object": "dist/linux/amd64/locale.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Locale:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "md5",
+          "object": "dist/linux/amd64/md5.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:b9b3a37829baa40ee941e901aab8671b)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup",
+          "object": "dist/linux/amd64/netlocalgroup.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 0
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local groups:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon",
+          "object": "dist/linux/amd64/netloggedon.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Users logged on (local POSIX host):"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon2",
+          "object": "dist/linux/amd64/netloggedon2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Structured local POSIX sessions:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netstat",
+          "object": "dist/linux/amd64/netstat.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 4369
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Network connections:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuser",
+          "object": "dist/linux/amd64/netuser.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local POSIX user information:",
+                "Total users: 1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuserenum",
+          "object": "dist/linux/amd64/netuserenum.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local POSIX users:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "nslookup",
+          "object": "dist/linux/amd64/nslookup.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "localhost"
+            },
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "DNS results for"
+              ]
+            }
+          }
+        },
+        {
+          "name": "probe",
+          "object": "dist/linux/amd64/probe.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "127.0.0.1"
+            },
+            {
+              "type": "int",
+              "value": 1
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "tcp_listener": {
+            "port_argument": 1
+          },
+          "expect": {
+            "output": {
+              "contains": [
+                "OPEN"
+              ]
+            }
+          }
+        },
+        {
+          "name": "resources",
+          "object": "dist/linux/amd64/resources.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "System resources:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "routeprint",
+          "object": "dist/linux/amd64/routeprint.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Routing table:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha1",
+          "object": "dist/linux/amd64/sha1.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:a7251fd58489a73e2823956299fb6fa7c250d393)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha256",
+          "object": "dist/linux/amd64/sha256.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "tasklist",
+          "object": "dist/linux/amd64/tasklist.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Processes:",
+                "Name:\t",
+                "Pid:\t",
+                "PPid:\t"
+              ]
+            }
+          }
+        },
+        {
+          "name": "uptime",
+          "object": "dist/linux/amd64/uptime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "uptime_seconds="
+              ]
+            }
+          }
+        },
+        {
+          "name": "whoami",
+          "object": "dist/linux/amd64/whoami.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "uid="
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "linux-arm64",
+      "target": {
+        "os": "linux",
+        "arch": "arm64"
+      },
+      "tests": [
+        {
+          "name": "arp",
+          "object": "dist/linux/arm64/arp.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "ARP table:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "cacls",
+          "object": "dist/linux/arm64/cacls.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Exists: yes",
+                "Total entries: 1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "dir",
+          "object": "dist/linux/arm64/dir.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_DIR}"
+            },
+            {
+              "type": "short",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Contents of",
+                "marker.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "enumLocalSessions",
+          "object": "dist/linux/arm64/enumLocalSessions.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Local sessions:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "env",
+          "object": "dist/linux/arm64/env.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "="
+              ]
+            }
+          }
+        },
+        {
+          "name": "findLoadedModule",
+          "object": "dist/linux/arm64/findLoadedModule.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "lib"
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Current-process loaded module matches:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ipconfig",
+          "object": "dist/linux/arm64/ipconfig.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Network interfaces:",
+                "hostname:",
+                "Resolver configuration:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listmods",
+          "object": "dist/linux/arm64/listmods.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Loaded modules:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "locale",
+          "object": "dist/linux/arm64/locale.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Locale:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "md5",
+          "object": "dist/linux/arm64/md5.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:b9b3a37829baa40ee941e901aab8671b)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup",
+          "object": "dist/linux/arm64/netlocalgroup.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 0
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local groups:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon",
+          "object": "dist/linux/arm64/netloggedon.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Users logged on (local POSIX host):"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon2",
+          "object": "dist/linux/arm64/netloggedon2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Structured local POSIX sessions:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netstat",
+          "object": "dist/linux/arm64/netstat.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 4369
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Network connections:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuser",
+          "object": "dist/linux/arm64/netuser.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local POSIX user information:",
+                "Total users: 1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuserenum",
+          "object": "dist/linux/arm64/netuserenum.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local POSIX users:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "nslookup",
+          "object": "dist/linux/arm64/nslookup.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "localhost"
+            },
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "DNS results for"
+              ]
+            }
+          }
+        },
+        {
+          "name": "probe",
+          "object": "dist/linux/arm64/probe.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "127.0.0.1"
+            },
+            {
+              "type": "int",
+              "value": 1
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "tcp_listener": {
+            "port_argument": 1
+          },
+          "expect": {
+            "output": {
+              "contains": [
+                "OPEN"
+              ]
+            }
+          }
+        },
+        {
+          "name": "resources",
+          "object": "dist/linux/arm64/resources.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "System resources:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "routeprint",
+          "object": "dist/linux/arm64/routeprint.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Routing table:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha1",
+          "object": "dist/linux/arm64/sha1.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:a7251fd58489a73e2823956299fb6fa7c250d393)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha256",
+          "object": "dist/linux/arm64/sha256.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "tasklist",
+          "object": "dist/linux/arm64/tasklist.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Processes:",
+                "Name:\t",
+                "Pid:\t",
+                "PPid:\t"
+              ]
+            }
+          }
+        },
+        {
+          "name": "uptime",
+          "object": "dist/linux/arm64/uptime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "uptime_seconds="
+              ]
+            }
+          }
+        },
+        {
+          "name": "whoami",
+          "object": "dist/linux/arm64/whoami.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "uid="
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "darwin-amd64",
+      "target": {
+        "os": "darwin",
+        "arch": "amd64"
+      },
+      "tests": [
+        {
+          "name": "arp",
+          "object": "dist/darwin/amd64/arp.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "ARP table:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "cacls",
+          "object": "dist/darwin/amd64/cacls.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Exists: yes",
+                "Total entries: 1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "dir",
+          "object": "dist/darwin/amd64/dir.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_DIR}"
+            },
+            {
+              "type": "short",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Contents of",
+                "marker.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "enumLocalSessions",
+          "object": "dist/darwin/amd64/enumLocalSessions.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Local sessions:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "env",
+          "object": "dist/darwin/amd64/env.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "="
+              ]
+            }
+          }
+        },
+        {
+          "name": "findLoadedModule",
+          "object": "dist/darwin/amd64/findLoadedModule.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "lib"
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Current-process loaded module matches:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ipconfig",
+          "object": "dist/darwin/amd64/ipconfig.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Network interfaces:",
+                "hostname:",
+                "Resolver configuration:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listmods",
+          "object": "dist/darwin/amd64/listmods.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Loaded modules:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "locale",
+          "object": "dist/darwin/amd64/locale.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Locale:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "md5",
+          "object": "dist/darwin/amd64/md5.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:b9b3a37829baa40ee941e901aab8671b)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup",
+          "object": "dist/darwin/amd64/netlocalgroup.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 0
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local groups:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon",
+          "object": "dist/darwin/amd64/netloggedon.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Users logged on (local POSIX host):"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon2",
+          "object": "dist/darwin/amd64/netloggedon2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Structured local POSIX sessions:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netstat",
+          "object": "dist/darwin/amd64/netstat.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 4369
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Network connections:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuser",
+          "object": "dist/darwin/amd64/netuser.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local POSIX user information:",
+                "Total users: 1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuserenum",
+          "object": "dist/darwin/amd64/netuserenum.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local POSIX users:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "nslookup",
+          "object": "dist/darwin/amd64/nslookup.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "localhost"
+            },
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "DNS results for"
+              ]
+            }
+          }
+        },
+        {
+          "name": "probe",
+          "object": "dist/darwin/amd64/probe.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "127.0.0.1"
+            },
+            {
+              "type": "int",
+              "value": 1
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "tcp_listener": {
+            "port_argument": 1
+          },
+          "expect": {
+            "output": {
+              "contains": [
+                "OPEN"
+              ]
+            }
+          }
+        },
+        {
+          "name": "resources",
+          "object": "dist/darwin/amd64/resources.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "System resources:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "routeprint",
+          "object": "dist/darwin/amd64/routeprint.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Routing table:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha1",
+          "object": "dist/darwin/amd64/sha1.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:a7251fd58489a73e2823956299fb6fa7c250d393)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha256",
+          "object": "dist/darwin/amd64/sha256.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "tasklist",
+          "object": "dist/darwin/amd64/tasklist.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Processes:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "uptime",
+          "object": "dist/darwin/amd64/uptime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "uptime_seconds="
+              ]
+            }
+          }
+        },
+        {
+          "name": "whoami",
+          "object": "dist/darwin/amd64/whoami.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "uid="
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "darwin-arm64",
+      "target": {
+        "os": "darwin",
+        "arch": "arm64"
+      },
+      "tests": [
+        {
+          "name": "arp",
+          "object": "dist/darwin/arm64/arp.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "ARP table:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "cacls",
+          "object": "dist/darwin/arm64/cacls.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Exists: yes",
+                "Total entries: 1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "dir",
+          "object": "dist/darwin/arm64/dir.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_DIR}"
+            },
+            {
+              "type": "short",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Contents of",
+                "marker.txt"
+              ]
+            }
+          }
+        },
+        {
+          "name": "enumLocalSessions",
+          "object": "dist/darwin/arm64/enumLocalSessions.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Local sessions:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "env",
+          "object": "dist/darwin/arm64/env.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "="
+              ]
+            }
+          }
+        },
+        {
+          "name": "findLoadedModule",
+          "object": "dist/darwin/arm64/findLoadedModule.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "lib"
+            },
+            {
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Current-process loaded module matches:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "ipconfig",
+          "object": "dist/darwin/arm64/ipconfig.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Network interfaces:",
+                "hostname:",
+                "Resolver configuration:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "listmods",
+          "object": "dist/darwin/arm64/listmods.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Loaded modules:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "locale",
+          "object": "dist/darwin/arm64/locale.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Locale:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "md5",
+          "object": "dist/darwin/arm64/md5.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:b9b3a37829baa40ee941e901aab8671b)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netlocalgroup",
+          "object": "dist/darwin/arm64/netlocalgroup.o",
+          "args": [
+            {
+              "type": "short",
+              "value": 0
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local groups:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon",
+          "object": "dist/darwin/arm64/netloggedon.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Users logged on (local POSIX host):"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netloggedon2",
+          "object": "dist/darwin/arm64/netloggedon2.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Structured local POSIX sessions:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netstat",
+          "object": "dist/darwin/arm64/netstat.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 4369
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Network connections:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuser",
+          "object": "dist/darwin/arm64/netuser.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            },
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local POSIX user information:",
+                "Total users: 1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "netuserenum",
+          "object": "dist/darwin/arm64/netuserenum.o",
+          "args": [
+            {
+              "type": "int",
+              "value": 0
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Local POSIX users:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "nslookup",
+          "object": "dist/darwin/arm64/nslookup.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "localhost"
+            },
+            {
+              "type": "string",
+              "value": ""
+            },
+            {
+              "type": "short",
+              "value": 1
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "DNS results for"
+              ]
+            }
+          }
+        },
+        {
+          "name": "probe",
+          "object": "dist/darwin/arm64/probe.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "127.0.0.1"
+            },
+            {
+              "type": "int",
+              "value": 1
+            },
+            {
+              "type": "int",
+              "value": 1
+            }
+          ],
+          "tcp_listener": {
+            "port_argument": 1
+          },
+          "expect": {
+            "output": {
+              "contains": [
+                "OPEN"
+              ]
+            }
+          }
+        },
+        {
+          "name": "resources",
+          "object": "dist/darwin/arm64/resources.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "System resources:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "routeprint",
+          "object": "dist/darwin/arm64/routeprint.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Routing table:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha1",
+          "object": "dist/darwin/arm64/sha1.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:a7251fd58489a73e2823956299fb6fa7c250d393)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "sha256",
+          "object": "dist/darwin/arm64/sha256.o",
+          "args": [
+            {
+              "type": "string",
+              "value": "${FIXTURE_FILE}"
+            }
+          ],
+          "expect": {
+            "output": {
+              "matches": [
+                "(?i:74ccef2214ea8b89387bf7363ab01a4caccbb502417c0af7e42a578d67f1c9cb)"
+              ]
+            }
+          }
+        },
+        {
+          "name": "tasklist",
+          "object": "dist/darwin/arm64/tasklist.o",
+          "args": [
+            {
+              "type": "wstring",
+              "value": ""
+            }
+          ],
+          "expect": {
+            "output": {
+              "contains": [
+                "Processes:"
+              ]
+            }
+          }
+        },
+        {
+          "name": "uptime",
+          "object": "dist/darwin/arm64/uptime.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "uptime_seconds="
+              ]
+            }
+          }
+        },
+        {
+          "name": "whoami",
+          "object": "dist/darwin/arm64/whoami.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "uid="
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

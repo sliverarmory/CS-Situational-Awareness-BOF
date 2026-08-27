@@ -9,6 +9,9 @@ const sourceRoot = path.join(repoRoot, "src", "SA");
 const portabilityManifest = JSON.parse(
   fs.readFileSync(path.join(repoRoot, "portable", "manifest.json"), "utf8"),
 );
+const sliverE2EPolicy = JSON.parse(
+  fs.readFileSync(path.join(repoRoot, "testdata", "sliver-bof-e2e-policy.json"), "utf8"),
+);
 const portableCommands = portabilityManifest.command_sets?.portable;
 if (!Array.isArray(portableCommands) || portableCommands.length === 0 ||
     portableCommands.some((command) => typeof command !== "string" || command.length === 0) ||
@@ -30,6 +33,42 @@ const classifiedCommands = [...portableCommands, ...windowsOnlyCommands].sort();
 if (new Set(classifiedCommands).size !== classifiedCommands.length ||
     JSON.stringify(classifiedCommands) !== JSON.stringify(windowsCommands)) {
   throw new Error("portable and Windows-only command sets must exactly partition src/SA");
+}
+
+if (sliverE2EPolicy.schema_version !== 1 ||
+    typeof sliverE2EPolicy.manifest_path !== "string" ||
+    sliverE2EPolicy.manifest_path.length === 0 ||
+    path.isAbsolute(sliverE2EPolicy.manifest_path) ||
+    sliverE2EPolicy.manifest_path.split(/[\\/]/).includes("..") ||
+    !/^[0-9a-f]{40}$/.test(sliverE2EPolicy.sliver_version ?? "")) {
+  throw new Error("testdata/sliver-bof-e2e-policy.json has invalid top-level metadata");
+}
+const sliverE2EWindowsCommands = sliverE2EPolicy.windows?.tested;
+const domainRequiredWindowsCommands = sliverE2EPolicy.windows?.domain_required;
+const excludedWindowsEntries = sliverE2EPolicy.windows?.excluded;
+if (!Array.isArray(sliverE2EWindowsCommands) ||
+    !Array.isArray(domainRequiredWindowsCommands) ||
+    !Array.isArray(excludedWindowsEntries) ||
+    sliverE2EWindowsCommands.some((command) => typeof command !== "string" || command.length === 0) ||
+    domainRequiredWindowsCommands.some((command) => typeof command !== "string" || command.length === 0) ||
+    excludedWindowsEntries.some((entry) =>
+      typeof entry?.name !== "string" || entry.name.length === 0 ||
+      typeof entry?.reason !== "string" || entry.reason.length === 0)) {
+  throw new Error("testdata/sliver-bof-e2e-policy.json has an invalid Windows policy");
+}
+const excludedWindowsCommands = excludedWindowsEntries.map((entry) => entry.name);
+const classifiedE2EWindowsCommands = [
+  ...sliverE2EWindowsCommands,
+  ...domainRequiredWindowsCommands,
+  ...excludedWindowsCommands,
+];
+if (new Set(classifiedE2EWindowsCommands).size !== classifiedE2EWindowsCommands.length ||
+    classifiedE2EWindowsCommands.some((command) => !windowsCommands.includes(command)) ||
+    JSON.stringify([...classifiedE2EWindowsCommands].sort()) !== JSON.stringify(windowsCommands) ||
+    JSON.stringify([...sliverE2EWindowsCommands].sort()) !== JSON.stringify(sliverE2EWindowsCommands) ||
+    portableCommands.some((command) => !sliverE2EWindowsCommands.includes(command)) ||
+    domainRequiredWindowsCommands.some((command) => !windowsOnlyCommands.includes(command))) {
+  throw new Error("Sliver E2E tested, domain-required, and excluded sets must uniquely partition Windows commands; tested commands must be sorted and include every portable command");
 }
 
 const targets = portabilityManifest.targets;
@@ -208,7 +247,10 @@ function fallbackValue(command, argument) {
   return "";
 }
 
-function windowsArguments(command) {
+function windowsArguments(command, arch) {
+  if (command === "adv_audit_policies") {
+    return [{ type: "int32", value: arch === "386" ? 1 : 0 }];
+  }
   if (explicitArguments[command]) return explicitArguments[command];
   const extension = JSON.parse(fs.readFileSync(path.join(sourceRoot, command, "extension.json"), "utf8"));
   const metadata = extension.commands?.[0] ?? extension;
@@ -289,7 +331,7 @@ for (const target of targets) {
         os: target.goos,
         arch: target.goarch,
         path: `dist/${target.goos}/${target.goarch}/${command}.o`,
-        args: windowsArguments(command),
+        args: windowsArguments(command, target.goarch),
         ...(command === "probe" ? { tcp_listener: { port_argument: 1 } } : {}),
         expect: expectation(command, target.goos),
       });
@@ -325,9 +367,189 @@ const manifest = {
   artifacts,
 };
 
-const output = `${JSON.stringify(manifest, null, 2)}\n`;
+function escapeRegexp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+const windowsSliverActionExpectations = {
+  aadjoininfo: { output: { matches: ["(?:AAD/Entra ID Join Info|Host is not cloud joined)"] } },
+  adv_audit_policies: { output: { matches: ["(?:SUCCESS\\.|No audit\\.csv files)"] } },
+  cacls: { output: { contains: ["FIXTURE_FILE.txt"] } },
+  enumLocalSessions: { output: { contains: ["Enumerating sessions for local system:"] } },
+  enum_filter_driver: { output: { contains: ["SUCCESS."] } },
+  env: { output: { contains: ["Gathering Process Environment Variables:"] } },
+  findLoadedModule: {
+    output: { matches: ["(?i:kernel32\\.dll|Successfully enumerated all processes)"] },
+  },
+  "get-netsession": { output: { contains: ["entries enumerated"] } },
+  "get-netsession2": { output: { contains: ["Resolving client IPs to hostnames using"] } },
+  get_password_policy: { output: { contains: ["Minimum password length:"] } },
+  get_session_info: { output: { contains: ["UserName:"] } },
+  hostname: { output: { contains: ["Computer Name:"] } },
+  ipconfig: { output: { contains: ["Windows IP Configuration"] } },
+  list_firewall_rules: {
+    output: { contains: ["The number of rules in the Windows Firewall"] },
+  },
+  listdns: { output: { matches: ["(?:Cache record:|No results found)"] } },
+  listmods: { output: { contains: ["Printing modules of process ID:"] } },
+  locale: { output: { contains: ["Locale:"] } },
+  netlocalgroup: { output: { matches: ["Name:\\s+"] } },
+  netlocalgroup2: { output: { contains: ["Querying Remote Desktop Users"] } },
+  netloggedon: { output: { contains: ["Users logged on:"] } },
+  netshares: { output: { contains: ["Share:              Remark:"] } },
+  netstat: { output: { contains: ["Active Connections"] } },
+  nettime: { output: { contains: ["Local time (GMT"] } },
+  netuptime: { output: { contains: ["ServerName:"] } },
+  netuse: { output: { contains: ["The command completed successfully"] } },
+  netuser: { output: { contains: ["User name:"] } },
+  netuserenum: { output: { matches: ["-- [^\\r\\n]+"] } },
+  nslookup: { output: { matches: ["A localhost "] } },
+  reg_query: { output: { contains: ["ProductName"] } },
+  regsession: { output: { contains: ["Querying local registry"] } },
+  resources: { output: { contains: ["Memory Used:"] } },
+  routeprint: { output: { contains: ["Interface List"] } },
+  sc_enum: { output: { contains: ["SERVICE_NAME:"] } },
+  sc_qc: { output: { contains: ["SERVICE_NAME: EventLog"] } },
+  sc_qfailure: { output: { contains: ["SERVICE_NAME: EventLog"] } },
+  sc_qtriggerinfo: {
+    output: { matches: ["(?:SERVICE_NAME: EventLog|The service EventLog has not registered)"] },
+  },
+  sc_query: { output: { contains: ["SERVICE_NAME: EventLog"] } },
+  schtasksenum: { output: { matches: ["Task [0-9]+"] } },
+  schtasksquery: { output: { contains: ["Name:"] } },
+  tasklist: { output: { matches: ["System\\s+[0-9]+"] } },
+  useridletime: { output: { contains: ["Current User idle time:"] } },
+  vol: { output: { contains: ["Volume in drive"] } },
+  vssenum: { output: { contains: ["Target = "] } },
+  whoami: { output: { contains: ["UserName", "SID"] } },
+  wmi_query: { output: { matches: ["(?i:Microsoft Windows)"] } },
+};
+
+// These commands can complete successfully with no output on a clean, headless
+// Windows runner. Keep the smoke-test set explicit so newly added BOFs cannot
+// silently fall back to success-only coverage.
+const windowsSliverActionSmokeCommands = new Set([
+  "arp",
+  "driversigs",
+  "netloggedon2",
+  "netview",
+  "notepad",
+  "sc_qdescription",
+  "windowlist",
+]);
+
+function sliverActionExpectation(artifact) {
+  if (artifact.os === "windows" && windowsSliverActionExpectations[artifact.name]) {
+    return windowsSliverActionExpectations[artifact.name];
+  }
+  const expected = artifact.expect;
+  if (artifact.name === "cat") {
+    return { output: { contains: ["reflektor-bof-e2e"] } };
+  }
+  if (Array.isArray(expected.contains_all) && expected.contains_all.length > 0) {
+    if (expected.case_insensitive) {
+      return {
+        output: {
+          matches: expected.contains_all.map((value) => `(?i:${escapeRegexp(value)})`),
+        },
+      };
+    }
+    return { output: { contains: expected.contains_all } };
+  }
+  if (Array.isArray(expected.contains_any) && expected.contains_any.length > 0) {
+    if (expected.contains_any.length === 1 && !expected.case_insensitive) {
+      return { output: { contains: expected.contains_any } };
+    }
+    const alternatives = expected.contains_any.map(escapeRegexp).join("|");
+    return {
+      output: {
+        matches: [`${expected.case_insensitive ? "(?i:" : "(?:"}${alternatives})`],
+      },
+    };
+  }
+  if (artifact.os === "windows" && !windowsSliverActionSmokeCommands.has(artifact.name)) {
+    throw new Error(`Windows Sliver E2E test ${artifact.name} has no output assertion`);
+  }
+  return { success_only: true };
+}
+
+function sliverActionArguments(args) {
+  return args.map((argument) => {
+    let type;
+    if (argument.type === "int32") type = "int";
+    else if (argument.type === "int16") type = "short";
+    else if (["string", "wstring"].includes(argument.type)) type = argument.type;
+    else throw new Error(`unsupported Sliver action argument type ${argument.type}`);
+    return { type, value: argument.value };
+  });
+}
+
+const sliverActionSuites = targets
+  .filter((target) => target.publish)
+  .map((target) => {
+    const commands = target.goos === "windows" ? sliverE2EWindowsCommands : portableCommands;
+    const tests = commands.map((command) => {
+      const artifact = artifacts.find((candidate) =>
+        candidate.name === command &&
+        candidate.os === target.goos &&
+        candidate.arch === target.goarch);
+      if (!artifact) {
+        throw new Error(`missing generated artifact contract for ${target.goos}/${target.goarch}/${command}`);
+      }
+      return {
+        name: command,
+        object: artifact.path,
+        ...(artifact.args.length > 0 ? { args: sliverActionArguments(artifact.args) } : {}),
+        ...(artifact.tcp_listener ? { tcp_listener: artifact.tcp_listener } : {}),
+        expect: sliverActionExpectation(artifact),
+      };
+    });
+    return {
+      name: `${target.goos}-${target.goarch}`,
+      target: { os: target.goos, arch: target.goarch },
+      tests,
+    };
+  });
+
+const generatedWindowsSmokeCommands = [...new Set(sliverActionSuites
+  .filter((suite) => suite.target.os === "windows")
+  .flatMap((suite) => suite.tests)
+  .filter((test) => test.expect.success_only)
+  .map((test) => test.name))].sort();
+if (JSON.stringify(generatedWindowsSmokeCommands) !==
+    JSON.stringify([...windowsSliverActionSmokeCommands].sort())) {
+  throw new Error("generated Windows Sliver E2E smoke tests do not match the explicit policy");
+}
+
+const sliverActionManifest = {
+  schema: "sliver-bof-e2e/v1",
+  sliver: { version: sliverE2EPolicy.sliver_version },
+  defaults: {
+    bof_executor: "reflektor",
+    entrypoint: "go",
+    modes: ["session", "beacon"],
+    repeat: 1,
+    command_timeout: "2m",
+  },
+  fixtures: {
+    file: { variable: "FIXTURE_FILE", contents_utf8: "reflektor-bof-e2e\n" },
+    directory: {
+      variable: "FIXTURE_DIR",
+      files: { "marker.txt": "reflektor-bof-e2e\n" },
+    },
+  },
+  suites: sliverActionSuites,
+};
+
+const sliverActionMode = process.argv.includes("--sliver-action");
+const selectedManifest = sliverActionMode ? sliverActionManifest : manifest;
+const output = `${JSON.stringify(selectedManifest, null, 2)}\n`;
 if (process.argv.includes("--write")) {
-  fs.writeFileSync(path.join(repoRoot, "testdata", "e2e-manifest.json"), output);
+  const outputPath = sliverActionMode
+    ? path.join(repoRoot, sliverE2EPolicy.manifest_path)
+    : path.join(repoRoot, "testdata", "e2e-manifest.json");
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  fs.writeFileSync(outputPath, output);
 } else {
   process.stdout.write(output);
 }

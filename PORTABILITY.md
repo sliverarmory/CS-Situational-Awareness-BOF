@@ -93,6 +93,37 @@ The command accepts the eleven manifest targets and verifies that the selected
 set (71 Windows objects or 25 Unix objects). Reflektor then runs its corpus test
 with `CGO_ENABLED=0 go test ./integration -run '^TestSituationalAwarenessBOFCorpus$'`.
 
+## Sliver end-to-end coverage
+
+The Sliver end-to-end workflow builds the ignored object matrix once, then
+runs the published `sliverarmory/sliver-test-bof` action on the eight published
+targets. Each BOF is exercised through both a real Sliver session and a real
+Sliver beacon. The generated action-native contract is
+`.github/sliver-bof-e2e.json`; `testdata/sliver-bof-e2e-policy.json` pins the
+Sliver revision and records the hosted-runner inclusion policy.
+
+All 25 portable commands run on the five supported Unix targets. Windows runs
+those 25 commands plus 35 read-only Windows commands that do not require a
+domain, for 305 target-specific cases and 610 session/beacon invocations. Ten
+AD, ADCS, or LDAP commands are recorded as domain-required and remain for a
+future domain-joined test environment. `get_dpapi_system` is deliberately not
+executed in hosted CI: it requires elevation, temporarily changes LSA registry
+ACLs, and can place machine secrets in captured test output.
+
+Fifty-three of the 60 Windows cases require command-specific output, including
+fixture contents, cryptographic digests, service/WMI results, and an open
+loopback listener. The remaining seven (`arp`, `driversigs`, `netloggedon2`,
+`netview`, `notepad`, `sc_qdescription`, and `windowlist`) are explicit
+execution smoke tests because their successful result can be empty on a clean,
+headless runner. The generator fails closed if another Windows command would
+silently fall back to success-only coverage.
+
+Generated objects remain build artifacts. CI transfers them between its
+ephemeral build and test jobs, and neither `dist/` nor any `.o` file is tracked
+or published by the test workflow. The existing Reflektor corpus job continues
+to cover the three non-published Linux architectures that the Sliver action
+does not currently support.
+
 ## POSIX mappings for Windows-oriented commands
 
 The following ports preserve the upstream packed argument shape but define a
