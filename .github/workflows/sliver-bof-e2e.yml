@@ -45,7 +45,7 @@ concurrency:
 jobs:
   e2e:
     name: Execute BOFs through Sliver
-    uses: sliverarmory/sliver-test-bof/.github/workflows/e2e.yml@98b161b7ed3a6c95b6153a1f25929259bd7b6151
+    uses: sliverarmory/sliver-test-bof/.github/workflows/e2e.yml@8a429792b32cc3dff28e0781f27347689439cb1e
     with:
       manifest: .github/sliver-bof-e2e.json
       prepare-command: ./scripts/prepare-sliver-bof-e2e.sh
