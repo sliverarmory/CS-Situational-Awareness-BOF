@@ -428,6 +428,7 @@ const windowsSliverActionExpectations = {
   vol: { output: { contains: ["Volume in drive"] } },
   vssenum: { output: { contains: ["Target = "] } },
   whoami: { output: { contains: ["UserName", "SID"] } },
+  winver: { output: { contains: ["Windows Version info", "Build Number:"] } },
   wmi_query: { output: { matches: ["(?i:Microsoft Windows)"] } },
 };
 

@@ -1016,6 +1016,18 @@
           }
         },
         {
+          "name": "winver",
+          "object": "dist/windows/386/winver.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Windows Version info",
+                "Build Number:"
+              ]
+            }
+          }
+        },
+        {
           "name": "wmi_query",
           "object": "dist/windows/386/wmi_query.o",
           "args": [
@@ -2036,6 +2048,18 @@
           }
         },
         {
+          "name": "winver",
+          "object": "dist/windows/amd64/winver.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Windows Version info",
+                "Build Number:"
+              ]
+            }
+          }
+        },
+        {
           "name": "wmi_query",
           "object": "dist/windows/amd64/wmi_query.o",
           "args": [
@@ -3053,6 +3077,18 @@
           ],
           "expect": {
             "success_only": true
+          }
+        },
+        {
+          "name": "winver",
+          "object": "dist/windows/arm64/winver.o",
+          "expect": {
+            "output": {
+              "contains": [
+                "Windows Version info",
+                "Build Number:"
+              ]
+            }
           }
         },
         {

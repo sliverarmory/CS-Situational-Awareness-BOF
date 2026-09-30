@@ -1,8 +1,8 @@
 # Cross-platform BOF provenance
 
-This branch is based on Sliver Armory commit
-`991cb07c4aab9cc83f96facfd27b04b0637a27c0`, which merges the current
-TrustedSec Windows corpus. The portable implementation, build scripts, and
+The TrustedSec Windows corpus was most recently synchronized through upstream
+commit `fd96c4dcd88fd00eea902bebb20d0736e48f5f61` in merge commit
+`5949446ef83a18d8d1bd6db0aa7e5cbc0cc7d249`. The portable implementation, build scripts, and
 runtime-manifest generator were imported and adapted from the Reflektor-proven
 `sliverarmory/Situational-Awareness-BOFs` commit
 `693174ff525595c5ec61b08fdccb5f057ad52c94`.
@@ -11,10 +11,12 @@ The complete Windows source tree under `src/` and its GPL-2.0 license remain
 the upstream-sync boundary. Cross-platform work is additive under `portable/`
 and selects those sources only for Unix targets, so future upstream merges do
 not require maintaining a fork of every Windows command implementation.
+The fork adjusts `src/SA/winver/entry.c` to use BOF-qualified Windows imports;
+the upstream source's direct imports cannot be resolved by the BOF loader.
 
 ## Command coverage
 
-All 71 current `src/SA` command directories build as native Windows COFF
+All 72 current `src/SA` command directories build as native Windows COFF
 objects for 386, amd64, and arm64. The portable Unix set is exactly `arp`,
 `cacls`, `dir`,
 `enumLocalSessions`, `env`, `findLoadedModule`, `ipconfig`, `listmods`,
@@ -67,7 +69,7 @@ selected with `ZIG=/path/to/zig`:
 make matrix
 ```
 
-This produces and verifies 413 objects: 213 objects for all 71 Windows commands
+This produces and verifies 416 objects: 216 objects for all 72 Windows commands
 on three targets, 125 objects for the 25 portable commands on five published
 Unix targets, and 75 objects for the same portable set on three Reflektor
 corpus-only Linux targets. The eight published tuples are Windows, Linux, and
@@ -90,7 +92,7 @@ CI runtime rows should build only their host artifact set:
 
 The command accepts the eleven manifest targets and verifies that the selected
 `dist/<goos>/<goarch>` directory and E2E manifest contain the exact expected
-set (71 Windows objects or 25 Unix objects). Reflektor then runs its corpus test
+set (72 Windows objects or 25 Unix objects). Reflektor then runs its corpus test
 with `CGO_ENABLED=0 go test ./integration -run '^TestSituationalAwarenessBOFCorpus$'`.
 
 ## Sliver end-to-end coverage
@@ -103,14 +105,14 @@ Sliver beacon. The generated action-native contract is
 Sliver revision and records the hosted-runner inclusion policy.
 
 All 25 portable commands run on the five supported Unix targets. Windows runs
-those 25 commands plus 35 read-only Windows commands that do not require a
-domain, for 305 target-specific cases and 610 session/beacon invocations. Ten
+those 25 commands plus 36 read-only Windows commands that do not require a
+domain, for 308 target-specific cases and 616 session/beacon invocations. Ten
 AD, ADCS, or LDAP commands are recorded as domain-required and remain for a
 future domain-joined test environment. `get_dpapi_system` is deliberately not
 executed in hosted CI: it requires elevation, temporarily changes LSA registry
 ACLs, and can place machine secrets in captured test output.
 
-Fifty-three of the 60 Windows cases require command-specific output, including
+Fifty-four of the 61 Windows cases require command-specific output, including
 fixture contents, cryptographic digests, service/WMI results, and an open
 loopback listener. The remaining seven (`arp`, `driversigs`, `netloggedon2`,
 `netview`, `notepad`, `sc_qdescription`, and `windowlist`) are explicit
