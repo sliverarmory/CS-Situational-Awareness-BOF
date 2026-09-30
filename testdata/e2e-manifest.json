@@ -1598,6 +1598,23 @@
       }
     },
     {
+      "name": "winver",
+      "os": "windows",
+      "arch": "386",
+      "path": "dist/windows/386/winver.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
       "name": "wmi_query",
       "os": "windows",
       "arch": "386",
@@ -3215,6 +3232,23 @@
       }
     },
     {
+      "name": "winver",
+      "os": "windows",
+      "arch": "amd64",
+      "path": "dist/windows/amd64/winver.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
+      }
+    },
+    {
       "name": "wmi_query",
       "os": "windows",
       "arch": "amd64",
@@ -4829,6 +4863,23 @@
         ],
         "contains_any": [],
         "min_callbacks": 0
+      }
+    },
+    {
+      "name": "winver",
+      "os": "windows",
+      "arch": "arm64",
+      "path": "dist/windows/arm64/winver.o",
+      "args": [],
+      "expect": {
+        "types": [
+          0,
+          13,
+          30,
+          32
+        ],
+        "contains_any": [],
+        "min_callbacks": 1
       }
     },
     {

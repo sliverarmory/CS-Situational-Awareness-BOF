@@ -1,0 +1,25 @@
+{
+    "name": "Windows Version (SA)",
+    "version": "0.0.0",
+    "command_name": "sa-winver",
+    "extension_author": "moloch--",
+    "original_author": "TrustedSec",
+    "repo_url": "https://github.com/sliverarmory/CS-Situational-Awareness-BOF",
+    "help": "Displays the Windows build number and update build revision",
+    "long_help": "Displays the Windows build number from RtlGetVersion and the update build revision (UBR) from the Windows registry. A zero revision can indicate that the registry value could not be read.",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "winver.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "winver.x86.o"
+        }
+    ],
+    "arguments": []
+}

@@ -35,7 +35,7 @@
       "reg_query", "regsession",
       "sc_enum", "sc_qc", "sc_qdescription", "sc_qfailure",
       "sc_qtriggerinfo", "sc_query", "schtasksenum", "schtasksquery",
-      "sha512", "useridletime", "vol", "vssenum", "windowlist", "wmi_query"
+      "sha512", "useridletime", "vol", "vssenum", "windowlist", "winver", "wmi_query"
     ]
   },
   "windows_only_reason": "Commands remain Windows-only either because they require a Windows-specific subsystem or ABI, or because their portable implementation is deliberately deferred.",

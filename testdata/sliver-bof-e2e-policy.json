@@ -63,6 +63,7 @@
       "vssenum",
       "whoami",
       "windowlist",
+      "winver",
       "wmi_query"
     ],
     "domain_required": [
