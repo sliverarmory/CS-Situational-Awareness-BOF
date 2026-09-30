@@ -1,17 +1,24 @@
 #include <windows.h>
 #include "beacon.h"
+#include "bofdefs.h"
+
+#ifdef BOF
+WINBASEAPI HMODULE WINAPI KERNEL32$GetModuleHandleA(LPCSTR lpModuleName);
+#else
+#define KERNEL32$GetModuleHandleA GetModuleHandleA
+#endif
 
 typedef NTSTATUS (NTAPI *fpRtlGetVersion)(PRTL_OSVERSIONINFOEXW lpVersionInformation);
 typedef LONG (WINAPI *fpRegGetValueW)(HKEY hkey,LPCWSTR lpSubKey,LPCWSTR lpValue,DWORD dwFlags,LPDWORD pdwType,PVOID pvData,LPDWORD pcbData);
 DWORD GetUBR()
 {
-	HANDLE hAdvapi = LoadLibraryA("advapi32.dll");
-	fpRegGetValueW regval = (fpRegGetValueW)GetProcAddress(hAdvapi, "RegGetValueW");
+	HANDLE hAdvapi = KERNEL32$LoadLibraryA("advapi32.dll");
+	fpRegGetValueW regval = (fpRegGetValueW)KERNEL32$GetProcAddress(hAdvapi, "RegGetValueW");
 	if(regval == NULL)
 	{
 		if(hAdvapi)
 		{
-			FreeLibrary(hAdvapi);
+			KERNEL32$FreeLibrary(hAdvapi);
 		}
 		BeaconPrintf(CALLBACK_ERROR, "Failed to load RegGetValueW, can't return minor build number (the 0 is error value)\n");
 		return 0;
@@ -20,7 +27,7 @@ DWORD GetUBR()
     LSTATUS rc = regval(HKEY_LOCAL_MACHINE,
         L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
         L"UBR", RRF_RT_REG_DWORD, NULL, &ubr, &size);
-	FreeLibrary(hAdvapi);
+	KERNEL32$FreeLibrary(hAdvapi);
     return rc == ERROR_SUCCESS ? ubr : 0;
 }
 
@@ -31,9 +38,10 @@ VOID go(
 	IN ULONG Length 
 ) 
 {
-	RTL_OSVERSIONINFOEXW osVerInfo = {0};
-	HANDLE hntdll = GetModuleHandleA("ntdll.dll");
-	fpRtlGetVersion getver = (fpRtlGetVersion)GetProcAddress(hntdll, "RtlGetVersion");
+	RTL_OSVERSIONINFOEXW osVerInfo;
+	intZeroMemory(&osVerInfo, sizeof(osVerInfo));
+	HANDLE hntdll = KERNEL32$GetModuleHandleA("ntdll.dll");
+	fpRtlGetVersion getver = (fpRtlGetVersion)KERNEL32$GetProcAddress(hntdll, "RtlGetVersion");
 	if(getver == NULL)
 	{
 		BeaconPrintf(CALLBACK_ERROR, "Unable to resolve RtlGetVersion, unable to retreive build version\n");
@@ -50,4 +58,3 @@ GetUBR());
 
 
 };
-
