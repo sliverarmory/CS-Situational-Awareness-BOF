@@ -718,7 +718,11 @@
             "coff-loader"
           ],
           "expect": {
-            "success_only": true
+            "output": {
+              "contains": [
+                "Notepad enumeration complete"
+              ]
+            }
           }
         },
         {
@@ -1229,7 +1233,8 @@
             "output": {
               "contains": [
                 "UserName",
-                "SID"
+                "SID",
+                "S-1-"
               ]
             }
           }
@@ -1994,7 +1999,11 @@
             "coff-loader"
           ],
           "expect": {
-            "success_only": true
+            "output": {
+              "contains": [
+                "Notepad enumeration complete"
+              ]
+            }
           }
         },
         {
@@ -2505,7 +2514,8 @@
             "output": {
               "contains": [
                 "UserName",
-                "SID"
+                "SID",
+                "S-1-"
               ]
             }
           }
@@ -3130,7 +3140,11 @@
           "name": "notepad",
           "object": "dist/windows/arm64/notepad.o",
           "expect": {
-            "success_only": true
+            "output": {
+              "contains": [
+                "Notepad enumeration complete"
+              ]
+            }
           }
         },
         {
@@ -3549,7 +3563,8 @@
             "output": {
               "contains": [
                 "UserName",
-                "SID"
+                "SID",
+                "S-1-"
               ]
             }
           }

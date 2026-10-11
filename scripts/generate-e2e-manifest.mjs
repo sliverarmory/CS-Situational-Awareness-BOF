@@ -285,6 +285,9 @@ function expectation(command, os) {
   if (command === "env") return { types: [0, 13], contains_any: ["="], min_callbacks: 1 };
   if (command === "whoami") return { types: [0, 13], contains_any: os === "windows" ? [] : ["uid="], min_callbacks: 1 };
   if (command === "uptime") return { types: [0, 13], contains_any: [os === "windows" ? "Uptime" : "uptime_seconds="], min_callbacks: 1 };
+  if (os === "windows" && command === "notepad") {
+    return { types: [0, 13], contains_any: ["Notepad enumeration complete"], min_callbacks: 1 };
+  }
   if (os !== "windows") {
     if (command === "cacls") {
       return { types: [0, 13], contains_all: ["Exists: yes", "Total entries: 1"], min_callbacks: 1 };
@@ -317,7 +320,7 @@ function expectation(command, os) {
       return { types: [0, 13], contains_any: [portableMarkers[command]], min_callbacks: 1 };
     }
   }
-  if (os === "windows" && ["driversigs", "netloggedon2", "netview", "notepad", "windowlist"].includes(command)) {
+  if (os === "windows" && ["driversigs", "netloggedon2", "netview", "windowlist"].includes(command)) {
     return { types: [0, 13, 30, 32], contains_any: [], min_callbacks: 0 };
   }
   return { types: [0, 13, 30, 32], contains_any: [], min_callbacks: 1 };
@@ -405,6 +408,7 @@ const windowsSliverActionExpectations = {
   netuse: { output: { contains: ["The command completed successfully"] } },
   netuser: { output: { contains: ["User name:"] } },
   netuserenum: { output: { matches: ["-- [^\\r\\n]+"] } },
+  notepad: { output: { contains: ["Notepad enumeration complete"] } },
   nslookup: {
     output: {
       matches: ["(?:A localhost |Query for domain name failed\\r?\\nDNS name does not exist\\.)"],
@@ -427,7 +431,7 @@ const windowsSliverActionExpectations = {
   useridletime: { output: { contains: ["Current User idle time:"] } },
   vol: { output: { contains: ["Volume in drive"] } },
   vssenum: { output: { contains: ["Target = "] } },
-  whoami: { output: { contains: ["UserName", "SID"] } },
+  whoami: { output: { contains: ["UserName", "SID", "S-1-"] } },
   winver: { output: { contains: ["Windows Version info", "Build Number:"] } },
   wmi_query: { output: { matches: ["(?i:Microsoft Windows)"] } },
 };
@@ -440,7 +444,6 @@ const windowsSliverActionSmokeCommands = new Set([
   "driversigs",
   "netloggedon2",
   "netview",
-  "notepad",
   "sc_qdescription",
   "windowlist",
 ]);

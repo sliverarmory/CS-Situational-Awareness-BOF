@@ -7,6 +7,8 @@ on:
       - "feat/**"
     paths:
       - ".github/sliver-bof-e2e.json"
+      - ".github/workflows/autorelease.yml"
+      - ".github/workflows/dev.yml"
       - ".github/workflows/sliver-bof-e2e.yml"
       - "Makefile"
       - "portable/**"
@@ -22,6 +24,8 @@ on:
     branches: [master]
     paths:
       - ".github/sliver-bof-e2e.json"
+      - ".github/workflows/autorelease.yml"
+      - ".github/workflows/dev.yml"
       - ".github/workflows/sliver-bof-e2e.yml"
       - "Makefile"
       - "portable/**"

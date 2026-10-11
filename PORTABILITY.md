@@ -98,10 +98,12 @@ with `CGO_ENABLED=0 go test ./integration -run '^TestSituationalAwarenessBOFCorp
 Windows objects are also checked for imports accepted by the Sliver Armory
 COFFLoader fork. The shared BOF header supplies local `memcpy` and `memset`
 helpers for calls emitted by Zig/Clang and forwards them to DLL-qualified
-`MSVCRT$` imports. Candidate and release CI execute the packaged `whoami`
-objects with that fork on Windows/386 and Windows/amd64. The fork does not
-implement Windows/arm64 COFF relocations, so that target receives the import
-check and Reflektor runtime coverage only.
+`MSVCRT$` imports. The pinned `sliver-test-bof` v0.1.0 workflow runs all 61
+Windows commands on both Reflektor and the signed Armory COFFLoader for 386 and
+amd64, with the same output assertions on both routes. Release publication
+waits for this dual-executor workflow. The fork does not implement
+Windows/arm64 COFF relocations, so that target receives the import check and
+Reflektor runtime coverage only.
 
 ## Sliver end-to-end coverage
 
@@ -114,16 +116,18 @@ Sliver revision and records the hosted-runner inclusion policy.
 
 All 25 portable commands run on the five supported Unix targets. Windows runs
 those 25 commands plus 36 read-only Windows commands that do not require a
-domain, for 308 target-specific cases and 616 session/beacon invocations. Ten
-AD, ADCS, or LDAP commands are recorded as domain-required and remain for a
-future domain-joined test environment. `get_dpapi_system` is deliberately not
-executed in hosted CI: it requires elevation, temporarily changes LSA registry
+domain. The manifest has 308 unique target/command pairs; dual execution on
+Windows/386 and Windows/amd64 adds 122 executor-specific cases, for 430 cases
+and 860 session/beacon invocations. Ten AD, ADCS, or LDAP commands are recorded
+as domain-required and remain for a future domain-joined test environment.
+`get_dpapi_system` is deliberately not executed in hosted CI: it requires
+elevation, temporarily changes LSA registry
 ACLs, and can place machine secrets in captured test output.
 
-Fifty-four of the 61 Windows cases require command-specific output, including
+Fifty-five of the 61 Windows cases require command-specific output, including
 fixture contents, cryptographic digests, service/WMI results, and an open
-loopback listener. The remaining seven (`arp`, `driversigs`, `netloggedon2`,
-`netview`, `notepad`, `sc_qdescription`, and `windowlist`) are explicit
+loopback listener. The remaining six (`arp`, `driversigs`, `netloggedon2`,
+`netview`, `sc_qdescription`, and `windowlist`) are explicit
 execution smoke tests because their successful result can be empty on a clean,
 headless runner. The generator fails closed if another Windows command would
 silently fall back to success-only coverage.

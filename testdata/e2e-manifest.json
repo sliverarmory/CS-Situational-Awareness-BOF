@@ -1020,12 +1020,12 @@
       "expect": {
         "types": [
           0,
-          13,
-          30,
-          32
+          13
         ],
-        "contains_any": [],
-        "min_callbacks": 0
+        "contains_any": [
+          "Notepad enumeration complete"
+        ],
+        "min_callbacks": 1
       }
     },
     {
@@ -2654,12 +2654,12 @@
       "expect": {
         "types": [
           0,
-          13,
-          30,
-          32
+          13
         ],
-        "contains_any": [],
-        "min_callbacks": 0
+        "contains_any": [
+          "Notepad enumeration complete"
+        ],
+        "min_callbacks": 1
       }
     },
     {
@@ -4288,12 +4288,12 @@
       "expect": {
         "types": [
           0,
-          13,
-          30,
-          32
+          13
         ],
-        "contains_any": [],
-        "min_callbacks": 0
+        "contains_any": [
+          "Notepad enumeration complete"
+        ],
+        "min_callbacks": 1
       }
     },
     {

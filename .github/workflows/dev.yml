@@ -90,10 +90,3 @@ jobs:
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
-
-  coffloader-runtime:
-    name: Execute packaged BOFs through COFFLoader
-    needs: build-candidate
-    uses: ./.github/workflows/coffloader-smoke.yml
-    with:
-      candidate_artifact: armory-package-candidates-${{ github.sha }}
