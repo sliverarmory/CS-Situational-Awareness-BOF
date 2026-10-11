@@ -159,9 +159,16 @@ jobs:
     with:
       candidate_artifact: signed-armory-release-${{ github.ref_name }}
 
+  sliver-bof-e2e:
+    name: Execute BOFs through Sliver
+    uses: sliverarmory/sliver-test-bof/.github/workflows/e2e.yml@6449187d332dc1182e9fcb4c4b6a14ce04a30d37 # v0.1.0
+    with:
+      manifest: .github/sliver-bof-e2e.json
+      prepare-command: ./scripts/prepare-sliver-bof-e2e.sh
+
   publish-release:
     name: Draft, verify, and publish release
-    needs: [build-signed-candidate, coffloader-runtime]
+    needs: [build-signed-candidate, coffloader-runtime, sliver-bof-e2e]
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:

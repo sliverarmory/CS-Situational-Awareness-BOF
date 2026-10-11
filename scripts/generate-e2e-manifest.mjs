@@ -506,6 +506,9 @@ const sliverActionSuites = targets
       return {
         name: command,
         object: artifact.path,
+        ...(target.goos === "windows" && ["386", "amd64"].includes(target.goarch)
+          ? { bof_executors: ["reflektor", "coff-loader"] }
+          : {}),
         ...(artifact.args.length > 0 ? { args: sliverActionArguments(artifact.args) } : {}),
         ...(artifact.tcp_listener ? { tcp_listener: artifact.tcp_listener } : {}),
         expect: sliverActionExpectation(artifact),
