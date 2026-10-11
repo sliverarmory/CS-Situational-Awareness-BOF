@@ -49,7 +49,7 @@ void internal_printf(const char* format, ...){
     if(buffersize + currentoutsize < bufsize) // If this print doesn't overflow our output buffer, just buffer it to the end
     {
         //BeaconFormatPrintf(&output, intBuffer);
-        memcpy(output+currentoutsize, intBuffer, buffersize);
+        MSVCRT$memcpy(output+currentoutsize, intBuffer, buffersize);
         currentoutsize += buffersize;
     }
     else // If this print does overflow our output buffer, lets print what we have and clear any thing else as it is likely this is a large print
@@ -62,14 +62,14 @@ void internal_printf(const char* format, ...){
             {
                 transfersize = buffersize;
             }
-            memcpy(output+currentoutsize, curloc, transfersize); // copy data into our transfer buffer
+            MSVCRT$memcpy(output+currentoutsize, curloc, transfersize); // copy data into our transfer buffer
             currentoutsize += transfersize;
             //BeaconFormatPrintf(&output, transferBuffer); // copy it to cobalt strikes output buffer
             if(currentoutsize == bufsize)
             {
             printoutput(FALSE); // sets currentoutsize to 0 and prints
             }
-            memset(transferBuffer, 0, transfersize); // reset our transfer buffer
+            MSVCRT$memset(transferBuffer, 0, transfersize); // reset our transfer buffer
             curloc += transfersize; // increment by how much data we just wrote
             buffersize -= transfersize; // subtract how much we just wrote from how much we are writing overall
         }
@@ -84,7 +84,7 @@ void printoutput(BOOL done)
     char * msg = NULL;
     BeaconOutput(CALLBACK_OUTPUT, output, currentoutsize);
     currentoutsize = 0;
-    memset(output, 0, bufsize);
+    MSVCRT$memset(output, 0, bufsize);
     if(done) {MSVCRT$free(output); output=NULL;}
 }
 #else

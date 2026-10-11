@@ -1,0 +1,107 @@
+name: Sliver Armory COFFLoader smoke test
+
+on:
+  workflow_call:
+    inputs:
+      candidate_artifact:
+        description: Artifact containing the candidate packages directory
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Execute packaged x64 and x86 whoami through COFFLoader
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - name: Check out BOF smoke harness
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Check out pinned Sliver Armory COFFLoader fork
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: sliverarmory/COFFLoader
+          ref: 28e49814641e34b2e38f50f7c49316473750198d
+          path: coffloader-fork
+          persist-credentials: false
+
+      - name: Download built candidate packages
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: ${{ inputs.candidate_artifact }}
+          path: candidate
+
+      - name: Install pinned Zig
+        uses: mlugg/setup-zig@d1434d08867e3ee9daa34448df10607b98908d29 # v2
+        with:
+          version: 0.14.0
+
+      - name: Build the fork DLL and smoke harness for x64 and x86
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ((zig version) -ne '0.14.0') { throw 'Zig 0.14.0 is required' }
+          $fork = Join-Path $env:GITHUB_WORKSPACE 'coffloader-fork'
+          $out = Join-Path $env:RUNNER_TEMP 'coffloader-smoke'
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+          foreach ($target in @(
+            @{ arch = 'x86_64'; suffix = 'x64' },
+            @{ arch = 'x86'; suffix = 'x86' }
+          )) {
+            $triple = "$($target.arch)-windows-gnu"
+            $suffix = $target.suffix
+            & zig cc -target $triple -DBUILD_DLL -shared `
+              (Join-Path $fork 'dll.c') `
+              (Join-Path $fork 'beacon_compatibility.c') `
+              (Join-Path $fork 'COFFLoader.c') `
+              -o (Join-Path $out "COFFLoader.$suffix.dll")
+            if ($LASTEXITCODE -ne 0) { throw "COFFLoader $suffix DLL build failed" }
+            & zig cc -target $triple -Wall -Wextra -Werror `
+              testdata/coffloader-smoke.c `
+              -o (Join-Path $out "coffloader-smoke.$suffix.exe")
+            if ($LASTEXITCODE -ne 0) { throw "$suffix smoke harness build failed" }
+          }
+
+      - name: Run both packaged whoami BOFs through the fork
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $out = Join-Path $env:RUNNER_TEMP 'coffloader-smoke'
+          # upload-artifact flattens a single packages/ path, while the signed
+          # candidate upload keeps both dist/ and packages/ parent directories.
+          $archive = Join-Path $env:GITHUB_WORKSPACE 'candidate/packages/sa-whoami.tar.gz'
+          if (-not (Test-Path $archive)) {
+            $archive = Join-Path $env:GITHUB_WORKSPACE 'candidate/sa-whoami.tar.gz'
+          }
+          if (-not (Test-Path $archive)) { throw "Missing candidate package: $archive" }
+          & tar -xzf $archive -C $out
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot extract candidate package' }
+          foreach ($target in @(
+            @{ suffix = 'x64'; object = 'dist/windows/amd64/whoami.o' },
+            @{ suffix = 'x86'; object = 'dist/windows/386/whoami.o' }
+          )) {
+            $suffix = $target.suffix
+            $dll = Join-Path $out "COFFLoader.$suffix.dll"
+            $bof = Join-Path $out $target.object
+            $exe = Join-Path $out "coffloader-smoke.$suffix.exe"
+            if (-not (Test-Path $bof)) { throw "Missing packaged BOF: $bof" }
+            $stdout = Join-Path $out "$suffix.stdout.txt"
+            $stderr = Join-Path $out "$suffix.stderr.txt"
+            $process = Start-Process -FilePath $exe `
+              -ArgumentList @("`"$dll`"", "`"$bof`"") `
+              -RedirectStandardOutput $stdout -RedirectStandardError $stderr -PassThru
+            if (-not $process.WaitForExit(60000)) {
+              $process.Kill($true)
+              throw "COFFLoader $suffix smoke test timed out"
+            }
+            Get-Content -Path $stdout
+            if ((Get-Item $stderr).Length -gt 0) { Get-Content -Path $stderr }
+            if ($process.ExitCode -ne 0) {
+              throw "COFFLoader $suffix smoke test failed with exit code $($process.ExitCode)"
+            }
+          }

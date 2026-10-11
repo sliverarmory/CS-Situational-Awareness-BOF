@@ -95,6 +95,14 @@ The command accepts the eleven manifest targets and verifies that the selected
 set (72 Windows objects or 25 Unix objects). Reflektor then runs its corpus test
 with `CGO_ENABLED=0 go test ./integration -run '^TestSituationalAwarenessBOFCorpus$'`.
 
+Windows objects are also checked for imports accepted by the Sliver Armory
+COFFLoader fork. The shared BOF header supplies local `memcpy` and `memset`
+helpers for calls emitted by Zig/Clang and forwards them to DLL-qualified
+`MSVCRT$` imports. Candidate and release CI execute the packaged `whoami`
+objects with that fork on Windows/386 and Windows/amd64. The fork does not
+implement Windows/arm64 COFF relocations, so that target receives the import
+check and Reflektor runtime coverage only.
+
 ## Sliver end-to-end coverage
 
 The Sliver end-to-end workflow builds the ignored object matrix once, then

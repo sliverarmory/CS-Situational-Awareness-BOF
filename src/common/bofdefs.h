@@ -127,6 +127,24 @@ WINBASEAPI int __cdecl MSVCRT$memcmp(const void* _Buf1, const void* _Buf2, size_
 WINBASEAPI void* __cdecl MSVCRT$realloc(void* _Memory, size_t _NewSize);
 WINBASEAPI void __cdecl MSVCRT$free(void* _Memory);
 WINBASEAPI void __cdecl MSVCRT$memset(void* dest, int c, size_t count);
+
+/*
+ * Clang can emit calls to the plain CRT symbols while lowering aggregate
+ * copies and initialization, even when the source uses MSVCRT$ names. Every
+ * BOF includes this header in its single translation unit, so supply local
+ * implementations that forward to imports understood by COFF loaders.
+ */
+__attribute__((used)) void* __cdecl memcpy(void* dest, const void* src, size_t count)
+{
+    return MSVCRT$memcpy(dest, src, count);
+}
+
+__attribute__((used)) void* __cdecl memset(void* dest, int value, size_t count)
+{
+    MSVCRT$memset(dest, value, count);
+    return dest;
+}
+
 WINBASEAPI int __cdecl MSVCRT$sprintf(char* __stream, const char* __format, ...);
 WINBASEAPI int __cdecl MSVCRT$vsnprintf(char* __restrict__ d, size_t n, const char* __restrict__ format, va_list arg);
 WINBASEAPI int __cdecl MSVCRT$_snwprintf(wchar_t* __restrict__ _Dest, size_t _Count, const wchar_t* __restrict__ _Format, ...);

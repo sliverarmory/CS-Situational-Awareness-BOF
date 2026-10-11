@@ -152,9 +152,16 @@ jobs:
           retention-days: 1
           compression-level: 0
 
+  coffloader-runtime:
+    name: Execute signed candidate BOFs through COFFLoader
+    needs: build-signed-candidate
+    uses: ./.github/workflows/coffloader-smoke.yml
+    with:
+      candidate_artifact: signed-armory-release-${{ github.ref_name }}
+
   publish-release:
     name: Draft, verify, and publish release
-    needs: build-signed-candidate
+    needs: [build-signed-candidate, coffloader-runtime]
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
