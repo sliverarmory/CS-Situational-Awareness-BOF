@@ -36,6 +36,10 @@
         {
           "name": "aadjoininfo",
           "object": "dist/windows/386/aadjoininfo.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "matches": [
@@ -47,6 +51,10 @@
         {
           "name": "adv_audit_policies",
           "object": "dist/windows/386/adv_audit_policies.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "int",
@@ -64,6 +72,10 @@
         {
           "name": "arp",
           "object": "dist/windows/386/arp.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "success_only": true
           }
@@ -71,6 +83,10 @@
         {
           "name": "cacls",
           "object": "dist/windows/386/cacls.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -88,6 +104,10 @@
         {
           "name": "cat",
           "object": "dist/windows/386/cat.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -105,6 +125,10 @@
         {
           "name": "dir",
           "object": "dist/windows/386/dir.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -127,6 +151,10 @@
         {
           "name": "driversigs",
           "object": "dist/windows/386/driversigs.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "success_only": true
           }
@@ -134,6 +162,10 @@
         {
           "name": "enumLocalSessions",
           "object": "dist/windows/386/enumLocalSessions.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -145,6 +177,10 @@
         {
           "name": "enum_filter_driver",
           "object": "dist/windows/386/enum_filter_driver.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -162,6 +198,10 @@
         {
           "name": "env",
           "object": "dist/windows/386/env.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -173,6 +213,10 @@
         {
           "name": "findLoadedModule",
           "object": "dist/windows/386/findLoadedModule.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -194,6 +238,10 @@
         {
           "name": "get-netsession",
           "object": "dist/windows/386/get-netsession.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -211,6 +259,10 @@
         {
           "name": "get-netsession2",
           "object": "dist/windows/386/get-netsession2.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -236,6 +288,10 @@
         {
           "name": "get_password_policy",
           "object": "dist/windows/386/get_password_policy.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -253,6 +309,10 @@
         {
           "name": "get_session_info",
           "object": "dist/windows/386/get_session_info.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -264,6 +324,10 @@
         {
           "name": "hostname",
           "object": "dist/windows/386/hostname.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -275,6 +339,10 @@
         {
           "name": "ipconfig",
           "object": "dist/windows/386/ipconfig.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -286,6 +354,10 @@
         {
           "name": "list_firewall_rules",
           "object": "dist/windows/386/list_firewall_rules.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -297,6 +369,10 @@
         {
           "name": "listdns",
           "object": "dist/windows/386/listdns.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "matches": [
@@ -308,6 +384,10 @@
         {
           "name": "listmods",
           "object": "dist/windows/386/listmods.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "int",
@@ -325,6 +405,10 @@
         {
           "name": "locale",
           "object": "dist/windows/386/locale.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -336,6 +420,10 @@
         {
           "name": "md5",
           "object": "dist/windows/386/md5.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -353,6 +441,10 @@
         {
           "name": "netlocalgroup",
           "object": "dist/windows/386/netlocalgroup.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "short",
@@ -378,6 +470,10 @@
         {
           "name": "netlocalgroup2",
           "object": "dist/windows/386/netlocalgroup2.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -399,6 +495,10 @@
         {
           "name": "netloggedon",
           "object": "dist/windows/386/netloggedon.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -416,6 +516,10 @@
         {
           "name": "netloggedon2",
           "object": "dist/windows/386/netloggedon2.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -429,6 +533,10 @@
         {
           "name": "netshares",
           "object": "dist/windows/386/netshares.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -450,6 +558,10 @@
         {
           "name": "netstat",
           "object": "dist/windows/386/netstat.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "int",
@@ -467,6 +579,10 @@
         {
           "name": "nettime",
           "object": "dist/windows/386/nettime.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -484,6 +600,10 @@
         {
           "name": "netuptime",
           "object": "dist/windows/386/netuptime.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -501,6 +621,10 @@
         {
           "name": "netuse",
           "object": "dist/windows/386/netuse.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "short",
@@ -522,6 +646,10 @@
         {
           "name": "netuser",
           "object": "dist/windows/386/netuser.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -543,6 +671,10 @@
         {
           "name": "netuserenum",
           "object": "dist/windows/386/netuserenum.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "int",
@@ -564,6 +696,10 @@
         {
           "name": "netview",
           "object": "dist/windows/386/netview.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -577,13 +713,25 @@
         {
           "name": "notepad",
           "object": "dist/windows/386/notepad.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
-            "success_only": true
+            "output": {
+              "contains": [
+                "Notepad enumeration complete"
+              ]
+            }
           }
         },
         {
           "name": "nslookup",
           "object": "dist/windows/386/nslookup.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -609,6 +757,10 @@
         {
           "name": "probe",
           "object": "dist/windows/386/probe.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -637,6 +789,10 @@
         {
           "name": "reg_query",
           "object": "dist/windows/386/reg_query.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -670,6 +826,10 @@
         {
           "name": "regsession",
           "object": "dist/windows/386/regsession.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -687,6 +847,10 @@
         {
           "name": "resources",
           "object": "dist/windows/386/resources.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -698,6 +862,10 @@
         {
           "name": "routeprint",
           "object": "dist/windows/386/routeprint.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -709,6 +877,10 @@
         {
           "name": "sc_enum",
           "object": "dist/windows/386/sc_enum.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -726,6 +898,10 @@
         {
           "name": "sc_qc",
           "object": "dist/windows/386/sc_qc.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -747,6 +923,10 @@
         {
           "name": "sc_qdescription",
           "object": "dist/windows/386/sc_qdescription.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -764,6 +944,10 @@
         {
           "name": "sc_qfailure",
           "object": "dist/windows/386/sc_qfailure.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -785,6 +969,10 @@
         {
           "name": "sc_qtriggerinfo",
           "object": "dist/windows/386/sc_qtriggerinfo.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -806,6 +994,10 @@
         {
           "name": "sc_query",
           "object": "dist/windows/386/sc_query.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -827,6 +1019,10 @@
         {
           "name": "schtasksenum",
           "object": "dist/windows/386/schtasksenum.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -844,6 +1040,10 @@
         {
           "name": "schtasksquery",
           "object": "dist/windows/386/schtasksquery.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -865,6 +1065,10 @@
         {
           "name": "sha1",
           "object": "dist/windows/386/sha1.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -882,6 +1086,10 @@
         {
           "name": "sha256",
           "object": "dist/windows/386/sha256.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -899,6 +1107,10 @@
         {
           "name": "sha512",
           "object": "dist/windows/386/sha512.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -916,6 +1128,10 @@
         {
           "name": "tasklist",
           "object": "dist/windows/386/tasklist.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -933,6 +1149,10 @@
         {
           "name": "uptime",
           "object": "dist/windows/386/uptime.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -944,6 +1164,10 @@
         {
           "name": "useridletime",
           "object": "dist/windows/386/useridletime.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -955,6 +1179,10 @@
         {
           "name": "vol",
           "object": "dist/windows/386/vol.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -972,6 +1200,10 @@
         {
           "name": "vssenum",
           "object": "dist/windows/386/vssenum.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -993,11 +1225,16 @@
         {
           "name": "whoami",
           "object": "dist/windows/386/whoami.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
                 "UserName",
-                "SID"
+                "SID",
+                "S-1-"
               ]
             }
           }
@@ -1005,6 +1242,10 @@
         {
           "name": "windowlist",
           "object": "dist/windows/386/windowlist.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "int",
@@ -1018,6 +1259,10 @@
         {
           "name": "winver",
           "object": "dist/windows/386/winver.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1030,6 +1275,10 @@
         {
           "name": "wmi_query",
           "object": "dist/windows/386/wmi_query.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1068,6 +1317,10 @@
         {
           "name": "aadjoininfo",
           "object": "dist/windows/amd64/aadjoininfo.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "matches": [
@@ -1079,6 +1332,10 @@
         {
           "name": "adv_audit_policies",
           "object": "dist/windows/amd64/adv_audit_policies.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "int",
@@ -1096,6 +1353,10 @@
         {
           "name": "arp",
           "object": "dist/windows/amd64/arp.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "success_only": true
           }
@@ -1103,6 +1364,10 @@
         {
           "name": "cacls",
           "object": "dist/windows/amd64/cacls.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1120,6 +1385,10 @@
         {
           "name": "cat",
           "object": "dist/windows/amd64/cat.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1137,6 +1406,10 @@
         {
           "name": "dir",
           "object": "dist/windows/amd64/dir.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1159,6 +1432,10 @@
         {
           "name": "driversigs",
           "object": "dist/windows/amd64/driversigs.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "success_only": true
           }
@@ -1166,6 +1443,10 @@
         {
           "name": "enumLocalSessions",
           "object": "dist/windows/amd64/enumLocalSessions.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1177,6 +1458,10 @@
         {
           "name": "enum_filter_driver",
           "object": "dist/windows/amd64/enum_filter_driver.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1194,6 +1479,10 @@
         {
           "name": "env",
           "object": "dist/windows/amd64/env.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1205,6 +1494,10 @@
         {
           "name": "findLoadedModule",
           "object": "dist/windows/amd64/findLoadedModule.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1226,6 +1519,10 @@
         {
           "name": "get-netsession",
           "object": "dist/windows/amd64/get-netsession.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1243,6 +1540,10 @@
         {
           "name": "get-netsession2",
           "object": "dist/windows/amd64/get-netsession2.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1268,6 +1569,10 @@
         {
           "name": "get_password_policy",
           "object": "dist/windows/amd64/get_password_policy.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1285,6 +1590,10 @@
         {
           "name": "get_session_info",
           "object": "dist/windows/amd64/get_session_info.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1296,6 +1605,10 @@
         {
           "name": "hostname",
           "object": "dist/windows/amd64/hostname.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1307,6 +1620,10 @@
         {
           "name": "ipconfig",
           "object": "dist/windows/amd64/ipconfig.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1318,6 +1635,10 @@
         {
           "name": "list_firewall_rules",
           "object": "dist/windows/amd64/list_firewall_rules.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1329,6 +1650,10 @@
         {
           "name": "listdns",
           "object": "dist/windows/amd64/listdns.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "matches": [
@@ -1340,6 +1665,10 @@
         {
           "name": "listmods",
           "object": "dist/windows/amd64/listmods.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "int",
@@ -1357,6 +1686,10 @@
         {
           "name": "locale",
           "object": "dist/windows/amd64/locale.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1368,6 +1701,10 @@
         {
           "name": "md5",
           "object": "dist/windows/amd64/md5.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1385,6 +1722,10 @@
         {
           "name": "netlocalgroup",
           "object": "dist/windows/amd64/netlocalgroup.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "short",
@@ -1410,6 +1751,10 @@
         {
           "name": "netlocalgroup2",
           "object": "dist/windows/amd64/netlocalgroup2.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1431,6 +1776,10 @@
         {
           "name": "netloggedon",
           "object": "dist/windows/amd64/netloggedon.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1448,6 +1797,10 @@
         {
           "name": "netloggedon2",
           "object": "dist/windows/amd64/netloggedon2.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1461,6 +1814,10 @@
         {
           "name": "netshares",
           "object": "dist/windows/amd64/netshares.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1482,6 +1839,10 @@
         {
           "name": "netstat",
           "object": "dist/windows/amd64/netstat.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "int",
@@ -1499,6 +1860,10 @@
         {
           "name": "nettime",
           "object": "dist/windows/amd64/nettime.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1516,6 +1881,10 @@
         {
           "name": "netuptime",
           "object": "dist/windows/amd64/netuptime.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1533,6 +1902,10 @@
         {
           "name": "netuse",
           "object": "dist/windows/amd64/netuse.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "short",
@@ -1554,6 +1927,10 @@
         {
           "name": "netuser",
           "object": "dist/windows/amd64/netuser.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1575,6 +1952,10 @@
         {
           "name": "netuserenum",
           "object": "dist/windows/amd64/netuserenum.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "int",
@@ -1596,6 +1977,10 @@
         {
           "name": "netview",
           "object": "dist/windows/amd64/netview.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1609,13 +1994,25 @@
         {
           "name": "notepad",
           "object": "dist/windows/amd64/notepad.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
-            "success_only": true
+            "output": {
+              "contains": [
+                "Notepad enumeration complete"
+              ]
+            }
           }
         },
         {
           "name": "nslookup",
           "object": "dist/windows/amd64/nslookup.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1641,6 +2038,10 @@
         {
           "name": "probe",
           "object": "dist/windows/amd64/probe.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1669,6 +2070,10 @@
         {
           "name": "reg_query",
           "object": "dist/windows/amd64/reg_query.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1702,6 +2107,10 @@
         {
           "name": "regsession",
           "object": "dist/windows/amd64/regsession.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1719,6 +2128,10 @@
         {
           "name": "resources",
           "object": "dist/windows/amd64/resources.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1730,6 +2143,10 @@
         {
           "name": "routeprint",
           "object": "dist/windows/amd64/routeprint.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1741,6 +2158,10 @@
         {
           "name": "sc_enum",
           "object": "dist/windows/amd64/sc_enum.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1758,6 +2179,10 @@
         {
           "name": "sc_qc",
           "object": "dist/windows/amd64/sc_qc.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1779,6 +2204,10 @@
         {
           "name": "sc_qdescription",
           "object": "dist/windows/amd64/sc_qdescription.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1796,6 +2225,10 @@
         {
           "name": "sc_qfailure",
           "object": "dist/windows/amd64/sc_qfailure.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1817,6 +2250,10 @@
         {
           "name": "sc_qtriggerinfo",
           "object": "dist/windows/amd64/sc_qtriggerinfo.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1838,6 +2275,10 @@
         {
           "name": "sc_query",
           "object": "dist/windows/amd64/sc_query.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1859,6 +2300,10 @@
         {
           "name": "schtasksenum",
           "object": "dist/windows/amd64/schtasksenum.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1876,6 +2321,10 @@
         {
           "name": "schtasksquery",
           "object": "dist/windows/amd64/schtasksquery.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1897,6 +2346,10 @@
         {
           "name": "sha1",
           "object": "dist/windows/amd64/sha1.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1914,6 +2367,10 @@
         {
           "name": "sha256",
           "object": "dist/windows/amd64/sha256.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1931,6 +2388,10 @@
         {
           "name": "sha512",
           "object": "dist/windows/amd64/sha512.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -1948,6 +2409,10 @@
         {
           "name": "tasklist",
           "object": "dist/windows/amd64/tasklist.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -1965,6 +2430,10 @@
         {
           "name": "uptime",
           "object": "dist/windows/amd64/uptime.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1976,6 +2445,10 @@
         {
           "name": "useridletime",
           "object": "dist/windows/amd64/useridletime.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -1987,6 +2460,10 @@
         {
           "name": "vol",
           "object": "dist/windows/amd64/vol.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "string",
@@ -2004,6 +2481,10 @@
         {
           "name": "vssenum",
           "object": "dist/windows/amd64/vssenum.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -2025,11 +2506,16 @@
         {
           "name": "whoami",
           "object": "dist/windows/amd64/whoami.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
                 "UserName",
-                "SID"
+                "SID",
+                "S-1-"
               ]
             }
           }
@@ -2037,6 +2523,10 @@
         {
           "name": "windowlist",
           "object": "dist/windows/amd64/windowlist.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "int",
@@ -2050,6 +2540,10 @@
         {
           "name": "winver",
           "object": "dist/windows/amd64/winver.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "expect": {
             "output": {
               "contains": [
@@ -2062,6 +2556,10 @@
         {
           "name": "wmi_query",
           "object": "dist/windows/amd64/wmi_query.o",
+          "bof_executors": [
+            "reflektor",
+            "coff-loader"
+          ],
           "args": [
             {
               "type": "wstring",
@@ -2642,7 +3140,11 @@
           "name": "notepad",
           "object": "dist/windows/arm64/notepad.o",
           "expect": {
-            "success_only": true
+            "output": {
+              "contains": [
+                "Notepad enumeration complete"
+              ]
+            }
           }
         },
         {
@@ -3061,7 +3563,8 @@
             "output": {
               "contains": [
                 "UserName",
-                "SID"
+                "SID",
+                "S-1-"
               ]
             }
           }

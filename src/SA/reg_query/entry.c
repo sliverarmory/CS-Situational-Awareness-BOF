@@ -55,11 +55,11 @@ pregkeyval init_regkey(const char * curpath, DWORD dwcurpathsz, const char * chi
     pregkeyval item = (pregkeyval)intAlloc(sizeof(regkeyval));
     item->dwkeypathsz = dwcurpathsz + ((dwchildkeysz) ? dwchildkeysz + 1 : 0); //str\str does not include null or just str, if we don't have a child key
     item->keypath = intAlloc(item->dwkeypathsz + 1);
-    memcpy(item->keypath, curpath, dwcurpathsz);
+    MSVCRT$memcpy(item->keypath, curpath, dwcurpathsz);
     if(dwchildkeysz > 0)
     {
         item->keypath[dwcurpathsz] = '\\';
-        memcpy(item->keypath + dwcurpathsz + 1, childkey, dwchildkeysz);
+        MSVCRT$memcpy(item->keypath + dwcurpathsz + 1, childkey, dwchildkeysz);
     }
     item->hreg = hreg;
     //item->keypath[item->dwkeypathsz] = 0;

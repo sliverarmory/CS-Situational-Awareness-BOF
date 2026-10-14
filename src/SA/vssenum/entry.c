@@ -60,9 +60,9 @@ void EnumSnapshots(wchar_t * hostname, wchar_t * sharename)
 		BeaconPrintf(CALLBACK_ERROR, "Unable to get snapshots: %X", ret);
 		goto end;
 	}
-	memcpy(&Volumes, snapshots, 4);
-	memcpy(&VolumesReturned, snapshots +4, 4);
-	memcpy(&VolumeBytes, snapshots + 8, 4);
+	MSVCRT$memcpy(&Volumes, snapshots, 4);
+	MSVCRT$memcpy(&VolumesReturned, snapshots +4, 4);
+	MSVCRT$memcpy(&VolumeBytes, snapshots + 8, 4);
 	intFree(snapshots); snapshots = NULL;
 	snapshotsLen = 12 + VolumeBytes;
 	snapshots = intAlloc(snapshotsLen);
@@ -88,7 +88,7 @@ void EnumSnapshots(wchar_t * hostname, wchar_t * sharename)
 		BeaconPrintf(CALLBACK_ERROR, "Unable to get snapshots: %X", ret);
 		goto end;
 	}
-	memcpy(&VolumesReturned, snapshots +4, 4);
+	MSVCRT$memcpy(&VolumesReturned, snapshots +4, 4);
 	entry = (wchar_t *)((char *)snapshots + 12);
 	for(int i = 0; i < VolumesReturned; i++)
 	{

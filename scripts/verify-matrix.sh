@@ -43,6 +43,56 @@ if ! command -v "$objdump_bin" >/dev/null 2>&1; then
 fi
 
 failures=0
+
+# The Sliver Armory COFFLoader resolves only its built-in Beacon imports and
+# DLL-qualified __imp_<library>$<export> references. Bare C runtime imports
+# (including compiler-generated memcpy/memset) fail at load time.
+# The fork executes x86/amd64; arm64 receives this import-shape check only.
+verify_coffloader_imports() {
+    local artifact="$1"
+    local goarch="$2"
+    local import_prefix
+    local undefined_symbols
+    if [[ "$goarch" == 386 ]]; then
+        import_prefix=__imp__
+    else
+        import_prefix=__imp_
+    fi
+    if ! undefined_symbols="$("$nm_bin" -u "$artifact")"; then
+        echo "cannot inspect COFFLoader imports: $artifact with $nm_bin" >&2
+        return 1
+    fi
+    awk -v artifact="$artifact" -v prefix="$import_prefix" '
+        NF == 0 { next }
+        {
+            symbol = $NF
+            if (index(symbol, prefix) != 1) {
+                printf "unsupported COFFLoader import: %s: %s\n", artifact, symbol > "/dev/stderr"
+                bad = 1
+                next
+            }
+            name = substr(symbol, length(prefix) + 1)
+            # These are the exact non-DLL imports in the fork InternalFunctions.
+            if (name ~ /^(BeaconDataParse|BeaconDataInt|BeaconDataShort|BeaconDataLength|BeaconDataExtract|BeaconFormatAlloc|BeaconFormatReset|BeaconFormatFree|BeaconFormatAppend|BeaconFormatPrintf|BeaconFormatToString|BeaconFormatInt|BeaconPrintf|BeaconOutput|BeaconUseToken|BeaconRevertToken|BeaconIsAdmin|BeaconGetSpawnTo|BeaconSpawnTemporaryProcess|BeaconInjectProcess|BeaconInjectTemporaryProcess|BeaconCleanupProcess|toWideChar|LoadLibraryA|GetProcAddress|GetModuleHandleA|FreeLibrary)(@[0-9]+)?$/) {
+                next
+            }
+            # Those prefixes take the internal branch before the DLL branch.
+            if (name ~ /^(Beacon|toWideChar|GetProcAddress|LoadLibraryA|GetModuleHandleA|FreeLibrary)/) {
+                printf "unsupported COFFLoader import: %s: %s\n", artifact, symbol > "/dev/stderr"
+                bad = 1
+                next
+            }
+            # COFFLoader splits at $, then strips the x86 stdcall @N suffix.
+            if (name ~ /^[A-Za-z][A-Za-z0-9_]*\$[A-Za-z_][A-Za-z0-9_]*(@[0-9]+)?$/) {
+                next
+            }
+            printf "unsupported COFFLoader import: %s: %s\n", artifact, symbol > "/dev/stderr"
+            bad = 1
+        }
+        END { exit bad ? 1 : 0 }
+    ' <<<"$undefined_symbols"
+}
+
 read_le_u32() {
     local artifact="$1"
     local offset="$2"
@@ -102,6 +152,9 @@ verify_artifact() {
         actual_machine="$(od -An -tx1 -N2 "$artifact" | tr -d '[:space:]')"
         if [[ "$actual_machine" != "$expected_machine" ]]; then
             echo "wrong COFF machine: $artifact: got $actual_machine, want $expected_machine" >&2
+            failures=$((failures + 1))
+        fi
+        if ! verify_coffloader_imports "$artifact" "$goarch"; then
             failures=$((failures + 1))
         fi
     fi

@@ -76,7 +76,7 @@ VOID go(
     if(domain != NULL)
     {
         rdomain = intAlloc(len); // The memory returned by BeaconDataExtract is not valid for our call into NetServerEnum, that's why we make this copy.  BOF crashes if we don't
-        memcpy(rdomain, domain, len);
+        MSVCRT$memcpy(rdomain, domain, len);
     }
     netview_enum(rdomain);
 	printoutput(TRUE);

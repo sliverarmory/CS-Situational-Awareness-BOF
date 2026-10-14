@@ -69,7 +69,11 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
 
 void go(IN PCHAR Buffer, IN ULONG Length) {
 	const char *windowname = "Notepad";
-	USER32$EnumDesktopWindows(NULL,(WNDENUMPROC)EnumWindowsProc,(LPARAM) windowname);
+	if (USER32$EnumDesktopWindows(NULL, (WNDENUMPROC)EnumWindowsProc, (LPARAM)windowname)) {
+		BeaconPrintf(CALLBACK_OUTPUT, "Notepad enumeration complete\n");
+	} else {
+		BeaconPrintf(CALLBACK_ERROR, "Notepad enumeration failed: %lu\n", KERNEL32$GetLastError());
+	}
 }
 
 #ifndef BOF

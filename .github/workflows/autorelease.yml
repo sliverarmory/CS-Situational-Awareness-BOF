@@ -152,9 +152,16 @@ jobs:
           retention-days: 1
           compression-level: 0
 
+  sliver-bof-e2e:
+    name: Execute BOFs through Sliver
+    uses: sliverarmory/sliver-test-bof/.github/workflows/e2e.yml@c9284315f5addaad00122c5e5b7842da291e5431 # v0.1.0 + Windows cleanup fix
+    with:
+      manifest: .github/sliver-bof-e2e.json
+      prepare-command: ./scripts/prepare-sliver-bof-e2e.sh
+
   publish-release:
     name: Draft, verify, and publish release
-    needs: build-signed-candidate
+    needs: [build-signed-candidate, sliver-bof-e2e]
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:

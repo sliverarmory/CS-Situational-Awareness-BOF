@@ -25,10 +25,10 @@ void printUptime64() {
 			curTime.wDay, curTime.wHour, curTime.wMinute, curTime.wSecond);
 
 	KERNEL32$SystemTimeToFileTime(&curTime, &curFTime);
-	memcpy(&utime, &curFTime, sizeof(utime));
+	MSVCRT$memcpy(&utime, &curFTime, sizeof(utime));
 	utime.QuadPart -= ticks * 10000;
 
-	memcpy(&curFTime, &utime, sizeof(utime));
+	MSVCRT$memcpy(&curFTime, &utime, sizeof(utime));
 	KERNEL32$FileTimeToSystemTime(&curFTime, &curTime);
 	internal_printf("Boot time: %4d-%.2d-%.2d %.2d:%.2d:%.2d\n", curTime.wYear, curTime.wMonth, 
 			curTime.wDay, curTime.wHour, curTime.wMinute, curTime.wSecond);

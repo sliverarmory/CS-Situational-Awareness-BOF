@@ -97,7 +97,7 @@ PLDAPControlA FormatSDFlags(int iFlagValue) {
 	pLControl->ldctl_oid = "1.2.840.113556.1.4.801";
 	pLControl->ldctl_iscritical = TRUE;
 	pLControl->ldctl_value.bv_val = (char*)MSVCRT$malloc((size_t)pldctrl_value->bv_len);
-	memcpy(pLControl->ldctl_value.bv_val, pldctrl_value->bv_val, pldctrl_value->bv_len);
+	MSVCRT$memcpy(pLControl->ldctl_value.bv_val, pldctrl_value->bv_val, pldctrl_value->bv_len);
 	pLControl->ldctl_value.bv_len = pldctrl_value->bv_len;
 	
 	// Cleanup temporary berval.

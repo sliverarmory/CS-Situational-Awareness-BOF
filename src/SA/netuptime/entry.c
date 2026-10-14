@@ -21,7 +21,7 @@ void netuptime( wchar_t *servername)
 		utime = output->StatisticsStartTime;
 		KERNEL32$GetLocalTime(&curTime);
 
-		memcpy(&curFTime, &utime, sizeof(utime));
+		MSVCRT$memcpy(&curFTime, &utime, sizeof(utime));
 		KERNEL32$FileTimeToSystemTime(&curFTime, &curTime);
 		internal_printf("ServerName:   %S\n", servername);
 		internal_printf("Boot time:    %4d-%.2d-%.2d %.2d:%.2d:%.2d\n", curTime.wYear, curTime.wMonth, 

@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
 
 	if (argc==2)
 	{
-		memset(domainarg, 0, sizeof(wchar_t)*MAX_PATH);
+		MSVCRT$memset(domainarg, 0, sizeof(wchar_t)*MAX_PATH);
 		mbstowcs(domainarg, argv[1], MAX_PATH);
 		domain = domainarg;
 	}
