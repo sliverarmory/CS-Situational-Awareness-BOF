@@ -154,7 +154,7 @@ jobs:
 
   sliver-bof-e2e:
     name: Execute BOFs through Sliver
-    uses: sliverarmory/sliver-test-bof/.github/workflows/e2e.yml@c9284315f5addaad00122c5e5b7842da291e5431 # v0.1.0 + Windows cleanup fix
+    uses: sliverarmory/sliver-test-bof/.github/workflows/e2e.yml@b38a09a226bf861a1e56e9dbe07838fe99138582 # v0.1.0 + Windows cleanup fix
     with:
       manifest: .github/sliver-bof-e2e.json
       prepare-command: ./scripts/prepare-sliver-bof-e2e.sh

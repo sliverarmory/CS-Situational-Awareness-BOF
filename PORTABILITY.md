@@ -98,7 +98,7 @@ with `CGO_ENABLED=0 go test ./integration -run '^TestSituationalAwarenessBOFCorp
 Windows objects are also checked for imports accepted by the Sliver Armory
 COFFLoader fork. The shared BOF header supplies local `memcpy` and `memset`
 helpers for calls emitted by Zig/Clang and forwards them to DLL-qualified
-`MSVCRT$` imports. The pinned `sliver-test-bof` v0.1.0 workflow runs all 61
+`MSVCRT$` imports. The pinned `sliver-test-bof` workflow runs all 61
 Windows commands on both Reflektor and the signed Armory COFFLoader for 386 and
 amd64, with the same output assertions on both routes. Release publication
 waits for this dual-executor workflow. The fork does not implement
@@ -108,7 +108,7 @@ Reflektor runtime coverage only.
 ## Sliver end-to-end coverage
 
 The Sliver end-to-end workflow builds the ignored object matrix once, then
-runs the published `sliverarmory/sliver-test-bof` action on the eight published
+runs the pinned `sliverarmory/sliver-test-bof` workflow on the eight published
 targets. Each BOF is exercised through both a real Sliver session and a real
 Sliver beacon. The generated action-native contract is
 `.github/sliver-bof-e2e.json`; `testdata/sliver-bof-e2e-policy.json` pins the
